@@ -1,12 +1,24 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import Home from './components/Home';
+import List from './components/List';
+
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>health</Text>
-      <Text>rootin</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home}></Stack.Screen>
+        <Stack.Screen name="List" component={List}></Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+    // <View style={styles.container}>
+    //   <Text style={styles.text}>health</Text>
+    //   <Text>rootin</Text>
+    // </View>
   );
 }
 
