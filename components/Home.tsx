@@ -4,10 +4,8 @@ import {btnBorderColor, buttonColor, mainColor} from '../style/color';
 export default function Home({navigation}: any) {
   return (
     <View style={styles.container}>
-      <Text style={styles.today} onPress={() => navigation.navigate('List')}>
-        오늘의 운동
-      </Text>
-      <Text onPress={() => navigation.navigate('List')}>지난 운동</Text>
+      <Text style={styles.today}>오늘의 운동</Text>
+      <Text onPress={() => navigation.navigate('Record')}>지난 운동</Text>
     </View>
   );
 }

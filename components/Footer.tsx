@@ -1,13 +1,18 @@
 import {StyleSheet, View} from 'react-native';
 import FooterItem from './FooterItem';
 
-const data = ['운동', '기록', '통계', '더보기'];
+const data = [
+  {title: '홈', link: 'Home'},
+  {title: '기록', link: 'Record'},
+  {title: '통계', link: 'Stat'},
+  {title: '더보기', link: 'Other'},
+];
 
-export default function Footer({navigation}: any) {
+export default function Footer() {
   return (
     <View style={styles.container}>
-      {data.map((item: string, i: number) => {
-        return <FooterItem key={i} title={item} navigation={navigation} />;
+      {data.map((item, i: number) => {
+        return <FooterItem key={i} title={item.title} link={item.link} />;
       })}
     </View>
   );

@@ -1,9 +1,9 @@
 import {Text, View} from 'react-native';
 
-export default function List() {
+export default function Stat() {
   return (
     <View>
-      <Text>list</Text>
+      <Text>stat</Text>
     </View>
   );
 }
