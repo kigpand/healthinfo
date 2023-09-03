@@ -1,5 +1,9 @@
-import {View} from 'react-native';
+import {Text, SafeAreaView} from 'react-native';
 
 export default function Header() {
-  return <View></View>;
+  return (
+    <SafeAreaView>
+      <Text>header</Text>
+    </SafeAreaView>
+  );
 }

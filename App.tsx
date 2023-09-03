@@ -4,16 +4,26 @@ import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import Home from './components/Home';
 import List from './components/List';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
     <NavigationContainer>
+      <Header />
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home}></Stack.Screen>
-        <Stack.Screen name="List" component={List}></Stack.Screen>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen
+          name="List"
+          component={List}
+          options={{headerShown: false}}></Stack.Screen>
       </Stack.Navigator>
+      <Footer />
     </NavigationContainer>
     // <View style={styles.container}>
     //   <Text style={styles.text}>health</Text>
