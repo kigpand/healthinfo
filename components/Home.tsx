@@ -1,10 +1,17 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Modal, StyleSheet, Text, View} from 'react-native';
 import {btnBorderColor, buttonColor, mainColor} from '../style/color';
+import {useState} from 'react';
+import HomeModal from './HomeModal';
 
 export default function Home({navigation}: any) {
+  const [onView, setOnView] = useState<boolean>(false);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.today}>오늘의 운동</Text>
+      <Text style={styles.today} onPress={() => setOnView(true)}>
+        오늘의 운동
+      </Text>
+      <HomeModal onView={onView} closeView={() => setOnView(false)} />
       <Text onPress={() => navigation.navigate('Record')}>지난 운동</Text>
     </View>
   );
