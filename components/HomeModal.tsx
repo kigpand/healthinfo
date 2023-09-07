@@ -1,5 +1,7 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
 import {btnBorderColor, buttonColor, mainColor} from '../style/color';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type Props = {
   onView: boolean;
@@ -7,6 +9,13 @@ type Props = {
 };
 
 export default function HomeModal({onView, closeView}: Props) {
+  const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+  function onMove() {
+    nav.navigate('Prev');
+    closeView();
+  }
+
   function onListClick() {
     closeView();
   }
@@ -18,7 +27,7 @@ export default function HomeModal({onView, closeView}: Props) {
       visible={onView}
       presentationStyle="formSheet">
       <View style={styles.modal}>
-        <Text style={styles.list} onPress={onListClick}>
+        <Text style={styles.list} onPress={onMove}>
           이전 루틴 불러오기
         </Text>
         <Text style={styles.new} onPress={onListClick}>

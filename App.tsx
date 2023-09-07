@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Other from './components/Other';
 import Record from './components/Record';
 import Stat from './components/Stat';
+import Prev from './components/Prev';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,10 @@ function App(): JSX.Element {
         <Stack.Screen
           name="Other"
           component={Other}
+          options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen
+          name="Prev"
+          component={Prev}
           options={{headerShown: false}}></Stack.Screen>
       </Stack.Navigator>
       <Footer />
