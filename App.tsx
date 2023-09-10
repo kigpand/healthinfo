@@ -1,13 +1,14 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import Home from './components/Home';
+import Home from './navigation/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Other from './components/Other';
-import Record from './components/Record';
-import Stat from './components/Stat';
-import Prev from './components/Prev';
+import Other from './navigation/Other';
+import Record from './navigation/Record';
+import Stat from './navigation/Stat';
+import Prev from './navigation/Prev';
+import NewData from './navigation/NewData';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,10 @@ function App(): JSX.Element {
         <Stack.Screen
           name="Prev"
           component={Prev}
+          options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen
+          name="NewData"
+          component={NewData}
           options={{headerShown: false}}></Stack.Screen>
       </Stack.Navigator>
       <Footer />

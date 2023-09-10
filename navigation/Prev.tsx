@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
 export default function Prev() {
   return (
@@ -7,3 +7,5 @@ export default function Prev() {
     </View>
   );
 }
+
+const style = StyleSheet.create({});

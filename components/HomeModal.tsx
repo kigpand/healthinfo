@@ -17,6 +17,7 @@ export default function HomeModal({onView, closeView}: Props) {
   }
 
   function onListClick() {
+    nav.navigate('NewData');
     closeView();
   }
 
