@@ -1,9 +1,20 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import useExercise from '../store/useExercise';
 
-export default function PrevButton() {
+type Props = {
+  prevData: any;
+};
+
+export default function PrevButton({prevData}: Props) {
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const {setRoutine} = useExercise();
+
+  function onStart() {
+    setRoutine(prevData);
+    nav.navigate('Start');
+  }
 
   function onCancle() {
     nav.navigate('Home');
@@ -12,7 +23,7 @@ export default function PrevButton() {
   return (
     <View style={style.container}>
       <TouchableOpacity style={style.button}>
-        <Text>시작</Text>
+        <Text onPress={onStart}>시작</Text>
       </TouchableOpacity>
       <TouchableOpacity style={style.cancle}>
         <Text onPress={onCancle}>취소</Text>

@@ -18,7 +18,7 @@ export default function Prev() {
           );
         })}
       </View>
-      <PrevButton />
+      <PrevButton prevData={prevData} />
     </View>
   );
 }

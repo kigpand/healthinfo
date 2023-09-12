@@ -9,6 +9,7 @@ import Record from './navigation/Record';
 import Stat from './navigation/Stat';
 import Prev from './navigation/Prev';
 import NewData from './navigation/NewData';
+import Start from './navigation/Start';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,10 @@ function App(): JSX.Element {
         <Stack.Screen
           name="NewData"
           component={NewData}
+          options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen
+          name="Start"
+          component={Start}
           options={{headerShown: false}}></Stack.Screen>
       </Stack.Navigator>
       <Footer />
