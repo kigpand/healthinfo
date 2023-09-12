@@ -13,7 +13,7 @@ export default function Home({navigation}: any) {
       </Text>
       <HomeModal onView={onView} closeView={() => setOnView(false)} />
       <Text style={styles.record} onPress={() => navigation.navigate('Record')}>
-        지난 운동
+        지난 기록
       </Text>
     </View>
   );
@@ -29,11 +29,9 @@ const styles = StyleSheet.create({
   today: {
     overflow: 'hidden',
     width: 200,
-    height: 50,
+    paddingVertical: 10,
     fontSize: 20,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    alignItems: 'center',
+    textAlign: 'center',
     backgroundColor: buttonColor,
     color: 'white',
     borderRadius: 10,
@@ -43,10 +41,9 @@ const styles = StyleSheet.create({
   record: {
     overflow: 'hidden',
     width: 200,
-    height: 50,
+    paddingVertical: 10,
     fontSize: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    textAlign: 'center',
     backgroundColor: '#8f6dff',
     color: 'white',
     borderRadius: 10,
