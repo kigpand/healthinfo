@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {btnBorderColor, buttonColor, mainColor} from '../style/color';
 import {useState} from 'react';
-import HomeModal from '../components/HomeModal';
+import HomeModal from '../components/modal/HomeModal';
 
 export default function Home({navigation}: any) {
   const [onView, setOnView] = useState<boolean>(false);

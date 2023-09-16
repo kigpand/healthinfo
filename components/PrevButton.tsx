@@ -2,6 +2,8 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import useExercise from '../store/useExercise';
+import {useState} from 'react';
+import StartModal from './modal/StartModal';
 
 type Props = {
   prevData: any;
@@ -9,11 +11,11 @@ type Props = {
 
 export default function PrevButton({prevData}: Props) {
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const {setRoutine} = useExercise();
+  const [onView, setOnView] = useState<boolean>(false);
 
   function onStart() {
-    setRoutine(prevData);
-    nav.navigate('Start');
+    // setRoutine(prevData);
+    setOnView(true);
   }
 
   function onCancle() {
@@ -28,6 +30,11 @@ export default function PrevButton({prevData}: Props) {
       <TouchableOpacity style={style.cancle}>
         <Text onPress={onCancle}>취소</Text>
       </TouchableOpacity>
+      <StartModal
+        prevData={prevData}
+        onView={onView}
+        onCloseView={() => setOnView(false)}
+      />
     </View>
   );
 }

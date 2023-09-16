@@ -1,5 +1,5 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
-import {btnBorderColor, buttonColor, mainColor} from '../style/color';
+import {btnBorderColor, buttonColor, mainColor} from '../../style/color';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
