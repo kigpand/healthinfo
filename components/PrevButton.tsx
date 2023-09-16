@@ -1,7 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import useExercise from '../store/useExercise';
 import {useState} from 'react';
 import StartModal from './modal/StartModal';
 
@@ -14,7 +13,6 @@ export default function PrevButton({prevData}: Props) {
   const [onView, setOnView] = useState<boolean>(false);
 
   function onStart() {
-    // setRoutine(prevData);
     setOnView(true);
   }
 

@@ -1,6 +1,6 @@
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 type Props = {
   title: string;
@@ -15,11 +15,9 @@ export default function FooterItem({title, link}: Props) {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text} onPress={onMove}>
-        {title}
-      </Text>
-    </View>
+    <TouchableOpacity style={styles.container} onPress={onMove}>
+      <Text onPress={onMove}>{title}</Text>
+    </TouchableOpacity>
   );
 }
 
@@ -28,8 +26,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text: {
-    fontSize: 10,
   },
 });
