@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import {btnBorderColor, buttonColor, mainColor} from '../style/color';
+import {backgroundColor, btnBorderColor, buttonColor} from '../style/color';
 import {useState} from 'react';
 import HomeModal from '../components/modal/HomeModal';
 
@@ -22,7 +22,7 @@ export default function Home({navigation}: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: mainColor,
+    backgroundColor: backgroundColor,
     alignItems: 'center',
     justifyContent: 'center',
   },

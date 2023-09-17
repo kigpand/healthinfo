@@ -2,7 +2,7 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useState} from 'react';
 import {Modal, View, Text, StyleSheet, TextInput} from 'react-native';
-import {borderColor, mainColor} from '../../style/color';
+import {borderColor} from '../../style/color';
 import useExercise from '../../store/useExercise';
 
 type Props = {
@@ -16,11 +16,8 @@ export default function StartModal({prevData, onView, onCloseView}: Props) {
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {setRoutine} = useExercise();
   const onSuccess = () => {
-    setRoutine({
-      routine: prevData,
-      timer: time,
-    });
-    nav.navigate('Start');
+    setRoutine(prevData, time);
+    nav.navigate('Set');
     onCloseView();
   };
 

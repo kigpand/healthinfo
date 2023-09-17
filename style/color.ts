@@ -1,5 +1,7 @@
-// export const mainColor = '#00fa9a';
-export const mainColor = 'white';
+export const mainColor = '#00fa9a';
+// export const mainColor = 'white';
+
+export const backgroundColor = 'white';
 
 export const buttonColor = '#66cdaa';
 

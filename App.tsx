@@ -9,43 +9,55 @@ import Record from './navigation/Record';
 import Stat from './navigation/Stat';
 import Prev from './navigation/Prev';
 import NewData from './navigation/NewData';
-import Start from './navigation/Start';
+import Set from './navigation/Set';
+import Clear from './navigation/Clear';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Header />
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerShown: false}}></Stack.Screen>
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Record"
           component={Record}
-          options={{headerShown: false}}></Stack.Screen>
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Stat"
           component={Stat}
-          options={{headerShown: false}}></Stack.Screen>
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Other"
           component={Other}
-          options={{headerShown: false}}></Stack.Screen>
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Prev"
           component={Prev}
-          options={{headerShown: false}}></Stack.Screen>
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="NewData"
           component={NewData}
-          options={{headerShown: false}}></Stack.Screen>
+          options={{headerShown: false}}
+        />
         <Stack.Screen
-          name="Start"
-          component={Start}
-          options={{headerShown: false}}></Stack.Screen>
+          name="Set"
+          component={Set}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Clear"
+          component={Clear}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
       <Footer />
     </NavigationContainer>
