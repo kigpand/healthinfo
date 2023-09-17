@@ -16,6 +16,7 @@ export default function SetItem() {
     if (count + 1 === routine?.routine.length) {
       nav.navigate('Clear');
     } else {
+      setOnTimer(true);
       setCount(count + 1);
     }
   }
@@ -32,11 +33,12 @@ export default function SetItem() {
         onAddCount={onAddCount}
         onMinusCount={onMinusCount}
       />
-      <Timer
-        onView={onTimer}
-        closeView={() => setOnTimer(false)}
-        timer={Number(routine?.timer)}
-      />
+      {onTimer && (
+        <Timer
+          closeView={() => setOnTimer(false)}
+          timer={Number(routine?.timer)}
+        />
+      )}
     </View>
   );
 }
