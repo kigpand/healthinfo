@@ -1,5 +1,5 @@
-import {Modal, StyleSheet, Text, View} from 'react-native';
-import {backgroundColor} from '../style/color';
+import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {backgroundColor, buttonColor} from '../style/color';
 import {useEffect, useState} from 'react';
 import {useInterval} from '../hooks/useInterval';
 
@@ -10,6 +10,7 @@ type Props = {
 
 export default function Timer({timer, closeView}: Props) {
   const [time, setTime] = useState<number>(timer);
+  const [isNext, setIsNext] = useState<boolean>(false);
 
   useInterval(
     () => {
@@ -20,13 +21,22 @@ export default function Timer({timer, closeView}: Props) {
 
   useEffect(() => {
     if (time === 0) {
-      closeView();
+      setIsNext(true);
     }
   }, [time]);
+
+  function onNext() {
+    closeView();
+  }
 
   return (
     <View style={style.modal}>
       <Text style={style.text}>{time}</Text>
+      {isNext && (
+        <TouchableOpacity style={style.next} onPress={onNext}>
+          <Text>Next</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -47,5 +57,15 @@ const style = StyleSheet.create({
   text: {
     fontSize: 70,
     fontWeight: '700',
+  },
+  next: {
+    position: 'absolute',
+    bottom: 30,
+    right: 10,
+    backgroundColor: buttonColor,
+    color: 'white',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 12,
   },
 });

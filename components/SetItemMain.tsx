@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import {IRoutine} from '../interface/IRoutine';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {buttonColor} from '../style/color';
 
 type Props = {
@@ -25,6 +25,7 @@ export default function SetItemMain({
   const [setNum, setSetNum] = useState<string>('0');
 
   function onNextBtn() {
+    setSetNum('0');
     onAddCount();
   }
 
