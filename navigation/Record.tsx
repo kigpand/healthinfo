@@ -1,9 +1,16 @@
-import {Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import RecordList from '../components/RecordList';
 
 export default function Record() {
   return (
-    <View>
-      <Text>Record</Text>
+    <View style={style.container}>
+      <RecordList />
     </View>
   );
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

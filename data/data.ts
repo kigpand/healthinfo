@@ -50,3 +50,30 @@ export const prevData = [
     set: 5,
   },
 ];
+
+export const record = [
+  {
+    date: '20230811',
+    exercise: '등운동',
+  },
+  {
+    date: '20230812',
+    exercise: '어깨운동',
+  },
+  {
+    date: '20230813',
+    exercise: '가슴운동',
+  },
+  {
+    date: '20230814',
+    exercise: '등운동',
+  },
+  {
+    date: '20230815',
+    exercise: '하체운동',
+  },
+  {
+    date: '20230816',
+    exercise: '팔운동',
+  },
+];
