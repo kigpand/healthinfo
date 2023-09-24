@@ -2,6 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {prevData, record} from '../data/data';
 import {mainColor} from '../style/color';
 import {useState} from 'react';
+import RecordViewModal from './modal/RecordViewModal';
 
 export default function RecordList() {
   const [modalItem, setModalItem] = useState<any>(null);
@@ -25,6 +26,7 @@ export default function RecordList() {
           </TouchableOpacity>
         );
       })}
+      {modalItem && <RecordViewModal modalItem={modalItem} />}
     </View>
   );
 }
