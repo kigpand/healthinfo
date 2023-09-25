@@ -25,6 +25,10 @@ export default function SetItem() {
     setCount(count - 1);
   }
 
+  function startTimer() {
+    setOnTimer(true);
+  }
+
   return (
     <View style={styles.setItem}>
       <SetItemMain
@@ -32,6 +36,7 @@ export default function SetItem() {
         count={count}
         onAddCount={onAddCount}
         onMinusCount={onMinusCount}
+        startTimer={startTimer}
       />
       {onTimer && (
         <Timer

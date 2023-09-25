@@ -14,6 +14,7 @@ type Props = {
   count: number;
   onAddCount: () => void;
   onMinusCount: () => void;
+  startTimer: () => void;
 };
 
 export default function SetItemMain({
@@ -21,6 +22,7 @@ export default function SetItemMain({
   count,
   onAddCount,
   onMinusCount,
+  startTimer,
 }: Props) {
   const [setNum, setSetNum] = useState<string>('0');
 
@@ -43,6 +45,9 @@ export default function SetItemMain({
           onChangeText={newText => setSetNum(newText)}
           defaultValue={setNum}
         />
+        <TouchableOpacity onPress={startTimer} style={styles.rest}>
+          <Text style={{fontWeight: 'bold', color: 'white'}}>휴식</Text>
+        </TouchableOpacity>
       </View>
       {count !== 0 && (
         <TouchableOpacity style={styles.prev} onPress={onMinusCount}>
@@ -82,6 +87,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 8,
+  },
+  rest: {
+    marginTop: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 8,
+    backgroundColor: 'skyblue',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   prev: {
     backgroundColor: buttonColor,
