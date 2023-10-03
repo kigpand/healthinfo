@@ -1,53 +1,65 @@
+import {IRoutine} from '../interface/IRoutine';
+
 export const category = ['등', '하체', '어깨', '팔', '가슴'];
 
-export const prevData = [
+export const prevData: IRoutine[] = [
   {
-    cateogry: '등',
-    title: '등운동',
-    kg: '10kg',
-    set: 5,
+    title: '첫번째 루틴',
+    routine: [
+      {
+        category: '등',
+        title: '등운동',
+        kg: '10kg',
+        set: 5,
+      },
+      {
+        category: '등',
+        title: '등운동',
+        kg: '8kg',
+        set: 10,
+      },
+      {
+        category: '등',
+        title: '등운동',
+        kg: '5kg',
+        set: 7,
+      },
+      {
+        category: '등',
+        title: '등운동',
+        kg: '15kg',
+        set: 8,
+      },
+      {
+        category: '하체',
+        title: '하체운동',
+        kg: '10kg',
+        set: 5,
+      },
+    ],
   },
   {
-    cateogry: '등',
-    title: '등운동',
-    kg: '8kg',
-    set: 10,
-  },
-  {
-    cateogry: '등',
-    title: '등운동',
-    kg: '5kg',
-    set: 7,
-  },
-  {
-    cateogry: '등',
-    title: '등운동',
-    kg: '15kg',
-    set: 8,
-  },
-  {
-    cateogry: '어깨',
-    title: '어깨운동',
-    kg: '12kg',
-    set: 3,
-  },
-  {
-    cateogry: '어깨',
-    title: '어깨운동',
-    kg: '15kg',
-    set: 4,
-  },
-  {
-    cateogry: '어깨',
-    title: '어깨운동',
-    kg: '20kg',
-    set: 5,
-  },
-  {
-    cateogry: '하체',
-    title: '하체운동',
-    kg: '10kg',
-    set: 5,
+    title: '어깨 루틴',
+    routine: [
+      {
+        category: '어깨',
+        title: '어깨운동',
+        kg: '12kg',
+        set: 3,
+      },
+      {
+        category: '어깨',
+        title: '어깨운동',
+        kg: '15kg',
+        set: 4,
+      },
+      {
+        category: '어깨',
+        title: '어깨운동',
+        kg: '20kg',
+        set: 5,
+      },
+    ],
   },
 ];
 

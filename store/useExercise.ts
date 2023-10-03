@@ -3,12 +3,12 @@ import {IRoutine, IRoutineStore} from '../interface/IRoutine';
 
 interface IUserStore {
   routine: IRoutineStore | null;
-  setRoutine: (list: IRoutine[], timer: string) => void;
+  setRoutine: (list: IRoutine, timer: string) => void;
 }
 
 const useExercise = create<IUserStore>(set => ({
   routine: null,
-  setRoutine: (list: IRoutine[], timer: string) =>
+  setRoutine: (list: IRoutine, timer: string) =>
     set({routine: {routine: list, timer: timer}}),
 }));
 

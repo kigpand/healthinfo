@@ -5,7 +5,6 @@ type Props = {
 };
 
 export default function RecordViewModal({modalItem}: Props) {
-  console.log(modalItem);
   return (
     <View style={style.container}>
       <Text>modal</Text>

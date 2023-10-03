@@ -4,19 +4,20 @@ import {useState} from 'react';
 import {Modal, View, Text, StyleSheet, TextInput} from 'react-native';
 import {borderColor} from '../../style/color';
 import useExercise from '../../store/useExercise';
+import {IRoutine} from '../../interface/IRoutine';
 
 type Props = {
-  prevData: any;
+  routine: IRoutine;
   onView: boolean;
   onCloseView: () => void;
 };
 
-export default function StartModal({prevData, onView, onCloseView}: Props) {
+export default function StartModal({routine, onView, onCloseView}: Props) {
   const [time, setTime] = useState<string>('0');
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {setRoutine} = useExercise();
   const onSuccess = () => {
-    setRoutine(prevData, time);
+    setRoutine(routine, time);
     nav.navigate('Set');
     onCloseView();
   };

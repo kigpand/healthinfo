@@ -1,16 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {category} from '../data/data';
 
 export default function NewData() {
   return (
     <View style={style.container}>
-      {category.map((cate: string, i: number) => {
+      <Text>루틴명을 입력해주세요</Text>
+      <TextInput />
+      {/* {category.map((cate: string, i: number) => {
         return (
           <Text style={style.list} key={i}>
             {cate}
           </Text>
         );
-      })}
+      })} */}
     </View>
   );
 }

@@ -1,24 +1,35 @@
 import {StyleSheet, Text, View} from 'react-native';
-import PrevButton from '../components/PrevButton';
 import {prevData} from '../data/data';
+import StartModal from '../components/modal/StartModal';
+import {useState} from 'react';
+import {IRoutine} from '../interface/IRoutine';
 
 export default function Prev() {
+  const [onView, setOnView] = useState<boolean>(false);
+  const [routine, setRoutine] = useState<IRoutine | null>(null);
+
+  function openModal(routine: IRoutine) {
+    setRoutine(routine);
+    setOnView(true);
+  }
+
+  function closeModal() {
+    setRoutine(null);
+    setOnView(false);
+  }
+
   return (
     <View style={style.container}>
       <View style={style.prev}>
         {prevData.map((prev, i) => {
           return (
             <View style={style.item} key={i}>
-              <Text>{prev.title}</Text>
-              <View style={style.kg}>
-                <Text>{prev.kg}</Text>
-                <Text>x{prev.set}</Text>
-              </View>
+              <Text onPress={() => openModal(prev)}>{prev.title}</Text>
             </View>
           );
         })}
       </View>
-      <PrevButton prevData={prevData} />
+      <StartModal routine={routine!} onView={onView} onCloseView={closeModal} />
     </View>
   );
 }

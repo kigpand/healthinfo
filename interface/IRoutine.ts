@@ -1,11 +1,16 @@
-export interface IRoutine {
+export interface IRoutineData {
   category: string;
   kg: string;
-  set: string;
+  set: number;
   title: string;
 }
 
+export interface IRoutine {
+  title: string;
+  routine: IRoutineData[];
+}
+
 export interface IRoutineStore {
-  routine: IRoutine[];
+  routine: IRoutine;
   timer: string;
 }
