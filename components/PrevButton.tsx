@@ -22,11 +22,11 @@ export default function PrevButton({prevData}: Props) {
 
   return (
     <View style={style.container}>
-      <TouchableOpacity style={style.button}>
-        <Text onPress={onStart}>시작</Text>
+      <TouchableOpacity style={style.button} onPress={onStart}>
+        <Text>시작</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={style.cancle}>
-        <Text onPress={onCancle}>취소</Text>
+      <TouchableOpacity style={style.cancle} onPress={onCancle}>
+        <Text>취소</Text>
       </TouchableOpacity>
       <StartModal
         prevData={prevData}
