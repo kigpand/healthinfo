@@ -12,7 +12,7 @@ export default function HomeModal({onView, closeView}: Props) {
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function onMove() {
-    nav.navigate('Prev');
+    nav.navigate('LoadPrevRoutine');
     closeView();
   }
 

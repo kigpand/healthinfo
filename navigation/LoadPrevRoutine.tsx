@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {prevData} from '../data/data';
 import StartModal from '../components/modal/StartModal';
 import {useState} from 'react';
 import {IRoutine} from '../interface/IRoutine';
+import PrevRoutineList from '../components/PrevRoutineList';
 
-export default function Prev() {
+export default function LoadPrevRoutine() {
   const [onView, setOnView] = useState<boolean>(false);
   const [routine, setRoutine] = useState<IRoutine | null>(null);
 
@@ -18,17 +19,21 @@ export default function Prev() {
     setOnView(false);
   }
 
+  // section list test 해볼것
   return (
     <View style={style.container}>
-      <View style={style.prev}>
-        {prevData.map((prev, i) => {
-          return (
-            <View style={style.item} key={i}>
-              <Text onPress={() => openModal(prev)}>{prev.title}</Text>
-            </View>
-          );
-        })}
-      </View>
+      <FlatList
+        horizontal={true}
+        style={style.flatList}
+        data={prevData}
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: 'center',
+          gap: 10,
+        }}
+        renderItem={item => (
+          <PrevRoutineList item={item.item} openModal={openModal} />
+        )}></FlatList>
       <StartModal routine={routine!} onView={onView} onCloseView={closeModal} />
     </View>
   );
@@ -40,23 +45,11 @@ const style = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
   },
-  prev: {
+  flatList: {
     flex: 1,
-    height: '100%',
-    flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
     marginTop: 100,
-    gap: 10,
-  },
-  item: {
-    width: '40%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    backgroundColor: 'red',
-    position: 'relative',
+    width: '100%',
   },
   kg: {
     display: 'flex',

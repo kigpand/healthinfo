@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import Other from './navigation/Other';
 import Record from './navigation/Record';
 import Stat from './navigation/Stat';
-import Prev from './navigation/Prev';
+import LoadPrevRoutine from './navigation/LoadPrevRoutine';
 import NewData from './navigation/NewData';
 import Set from './navigation/Set';
 import Clear from './navigation/Clear';
@@ -39,8 +39,8 @@ function App(): JSX.Element {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Prev"
-          component={Prev}
+          name="LoadPrevRoutine"
+          component={LoadPrevRoutine}
           options={{headerShown: false}}
         />
         <Stack.Screen
