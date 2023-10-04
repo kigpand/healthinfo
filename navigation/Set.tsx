@@ -1,14 +1,14 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {mainColor} from '../style/color';
 import {useState} from 'react';
-import SetItem from '../components/SetItem';
+import SetList from '../components/SetList';
 
 export default function Set() {
   const [exercise, setExercise] = useState<boolean>(false);
   return (
     <View style={styles.guide}>
       {exercise ? (
-        <SetItem />
+        <SetList />
       ) : (
         <TouchableOpacity onPress={() => setExercise(true)}>
           <Text style={styles.text}>시작!!!</Text>

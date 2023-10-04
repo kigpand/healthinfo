@@ -8,31 +8,31 @@ export const prevData: IRoutine[] = [
     routine: [
       {
         category: '등',
-        title: '등운동',
+        title: '등운동1',
         kg: '10kg',
         set: 5,
       },
       {
         category: '등',
-        title: '등운동',
+        title: '등운동2',
         kg: '8kg',
         set: 10,
       },
       {
         category: '등',
-        title: '등운동',
+        title: '등운동3',
         kg: '5kg',
         set: 7,
       },
       {
         category: '등',
-        title: '등운동',
+        title: '등운동4',
         kg: '15kg',
         set: 8,
       },
       {
         category: '하체',
-        title: '하체운동',
+        title: '하체운동5',
         kg: '10kg',
         set: 5,
       },
@@ -43,19 +43,19 @@ export const prevData: IRoutine[] = [
     routine: [
       {
         category: '어깨',
-        title: '어깨운동',
+        title: '어깨운동1',
         kg: '12kg',
         set: 3,
       },
       {
         category: '어깨',
-        title: '어깨운동',
+        title: '어깨운동2',
         kg: '15kg',
         set: 4,
       },
       {
         category: '어깨',
-        title: '어깨운동',
+        title: '어깨운동3',
         kg: '20kg',
         set: 5,
       },

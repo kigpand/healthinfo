@@ -5,19 +5,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {IRoutine} from '../interface/IRoutine';
-import {useEffect, useState} from 'react';
+import {IRoutineData} from '../interface/IRoutine';
+import {useState} from 'react';
 import {buttonColor} from '../style/color';
 
 type Props = {
-  routine: IRoutine | null;
+  routine: IRoutineData | null;
   count: number;
   onAddCount: () => void;
   onMinusCount: () => void;
   startTimer: () => void;
 };
 
-export default function SetItemMain({
+export default function SetListMain({
   routine,
   count,
   onAddCount,

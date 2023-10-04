@@ -2,14 +2,14 @@ import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import useExercise from '../store/useExercise';
 import Timer from './Timer';
-import SetItemMain from './SetItemMain';
+import SetListMain from './SetListMain';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 
-export default function SetItem() {
+export default function SetList() {
   const [onTimer, setOnTimer] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
-  const {routine} = useExercise();
+  const {routine, timer} = useExercise();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function onAddCount() {
@@ -31,18 +31,15 @@ export default function SetItem() {
 
   return (
     <View style={styles.setItem}>
-      <SetItemMain
-        routine={routine ? routine.routine[count] : null}
+      <SetListMain
+        routine={routine?.routine[count] || null}
         count={count}
         onAddCount={onAddCount}
         onMinusCount={onMinusCount}
         startTimer={startTimer}
       />
       {onTimer && (
-        <Timer
-          closeView={() => setOnTimer(false)}
-          timer={Number(routine?.timer)}
-        />
+        <Timer closeView={() => setOnTimer(false)} timer={Number(timer)} />
       )}
     </View>
   );

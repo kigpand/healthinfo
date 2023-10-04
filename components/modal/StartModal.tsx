@@ -13,11 +13,12 @@ type Props = {
 };
 
 export default function StartModal({routine, onView, onCloseView}: Props) {
-  const [time, setTime] = useState<string>('0');
+  const [time, setTime] = useState<number>(0);
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const {setRoutine} = useExercise();
+  const {setRoutine, setTimer} = useExercise();
   const onSuccess = () => {
-    setRoutine(routine, time);
+    setRoutine(routine);
+    setTimer(time);
     nav.navigate('Set');
     onCloseView();
   };
@@ -37,7 +38,7 @@ export default function StartModal({routine, onView, onCloseView}: Props) {
             style={styles.timerInput}
             placeholder="timer"
             keyboardType="number-pad"
-            onChangeText={newText => setTime(newText)}
+            onChangeText={newText => setTime(Number(newText))}
           />
         </View>
         <View style={styles.btns}>
