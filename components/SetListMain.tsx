@@ -18,10 +18,10 @@ export default function SetListMain({
   onMinusCount,
   startTimer,
 }: Props) {
-  const [setNum, setSetNum] = useState<string>('0');
+  const [setNum, setSetNum] = useState<number>(0);
 
   function onNextBtn() {
-    setSetNum('0');
+    setSetNum(0);
     onAddCount();
   }
 
@@ -32,13 +32,19 @@ export default function SetListMain({
       <Text style={styles.set}>{routine?.set}set</Text>
       <View style={styles.doing}>
         <Text>몇 세트 진행하셨나요?</Text>
-        <TextInput
+        <View style={styles.setNum}>
+          <Text style={styles.input}>{setNum}</Text>
+          <Text style={styles.plus} onPress={() => setSetNum(setNum + 1)}>
+            +
+          </Text>
+        </View>
+        {/* <TextInput
           style={styles.input}
           placeholder="set"
           keyboardType="number-pad"
           onChangeText={newText => setSetNum(newText)}
           defaultValue={setNum}
-        />
+        /> */}
         <Pressable onPress={startTimer} style={styles.rest}>
           <Text style={{fontWeight: 'bold', color: 'white'}}>휴식</Text>
         </Pressable>
@@ -75,12 +81,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 100,
   },
-  input: {
+  setNum: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 10,
+    gap: 10,
+  },
+  plus: {
+    fontSize: 20,
+    backgroundColor: 'white',
+    paddingHorizontal: 5,
+    // margin
+  },
+  input: {
+    width: 100,
     backgroundColor: 'white',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 8,
+    textAlign: 'right',
   },
   rest: {
     marginTop: 10,
