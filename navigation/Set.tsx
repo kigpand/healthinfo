@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {mainColor} from '../style/color';
 import {useState} from 'react';
 import SetList from '../components/SetList';
@@ -10,9 +10,9 @@ export default function Set() {
       {exercise ? (
         <SetList />
       ) : (
-        <TouchableOpacity onPress={() => setExercise(true)}>
+        <Pressable onPress={() => setExercise(true)}>
           <Text style={styles.text}>시작!!!</Text>
-        </TouchableOpacity>
+        </Pressable>
       )}
     </View>
   );

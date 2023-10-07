@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import {IRoutineData} from '../interface/IRoutine';
 import {useState} from 'react';
 import {buttonColor} from '../style/color';
@@ -45,18 +39,18 @@ export default function SetListMain({
           onChangeText={newText => setSetNum(newText)}
           defaultValue={setNum}
         />
-        <TouchableOpacity onPress={startTimer} style={styles.rest}>
+        <Pressable onPress={startTimer} style={styles.rest}>
           <Text style={{fontWeight: 'bold', color: 'white'}}>휴식</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
       {count !== 0 && (
-        <TouchableOpacity style={styles.prev} onPress={onMinusCount}>
+        <Pressable style={styles.prev} onPress={onMinusCount}>
           <Text style={styles.prevText}>이전</Text>
-        </TouchableOpacity>
+        </Pressable>
       )}
-      <TouchableOpacity style={styles.next} onPress={onNextBtn}>
+      <Pressable style={styles.next} onPress={onNextBtn}>
         <Text style={styles.nextText}>Next</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

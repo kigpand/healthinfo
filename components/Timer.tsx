@@ -1,4 +1,4 @@
-import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Modal, Pressable, StyleSheet, Text, View} from 'react-native';
 import {backgroundColor, buttonColor} from '../style/color';
 import {useEffect, useState} from 'react';
 import {useInterval} from '../hooks/useInterval';
@@ -33,9 +33,9 @@ export default function Timer({timer, closeView}: Props) {
     <View style={style.modal}>
       <Text style={style.text}>{time}</Text>
       {isNext && (
-        <TouchableOpacity style={style.next} onPress={onNext}>
+        <Pressable style={style.next} onPress={onNext}>
           <Text>Next</Text>
-        </TouchableOpacity>
+        </Pressable>
       )}
     </View>
   );

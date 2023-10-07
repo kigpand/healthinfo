@@ -1,6 +1,6 @@
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 
 type Props = {
   title: string;
@@ -15,9 +15,9 @@ export default function FooterItem({title, link}: Props) {
   }
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onMove}>
+    <Pressable style={styles.container} onPress={onMove}>
       <Text onPress={onMove}>{title}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 

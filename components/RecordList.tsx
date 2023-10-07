@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {prevData, record} from '../data/data';
 import {mainColor} from '../style/color';
 import {useState} from 'react';
@@ -17,13 +17,13 @@ export default function RecordList() {
     <View style={styles.container}>
       {record.map((item, i: number) => {
         return (
-          <TouchableOpacity
+          <Pressable
             style={styles.button}
             onPress={() => onItemClick(item.exercise)}
             key={i}>
             <Text style={styles.text}>{item.date}</Text>
             <Text style={styles.text}>{item.exercise}</Text>
-          </TouchableOpacity>
+          </Pressable>
         );
       })}
       {modalItem && <RecordViewModal modalItem={modalItem} />}
