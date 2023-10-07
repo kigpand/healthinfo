@@ -2,6 +2,7 @@ import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import {IRoutineData} from '../interface/IRoutine';
 import {useState} from 'react';
 import {buttonColor} from '../style/color';
+import TimerCheckModal from './modal/TimerCheckModal';
 
 type Props = {
   routine: IRoutineData | null;
@@ -19,10 +20,16 @@ export default function SetListMain({
   startTimer,
 }: Props) {
   const [setNum, setSetNum] = useState<number>(0);
+  const [checkTimer, setCheckTimer] = useState<boolean>(false);
 
   function onNextBtn() {
     setSetNum(0);
     onAddCount();
+  }
+
+  function onAddBtn() {
+    setSetNum(setNum + 1);
+    setCheckTimer(true);
   }
 
   return (
@@ -34,17 +41,10 @@ export default function SetListMain({
         <Text>몇 세트 진행하셨나요?</Text>
         <View style={styles.setNum}>
           <Text style={styles.input}>{setNum}</Text>
-          <Text style={styles.plus} onPress={() => setSetNum(setNum + 1)}>
+          <Text style={styles.plus} onPress={onAddBtn}>
             +
           </Text>
         </View>
-        {/* <TextInput
-          style={styles.input}
-          placeholder="set"
-          keyboardType="number-pad"
-          onChangeText={newText => setSetNum(newText)}
-          defaultValue={setNum}
-        /> */}
         <Pressable onPress={startTimer} style={styles.rest}>
           <Text style={{fontWeight: 'bold', color: 'white'}}>휴식</Text>
         </Pressable>
@@ -57,6 +57,11 @@ export default function SetListMain({
       <Pressable style={styles.next} onPress={onNextBtn}>
         <Text style={styles.nextText}>Next</Text>
       </Pressable>
+      <TimerCheckModal
+        onView={checkTimer}
+        closeView={() => setCheckTimer(false)}
+        startTimer={startTimer}
+      />
     </View>
   );
 }
