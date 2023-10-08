@@ -14,15 +14,11 @@ export default function TimerCheckModalBtns({startTimer, closeView}: Props) {
 
   return (
     <View style={styles.buttons}>
-      <Pressable style={styles.pressNo}>
-        <Text style={styles.noBtn} onPress={closeView}>
-          아니오
-        </Text>
+      <Pressable style={styles.pressNo} onPress={closeView}>
+        <Text style={styles.noBtn}>아니오</Text>
       </Pressable>
-      <Pressable style={styles.pressYes}>
-        <Text style={styles.yesBtn} onPress={onTimer}>
-          네
-        </Text>
+      <Pressable style={styles.pressYes} onPress={onTimer}>
+        <Text style={styles.yesBtn}>네</Text>
       </Pressable>
     </View>
   );

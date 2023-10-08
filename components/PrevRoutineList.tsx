@@ -20,9 +20,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     width: 100,
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // backgroundColor: 'red',
-    // position: 'relative',
   },
 });

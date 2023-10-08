@@ -5,7 +5,6 @@ import Timer from './Timer';
 import SetListMain from './SetListMain';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
-import TimerCheckModal from './modal/TimerCheckModal';
 
 export default function SetList() {
   const [onTimer, setOnTimer] = useState<boolean>(false);
