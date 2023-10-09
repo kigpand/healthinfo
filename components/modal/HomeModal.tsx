@@ -1,5 +1,5 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
-import {btnBorderColor, buttonColor} from '../../style/color';
+import {borderColor, btnBorderColor, buttonColor} from '../../style/color';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -61,9 +61,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: '#2c92ff',
+    backgroundColor: buttonColor,
     color: 'white',
     borderWidth: 1,
-    borderColor: '#5feaff',
+    borderColor: borderColor,
   },
 });

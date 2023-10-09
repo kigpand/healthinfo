@@ -3,11 +3,11 @@ export const mainColor = '#00fa9a';
 
 export const backgroundColor = 'white';
 
-export const buttonColor = '#66cdaa';
+export const buttonColor = '#2c92ff';
 
 export const btnBorderColor = '#3cb371';
 
-export const borderColor = '#32a6ff';
+export const borderColor = '#5feaff';
 
 export const trueColor = '#5493ff';
 

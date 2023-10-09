@@ -1,18 +1,34 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
-import {category} from '../data/data';
+import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {useState} from 'react';
+import {mainColor} from '../style/color';
+import {buttonColor} from '../style/color';
+import {borderColor} from '../style/color';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export default function NewData() {
+  const [text, onChangeText] = useState<string>('');
+  const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+  function onSubmit() {
+    if (text === '') return;
+    nav.navigate('NewDataMain', {title: text});
+  }
+
   return (
     <View style={style.container}>
-      <Text>루틴명을 입력해주세요</Text>
-      <TextInput />
-      {/* {category.map((cate: string, i: number) => {
-        return (
-          <Text style={style.list} key={i}>
-            {cate}
-          </Text>
-        );
-      })} */}
+      <Text style={style.title}>루틴명을 입력해주세요</Text>
+      <TextInput
+        style={style.input}
+        placeholder="루틴"
+        value={text}
+        onChangeText={onChangeText}
+      />
+      <Pressable style={style.button}>
+        <Text style={{color: 'white'}} onPress={onSubmit}>
+          등록
+        </Text>
+      </Pressable>
     </View>
   );
 }
@@ -23,16 +39,26 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
+    backgroundColor: mainColor,
   },
-  list: {
-    paddingHorizontal: 40,
-    paddingVertical: 20,
+  title: {
     fontSize: 20,
+    fontWeight: 'bold',
     color: 'white',
-    backgroundColor: '#ff4aff',
-    borderRadius: 8,
+  },
+  input: {
+    backgroundColor: 'white',
+    width: 200,
+    height: 30,
+  },
+  button: {
+    backgroundColor: buttonColor,
     borderWidth: 1,
-    borderColor: '#ff4aff',
-    overflow: 'hidden',
+    borderColor: borderColor,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    position: 'absolute',
+    bottom: 20,
+    borderRadius: 8,
   },
 });

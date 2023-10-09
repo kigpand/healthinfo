@@ -11,6 +11,7 @@ import LoadPrevRoutine from './navigation/LoadPrevRoutine';
 import NewData from './navigation/NewData';
 import Set from './navigation/Set';
 import Clear from './navigation/Clear';
+import NewDataMain from './navigation/NewDataMain';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,11 @@ function App(): JSX.Element {
         <Stack.Screen
           name="Clear"
           component={Clear}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="NewDataMain"
+          component={NewDataMain}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
