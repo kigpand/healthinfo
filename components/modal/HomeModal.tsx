@@ -61,9 +61,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: buttonColor,
+    backgroundColor: '#84ff00',
     color: 'white',
     borderWidth: 1,
-    borderColor: borderColor,
+    borderColor: '#1bff1b',
   },
 });

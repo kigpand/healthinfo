@@ -2,7 +2,7 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useState} from 'react';
 import {Modal, View, Text, StyleSheet, TextInput} from 'react-native';
-import {borderColor} from '../../style/color';
+import {borderColor, buttonColor} from '../../style/color';
 import useExercise from '../../store/useExercise';
 import {IRoutine} from '../../interface/IRoutine';
 
@@ -98,14 +98,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'red',
     overflow: 'hidden',
+    color: 'white',
   },
   start: {
-    backgroundColor: 'skyblue',
+    color: 'white',
+    backgroundColor: buttonColor,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: 'skyblue',
+    borderColor: borderColor,
     overflow: 'hidden',
   },
 });
