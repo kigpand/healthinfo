@@ -1,7 +1,11 @@
 import {useEffect, useRef} from 'react';
 import {Animated, Button, View} from 'react-native';
 
-export default function NewDataModalTitle() {
+type Props = {
+  closeView: () => void;
+};
+
+export default function NewDataModalTitle({closeView}: Props) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -15,7 +19,7 @@ export default function NewDataModalTitle() {
   }, [fadeAnim]);
   return (
     <Animated.View style={{opacity: fadeAnim}}>
-      <Button title="FadeIn" />
+      <Button title="FadeIn" onPress={closeView} />
     </Animated.View>
   );
 }

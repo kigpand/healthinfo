@@ -10,7 +10,7 @@ export default function NewDataModal({onView, closeView}: Props) {
   return (
     <Modal animationType="fade" transparent={false} visible={onView}>
       <View style={styles.modal}>
-        <NewDataModalTitle />
+        <NewDataModalTitle closeView={closeView} />
       </View>
     </Modal>
   );
