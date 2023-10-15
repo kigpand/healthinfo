@@ -37,19 +37,17 @@ export default function SetListMain({
   return (
     <View style={styles.container}>
       {routine && <SetListTitle routine={routine} />}
-      <SetListDoing
-        setNum={setNum}
-        onAddBtn={onAddBtn}
-        startTimer={startTimer}
-      />
+      <SetListDoing setNum={setNum} onAddBtn={onAddBtn} />
       {count !== 0 && (
         <Pressable style={styles.prev} onPress={onMinusCount}>
           <Text style={styles.prevText}>이전</Text>
         </Pressable>
       )}
-      <Pressable style={styles.next} onPress={onNextBtn}>
-        <Text style={styles.nextText}>Next</Text>
-      </Pressable>
+      {routine?.set === setNum && (
+        <Pressable style={styles.next} onPress={onNextBtn}>
+          <Text style={styles.nextText}>Next</Text>
+        </Pressable>
+      )}
       <TimerCheckModal
         onView={checkTimer}
         closeView={() => setCheckTimer(false)}

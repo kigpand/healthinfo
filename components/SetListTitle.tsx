@@ -7,7 +7,7 @@ type Props = {
 
 export default function SetListTitle({routine}: Props) {
   return (
-    <View>
+    <View style={{alignItems: 'center'}}>
       <Text style={styles.title}>{routine.title}</Text>
       <Text style={styles.kg}>{routine.kg}</Text>
       <Text style={styles.set}>{routine.set}set</Text>
