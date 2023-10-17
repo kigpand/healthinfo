@@ -37,7 +37,11 @@ export default function SetListMain({
   return (
     <View style={styles.container}>
       {routine && <SetListTitle routine={routine} />}
-      <SetListDoing setNum={setNum} onAddBtn={onAddBtn} />
+      <SetListDoing
+        setCount={routine?.set || 0}
+        setNum={setNum}
+        onAddBtn={onAddBtn}
+      />
       {count !== 0 && (
         <Pressable style={styles.prev} onPress={onMinusCount}>
           <Text style={styles.prevText}>이전</Text>

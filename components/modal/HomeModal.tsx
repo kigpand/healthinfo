@@ -28,6 +28,7 @@ export default function HomeModal({onView, closeView}: Props) {
       visible={onView}
       presentationStyle="formSheet">
       <View style={styles.modal}>
+        <Text style={styles.title}>어떤 방식으로 진행할까요?</Text>
         <Text style={styles.list} onPress={onMove}>
           이전 루틴 불러오기
         </Text>
@@ -45,6 +46,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
+    backgroundColor: '#fffcd4',
+  },
+  title: {
+    fontWeight: '700',
+    fontSize: 18,
+    marginBottom: 20,
   },
   list: {
     overflow: 'hidden',
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: '#84ff00',
+    backgroundColor: '#72dd00',
     color: 'white',
     borderWidth: 1,
     borderColor: '#1bff1b',

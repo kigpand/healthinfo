@@ -1,11 +1,12 @@
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 
 type Props = {
+  setCount: number;
   setNum: number;
   onAddBtn: () => void;
 };
 
-export default function SetListDoing({setNum, onAddBtn}: Props) {
+export default function SetListDoing({setCount, setNum, onAddBtn}: Props) {
   return (
     <View style={styles.doing}>
       <Text>몇 세트 진행하셨나요?</Text>
@@ -15,6 +16,7 @@ export default function SetListDoing({setNum, onAddBtn}: Props) {
           +
         </Text>
       </View>
+      <Text style={styles.set}>{setCount - setNum}세트남았어요!!</Text>
     </View>
   );
 }
@@ -44,5 +46,11 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 8,
     textAlign: 'right',
+  },
+  set: {
+    marginTop: 20,
+    fontWeight: '700',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });

@@ -22,6 +22,7 @@ export default function LoadPrevRoutine() {
   // section list test 해볼것
   return (
     <View style={style.container}>
+      <Text style={style.title}>어떤 루틴을 불러올까요?</Text>
       <FlatList
         horizontal={true}
         style={style.flatList}
@@ -45,10 +46,15 @@ const style = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
   },
+  title: {
+    fontWeight: '700',
+    fontSize: 18,
+    marginTop: 100,
+  },
   flatList: {
     flex: 1,
     flexWrap: 'wrap',
-    marginTop: 100,
+    marginTop: 50,
     width: '100%',
   },
   kg: {

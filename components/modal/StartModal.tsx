@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     alignItems: 'center',
-    backgroundColor: borderColor,
+    backgroundColor: buttonColor,
     position: 'absolute',
     paddingVertical: 10,
     top: 0,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   timerInput: {
-    borderColor: borderColor,
+    borderColor: buttonColor,
     borderWidth: 1,
     borderRadius: 8,
     fontSize: 18,

@@ -8,6 +8,7 @@ export default function Home({navigation}: any) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>오늘은 어떤 운동을 진행해볼까요?</Text>
       <Text style={styles.today} onPress={() => setOnView(true)}>
         오늘의 운동
       </Text>
@@ -25,6 +26,11 @@ const styles = StyleSheet.create({
     backgroundColor: backgroundColor,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    marginBottom: 40,
+    fontWeight: '700',
+    fontSize: 18,
   },
   today: {
     overflow: 'hidden',
