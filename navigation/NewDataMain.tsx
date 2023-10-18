@@ -2,22 +2,34 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {borderColor, buttonColor, mainColor} from '../style/color';
 import {useState} from 'react';
+import {IRoutineData} from '../interface/IRoutine';
+import NewDataModal from '../components/modal/NewDataModal';
 
 export default function NewDataMain() {
   const route = useRoute<RouteProp<any>>();
+  const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
+  const [viewModal, setViewModal] = useState<boolean>(false);
+
+  function getRoutineArr(routine: IRoutineData[]) {
+    setRoutineArr(routine);
+  }
+
   return (
     <View style={styles.container}>
       <Text>{route.params?.title}</Text>
-      <Pressable>
+      <Pressable onPress={() => setViewModal(true)}>
         <Image
           style={styles.plus}
           source={require('../img/plus.png')}
           alt="plus"
         />
       </Pressable>
-      <Pressable style={styles.button}>
-        <Text style={{color: 'white'}}>등록</Text>
-      </Pressable>
+      <NewDataModal onView={viewModal} closeView={() => setViewModal(true)} />
+      {routineArr.length > 0 && (
+        <Pressable style={styles.button}>
+          <Text style={{color: 'white'}}>등록</Text>
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -30,8 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: mainColor,
   },
   plus: {
-    width: 50,
-    height: 50,
+    width: 30,
+    height: 30,
     marginTop: 10,
   },
   button: {

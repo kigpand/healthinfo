@@ -24,11 +24,13 @@ export default function NewData() {
         value={text}
         onChangeText={onChangeText}
       />
-      <Pressable style={style.button}>
-        <Text style={{color: 'white'}} onPress={onSubmit}>
-          등록
-        </Text>
-      </Pressable>
+      {text !== '' && (
+        <Pressable style={style.button}>
+          <Text style={{color: 'white'}} onPress={onSubmit}>
+            등록
+          </Text>
+        </Pressable>
+      )}
     </View>
   );
 }
