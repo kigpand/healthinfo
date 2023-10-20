@@ -1,7 +1,7 @@
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {borderColor, buttonColor, mainColor} from '../style/color';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {IRoutineData} from '../interface/IRoutine';
 import NewDataModal from '../components/modal/NewDataModal';
 
@@ -10,9 +10,13 @@ export default function NewDataMain() {
   const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
   const [viewModal, setViewModal] = useState<boolean>(false);
 
-  function getRoutineArr(routine: IRoutineData[]) {
-    setRoutineArr(routine);
+  function getRoutineArr(routine: IRoutineData) {
+    setRoutineArr([...routineArr, routine]);
   }
+
+  useEffect(() => {
+    console.log(routineArr);
+  }, [routineArr]);
 
   return (
     <View style={styles.container}>
@@ -24,7 +28,11 @@ export default function NewDataMain() {
           alt="plus"
         />
       </Pressable>
-      <NewDataModal onView={viewModal} closeView={() => setViewModal(true)} />
+      <NewDataModal
+        onView={viewModal}
+        getRoutineArr={getRoutineArr}
+        closeView={() => setViewModal(false)}
+      />
       {routineArr.length > 0 && (
         <Pressable style={styles.button}>
           <Text style={{color: 'white'}}>등록</Text>
