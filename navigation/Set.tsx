@@ -1,25 +1,12 @@
 import {Animated, Pressable, StyleSheet, Text, View} from 'react-native';
 import {mainColor} from '../style/color';
-import {useEffect, useRef, useState} from 'react';
+import {useState} from 'react';
 import SetList from '../components/SetList';
+import {useScaleAnimate} from '../hooks/useScaleAnimate';
 
 export default function Set() {
   const [exercise, setExercise] = useState<boolean>(false);
-  const animation = useRef(new Animated.Value(1)).current;
-
-  const scaleLarge = Animated.timing(animation, {
-    toValue: 1.2,
-    useNativeDriver: true,
-  });
-
-  const scaleSmall = Animated.timing(animation, {
-    toValue: 1,
-    useNativeDriver: true,
-  });
-
-  useEffect(() => {
-    Animated.loop(Animated.sequence([scaleLarge, scaleSmall])).start();
-  }, [animation]);
+  const animate = useScaleAnimate({scale: 1.05});
 
   return (
     <View style={styles.guide}>
@@ -31,7 +18,7 @@ export default function Set() {
             운동을 시작하실려면 아래 버튼을 클릭해주세요
           </Text>
           <Pressable onPress={() => setExercise(true)}>
-            <Animated.View style={{transform: [{scale: animation}]}}>
+            <Animated.View style={{transform: [{scale: animate.animation}]}}>
               <Text style={styles.text}>시작!!!</Text>
             </Animated.View>
           </Pressable>
