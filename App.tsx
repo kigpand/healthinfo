@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Home from './navigation/Home';
 import Footer from './components/Footer';
 import Other from './navigation/Other';
@@ -11,10 +11,18 @@ import NewData from './navigation/NewData';
 import Set from './navigation/Set';
 import Clear from './navigation/Clear';
 import NewDataMain from './navigation/NewDataMain';
+import {prevData} from './data/data';
+import useExercise from './store/useExercise';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
+  const {setList} = useExercise();
+
+  useEffect(() => {
+    setList(prevData);
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">

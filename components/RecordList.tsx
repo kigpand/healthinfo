@@ -1,14 +1,16 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {prevData, record} from '../data/data';
+import {record} from '../data/data';
 import {mainColor} from '../style/color';
 import {useState} from 'react';
 import RecordViewModal from './modal/RecordViewModal';
+import useExercise from '../store/useExercise';
 
 export default function RecordList() {
   const [modalItem, setModalItem] = useState<any>(null);
+  const {list} = useExercise();
 
   function onItemClick(title: string) {
-    const result = prevData.find(item => item.title === title);
+    const result = list.find(item => item.title === title);
     if (result) {
       setModalItem(result);
     }

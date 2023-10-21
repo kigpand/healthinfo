@@ -1,30 +1,33 @@
-import {RouteProp, useRoute} from '@react-navigation/native';
 import {
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+  ParamListBase,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {borderColor, buttonColor, mainColor} from '../style/color';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {IRoutineData} from '../interface/IRoutine';
-import NewDataModal from '../components/modal/NewDataModal';
 import NewDataList from '../components/NewDataList';
 import NewDataAdd from '../components/NewDataAdd';
+import useExercise from '../store/useExercise';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 
 export default function NewDataMain() {
   const route = useRoute<RouteProp<any>>();
   const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
+  const {addList} = useExercise();
+  const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function getRoutineArr(routine: IRoutineData) {
     setRoutineArr([...routineArr, routine]);
   }
 
-  useEffect(() => {
-    console.log(routineArr);
-  }, [routineArr]);
+  function onSubmit() {
+    if (!route.params) return;
+    addList({title: route.params.title, routine: routineArr});
+    nav.navigate('Home');
+  }
 
   return (
     <View style={styles.container}>
@@ -32,7 +35,7 @@ export default function NewDataMain() {
       <NewDataAdd getRoutineArr={getRoutineArr} />
       <NewDataList routineArr={routineArr} />
       {routineArr.length > 0 && (
-        <Pressable style={styles.button}>
+        <Pressable style={styles.button} onPress={onSubmit}>
           <Text style={{color: 'white'}}>등록</Text>
         </Pressable>
       )}

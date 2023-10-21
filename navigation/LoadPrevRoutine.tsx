@@ -1,13 +1,14 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {prevData} from '../data/data';
 import StartModal from '../components/modal/StartModal';
 import {useState} from 'react';
 import {IRoutine} from '../interface/IRoutine';
 import PrevRoutineList from '../components/PrevRoutineList';
+import useExercise from '../store/useExercise';
 
 export default function LoadPrevRoutine() {
   const [onView, setOnView] = useState<boolean>(false);
   const [routine, setRoutine] = useState<IRoutine | null>(null);
+  const {list} = useExercise();
 
   function openModal(routine: IRoutine) {
     setRoutine(routine);
@@ -26,7 +27,7 @@ export default function LoadPrevRoutine() {
       <FlatList
         horizontal={true}
         style={style.flatList}
-        data={prevData}
+        data={list}
         contentContainerStyle={{
           flex: 1,
           justifyContent: 'center',
