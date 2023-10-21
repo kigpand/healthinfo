@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import {IRoutine, IRoutineStore} from '../interface/IRoutine';
+import {IRoutine} from '../interface/IRoutine';
 
 interface IUserStore {
   routine: IRoutine | null;

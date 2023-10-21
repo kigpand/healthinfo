@@ -1,8 +1,7 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-import {borderColor} from '../style/color';
 
 type Props = {
-  label: string;
+  label: 'kg' | '세트' | '카테고리' | '명칭';
   onChangeText: (text: string) => void;
 };
 
@@ -14,6 +13,9 @@ export default function NewDataModalList({label, onChangeText}: Props) {
         style={styles.input}
         onChangeText={onChangeText}
         placeholder={label}
+        keyboardType={
+          label === 'kg' || label === '세트' ? 'number-pad' : 'default'
+        }
       />
     </View>
   );

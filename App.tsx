@@ -2,7 +2,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import Home from './navigation/Home';
-import Header from './components/Header';
 import Footer from './components/Footer';
 import Other from './navigation/Other';
 import Record from './navigation/Record';
