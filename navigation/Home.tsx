@@ -10,7 +10,7 @@ export default function Home({navigation}: any) {
     <View style={styles.container}>
       <Text style={styles.title}>오늘은 어떤 운동을 진행해볼까요?</Text>
       <Text style={styles.today} onPress={() => setOnView(true)}>
-        오늘의 운동
+        Let's Go!
       </Text>
       <HomeModal onView={onView} closeView={() => setOnView(false)} />
       <Text style={styles.record} onPress={() => navigation.navigate('Record')}>

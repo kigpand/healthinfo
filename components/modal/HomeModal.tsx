@@ -30,7 +30,7 @@ export default function HomeModal({onView, closeView}: Props) {
       <View style={styles.modal}>
         <Text style={styles.title}>어떤 방식으로 진행할까요?</Text>
         <Text style={styles.list} onPress={onMove}>
-          이전 루틴 불러오기
+          저장된 루틴 불러오기
         </Text>
         <Text style={styles.new} onPress={onListClick}>
           새로 등록하기
