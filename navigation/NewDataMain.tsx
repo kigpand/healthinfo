@@ -9,11 +9,11 @@ import {borderColor, buttonColor, mainColor} from '../style/color';
 import {useState} from 'react';
 import {IRoutineData} from '../interface/IRoutine';
 import NewDataList from '../components/NewDataList';
-import NewDataAdd from '../components/NewDataAdd';
 import useExercise from '../store/useExercise';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 import StartModal from '../components/modal/StartModal';
 import NewDataBtns from '../components/NewDataBtns';
+import NewDataMainHeader from '../components/NewDataMainHeader';
 
 export default function NewDataMain() {
   const route = useRoute<RouteProp<any>>();
@@ -41,8 +41,7 @@ export default function NewDataMain() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{route.params?.title}</Text>
-      <NewDataAdd getRoutineArr={getRoutineArr} />
+      <NewDataMainHeader getRoutineArr={getRoutineArr} />
       <NewDataList routineArr={routineArr} />
       {routineArr.length > 0 && (
         <Pressable style={styles.button} onPress={() => setOnBtn(true)}>
@@ -67,11 +66,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: mainColor,
-  },
-  title: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    marginBottom: 20,
   },
   button: {
     backgroundColor: buttonColor,
