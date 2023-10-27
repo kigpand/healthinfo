@@ -21,10 +21,10 @@ export default function RecordList() {
         return (
           <Pressable
             style={styles.button}
-            onPress={() => onItemClick(item.exercise)}
+            onPress={() => onItemClick(item.title)}
             key={i}>
             <Text style={styles.text}>{item.date}</Text>
-            <Text style={styles.text}>{item.exercise}</Text>
+            <Text style={styles.text}>{item.title}</Text>
           </Pressable>
         );
       })}

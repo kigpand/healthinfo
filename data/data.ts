@@ -66,26 +66,26 @@ export const prevData: IRoutine[] = [
 export const record = [
   {
     date: '20230811',
-    exercise: '등운동',
+    title: '첫번째 루틴',
   },
   {
     date: '20230812',
-    exercise: '어깨운동',
+    title: '어깨 루틴',
   },
   {
     date: '20230813',
-    exercise: '가슴운동',
+    title: '어깨 루틴',
   },
   {
     date: '20230814',
-    exercise: '등운동',
+    title: '첫번째 루틴',
   },
   {
     date: '20230815',
-    exercise: '하체운동',
+    title: '어깨 루틴',
   },
   {
     date: '20230816',
-    exercise: '팔운동',
+    title: '어깨 루틴',
   },
 ];

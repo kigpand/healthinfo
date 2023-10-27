@@ -25,10 +25,8 @@ export default function NewData() {
         onChangeText={onChangeText}
       />
       {text !== '' && (
-        <Pressable style={style.button}>
-          <Text style={{color: 'white'}} onPress={onSubmit}>
-            등록
-          </Text>
+        <Pressable style={style.button} onPress={onSubmit}>
+          <Text style={{color: 'white'}}>등록</Text>
         </Pressable>
       )}
     </View>
