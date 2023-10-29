@@ -1,5 +1,10 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
-import {borderColor, btnBorderColor, buttonColor} from '../../style/color';
+import {
+  borderColor,
+  btnBorderColor,
+  buttonColor,
+  falseColor,
+} from '../../style/color';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -35,6 +40,9 @@ export default function HomeModal({onView, closeView}: Props) {
         <Text style={styles.new} onPress={onListClick}>
           새로 등록하기
         </Text>
+        <Text style={styles.close} onPress={closeView}>
+          이전
+        </Text>
       </View>
     </Modal>
   );
@@ -59,6 +67,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 8,
     backgroundColor: buttonColor,
+    fontWeight: 'bold',
     color: 'white',
     borderWidth: 1,
     borderColor: btnBorderColor,
@@ -69,8 +78,21 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 8,
     backgroundColor: '#72dd00',
+    fontWeight: 'bold',
     color: 'white',
     borderWidth: 1,
     borderColor: '#1bff1b',
+  },
+  close: {
+    overflow: 'hidden',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+    backgroundColor: falseColor,
+    color: 'white',
+    borderWidth: 1,
+    borderColor: '#ff3d8e',
+    position: 'absolute',
+    bottom: 20,
   },
 });
