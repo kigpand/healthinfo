@@ -15,6 +15,7 @@ export default function RecordList() {
       setModalItem(result);
     }
   }
+
   return (
     <View style={styles.container}>
       {record.map((item, i: number) => {
@@ -28,7 +29,12 @@ export default function RecordList() {
           </Pressable>
         );
       })}
-      {modalItem && <RecordViewModal modalItem={modalItem} />}
+      {modalItem && (
+        <RecordViewModal
+          modalItem={modalItem}
+          closeModal={() => setModalItem(false)}
+        />
+      )}
     </View>
   );
 }

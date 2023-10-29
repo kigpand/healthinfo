@@ -1,18 +1,24 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {IRoutine} from '../../interface/IRoutine';
+import RecordViewModalList from '../RecordViewModalList';
+import RecordViewModalButtons from '../RecordViewModalButtons';
 
 type Props = {
   modalItem: IRoutine;
+  closeModal: () => void;
 };
 
-export default function RecordViewModal({modalItem}: Props) {
+export default function RecordViewModal({modalItem, closeModal}: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
         <Text style={styles.title}>루틴 명: {modalItem.title}</Text>
         <FlatList
           data={modalItem.routine}
-          renderItem={item => <Text>{item.item.title}</Text>}></FlatList>
+          renderItem={item => (
+            <RecordViewModalList index={item.index} routineData={item.item} />
+          )}></FlatList>
+        <RecordViewModalButtons routine={modalItem} closeModal={closeModal} />
       </View>
     </View>
   );
@@ -30,14 +36,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   body: {
-    width: '80%',
+    width: '70%',
     padding: 20,
     borderRadius: 12,
     backgroundColor: 'white',
+    alignItems: 'center',
   },
   title: {
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 20,
   },
 });
