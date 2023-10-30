@@ -27,6 +27,13 @@ export default function NewDataMain() {
     setRoutineArr([...routineArr, routine]);
   }
 
+  function removeRoutine(title: string) {
+    const result = routineArr.filter(
+      (item: IRoutineData) => item.title !== title,
+    );
+    setRoutineArr(result);
+  }
+
   function onPlaySubmit() {
     setOnBtn(false);
     setStart(true);
@@ -42,7 +49,7 @@ export default function NewDataMain() {
   return (
     <View style={styles.container}>
       <NewDataMainHeader getRoutineArr={getRoutineArr} />
-      <NewDataList routineArr={routineArr} />
+      <NewDataList routineArr={routineArr} removeRoutine={removeRoutine} />
       {routineArr.length > 0 && (
         <Pressable style={styles.button} onPress={() => setOnBtn(true)}>
           <Text style={{color: 'white'}}>등록</Text>

@@ -18,6 +18,7 @@ export default function RecordList() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>최근 루틴</Text>
       {record.map((item, i: number) => {
         return (
           <Pressable
@@ -46,6 +47,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: mainColor,
   },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginVertical: 20,
+  },
   button: {
     width: 250,
     flexDirection: 'row',
@@ -57,6 +63,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
   },
 });

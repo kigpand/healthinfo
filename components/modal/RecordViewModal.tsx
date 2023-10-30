@@ -12,7 +12,7 @@ export default function RecordViewModal({modalItem, closeModal}: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
-        <Text style={styles.title}>루틴 명: {modalItem.title}</Text>
+        <Text style={styles.title}>{modalItem.title}</Text>
         <FlatList
           data={modalItem.routine}
           renderItem={item => (
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   body: {
     width: '70%',
     padding: 20,
+    paddingTop: 30,
     borderRadius: 12,
     backgroundColor: 'white',
     alignItems: 'center',
