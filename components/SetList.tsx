@@ -14,7 +14,7 @@ export default function SetList() {
 
   function onAddCount() {
     if (count + 1 === routine?.routine.length) {
-      nav.navigate('Clear');
+      nav.navigate('Finish');
     } else {
       setOnTimer(true);
       setCount(count + 1);

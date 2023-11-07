@@ -7,12 +7,12 @@ import Other from './navigation/Other';
 import Record from './navigation/Record';
 import Stat from './navigation/Stat';
 import LoadPrevRoutine from './navigation/LoadPrevRoutine';
-import NewData from './navigation/NewData';
+import SetNewDataTitle from './navigation/SetNewDataTitle';
 import Set from './navigation/Set';
-import Clear from './navigation/Clear';
-import NewDataMain from './navigation/NewDataMain';
+import AddNewData from './navigation/AddNewData';
 import {prevData} from './data/data';
 import useExercise from './store/useExercise';
+import Finish from './navigation/Finish';
 
 const Stack = createNativeStackNavigator();
 
@@ -52,8 +52,8 @@ function App(): JSX.Element {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="NewData"
-          component={NewData}
+          name="SetNewDataTitle"
+          component={SetNewDataTitle}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -62,13 +62,13 @@ function App(): JSX.Element {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Clear"
-          component={Clear}
+          name="Finsh"
+          component={Finish}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="NewDataMain"
-          component={NewDataMain}
+          name="AddNewData"
+          component={AddNewData}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

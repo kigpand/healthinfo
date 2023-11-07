@@ -4,20 +4,21 @@ import {useState} from 'react';
 import {IRoutine} from '../interface/IRoutine';
 import PrevRoutineList from '../components/PrevRoutineList';
 import useExercise from '../store/useExercise';
+import useModal from '../hooks/useModal';
 
 export default function LoadPrevRoutine() {
-  const [onView, setOnView] = useState<boolean>(false);
   const [routine, setRoutine] = useState<IRoutine | null>(null);
   const {list} = useExercise();
+  const {openModal, handleOpenModal, handleCloseModal} = useModal();
 
-  function openModal(routine: IRoutine) {
+  function handleListClick(routine: IRoutine) {
     setRoutine(routine);
-    setOnView(true);
+    handleOpenModal();
   }
 
   function closeModal() {
     setRoutine(null);
-    setOnView(false);
+    handleCloseModal();
   }
 
   // section list test 해볼것
@@ -34,9 +35,13 @@ export default function LoadPrevRoutine() {
           gap: 10,
         }}
         renderItem={item => (
-          <PrevRoutineList item={item.item} openModal={openModal} />
+          <PrevRoutineList item={item.item} handleListClick={handleListClick} />
         )}></FlatList>
-      <StartModal routine={routine!} onView={onView} onCloseView={closeModal} />
+      <StartModal
+        routine={routine!}
+        onView={openModal}
+        onCloseView={closeModal}
+      />
     </View>
   );
 }

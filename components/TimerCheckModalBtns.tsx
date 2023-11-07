@@ -3,21 +3,24 @@ import {falseColor, trueColor} from '../style/color';
 
 type Props = {
   startTimer: () => void;
-  closeView: () => void;
+  closeTimerCheckModal: () => void;
 };
 
-export default function TimerCheckModalBtns({startTimer, closeView}: Props) {
-  function onTimer() {
+export default function TimerCheckModalBtns({
+  startTimer,
+  closeTimerCheckModal,
+}: Props) {
+  function onStartTimer() {
     startTimer();
-    closeView();
+    closeTimerCheckModal();
   }
 
   return (
     <View style={styles.buttons}>
-      <Pressable style={styles.pressNo} onPress={closeView}>
+      <Pressable style={styles.pressNo} onPress={closeTimerCheckModal}>
         <Text style={styles.noBtn}>아니오</Text>
       </Pressable>
-      <Pressable style={styles.pressYes} onPress={onTimer}>
+      <Pressable style={styles.pressYes} onPress={onStartTimer}>
         <Text style={styles.yesBtn}>네</Text>
       </Pressable>
     </View>

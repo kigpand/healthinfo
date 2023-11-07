@@ -6,7 +6,10 @@ type Props = {
   onNoSubmit: () => void;
 };
 
-export default function NewDataBtns({onPlaySubmit, onNoSubmit}: Props) {
+export default function AddNewDataSubmitBtns({
+  onPlaySubmit,
+  onNoSubmit,
+}: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.body}>

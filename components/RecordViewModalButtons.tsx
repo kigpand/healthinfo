@@ -2,7 +2,8 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {falseColor, trueColor} from '../style/color';
 import StartModal from './modal/StartModal';
 import {IRoutine} from '../interface/IRoutine';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import useModal from '../hooks/useModal';
 
 type Props = {
   routine: IRoutine;
@@ -10,7 +11,12 @@ type Props = {
 };
 
 export default function RecordViewModalButtons({routine, closeModal}: Props) {
-  const [onView, setOnView] = useState<boolean>(false);
+  const {openModal, handleOpenModal, handleCloseModal} = useModal();
+
+  useEffect(() => {
+    return () => closeModal();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Pressable
@@ -20,13 +26,13 @@ export default function RecordViewModalButtons({routine, closeModal}: Props) {
       </Pressable>
       <Pressable
         style={{overflow: 'hidden', borderRadius: 10}}
-        onPress={() => setOnView(true)}>
+        onPress={handleOpenModal}>
         <Text style={styles.start}>시작</Text>
       </Pressable>
       <StartModal
         routine={routine!}
-        onView={onView}
-        onCloseView={() => setOnView(false)}
+        onView={openModal}
+        onCloseView={handleCloseModal}
       />
     </View>
   );

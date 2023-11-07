@@ -25,7 +25,7 @@ export default function Timer({timer, closeView}: Props) {
     }
   }, [time]);
 
-  function onNext() {
+  function onNextExeriseItem() {
     closeView();
   }
 
@@ -33,7 +33,7 @@ export default function Timer({timer, closeView}: Props) {
     <View style={style.modal}>
       <Text style={style.text}>{time}</Text>
       {isNext && (
-        <Pressable style={style.next} onPress={onNext}>
+        <Pressable style={style.next} onPress={onNextExeriseItem}>
           <Text>Next</Text>
         </Pressable>
       )}

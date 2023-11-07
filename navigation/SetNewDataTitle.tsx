@@ -6,13 +6,13 @@ import {borderColor} from '../style/color';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-export default function NewData() {
+export default function SetNewDataTitle() {
   const [text, onChangeText] = useState<string>('');
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function onSubmit() {
     if (text === '') return;
-    nav.navigate('NewDataMain', {title: text});
+    nav.navigate('AddNewData', {title: text});
   }
 
   return (

@@ -8,20 +8,21 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {borderColor, buttonColor, mainColor} from '../style/color';
 import {useState} from 'react';
 import {IRoutineData} from '../interface/IRoutine';
-import NewDataList from '../components/NewDataList';
+import AddNewDataList from '../components/AddNewDataList';
 import useExercise from '../store/useExercise';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 import StartModal from '../components/modal/StartModal';
-import NewDataBtns from '../components/NewDataBtns';
-import NewDataMainHeader from '../components/NewDataMainHeader';
+import AddNewDataSubmitBtns from '../components/AddNewDataSubmitBtns';
+import AddNewDataMainHeader from '../components/AddNewDataMainHeader';
+import useModal from '../hooks/useModal';
 
-export default function NewDataMain() {
+export default function AddNewData() {
   const route = useRoute<RouteProp<any>>();
-  const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
-  const {addList} = useExercise();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const {addList} = useExercise();
+  const {openModal, handleOpenModal, handleCloseModal} = useModal();
   const [onBtn, setOnBtn] = useState<boolean>(false);
-  const [start, setStart] = useState<boolean>(false);
+  const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
 
   function getRoutineArr(routine: IRoutineData) {
     setRoutineArr([...routineArr, routine]);
@@ -36,7 +37,7 @@ export default function NewDataMain() {
 
   function onPlaySubmit() {
     setOnBtn(false);
-    setStart(true);
+    handleOpenModal();
   }
 
   function onNoSubmit() {
@@ -48,21 +49,24 @@ export default function NewDataMain() {
 
   return (
     <View style={styles.container}>
-      <NewDataMainHeader getRoutineArr={getRoutineArr} />
-      <NewDataList routineArr={routineArr} removeRoutine={removeRoutine} />
+      <AddNewDataMainHeader getRoutineArr={getRoutineArr} />
+      <AddNewDataList routineArr={routineArr} removeRoutine={removeRoutine} />
       {routineArr.length > 0 && (
         <Pressable style={styles.button} onPress={() => setOnBtn(true)}>
           <Text style={{color: 'white'}}>등록</Text>
         </Pressable>
       )}
-      {onBtn && (
-        <NewDataBtns onPlaySubmit={onPlaySubmit} onNoSubmit={onNoSubmit} />
-      )}
       <StartModal
         routine={{title: route.params!.title, routine: routineArr}}
-        onView={start}
-        onCloseView={() => setStart(false)}
+        onView={openModal}
+        onCloseView={handleCloseModal}
       />
+      {onBtn && (
+        <AddNewDataSubmitBtns
+          onPlaySubmit={onPlaySubmit}
+          onNoSubmit={onNoSubmit}
+        />
+      )}
     </View>
   );
 }

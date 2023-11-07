@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import NewDataAdd from './NewDataAdd';
+import NewDataAddRoutineBtn from './NewDataAddRoutineBtn';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {IRoutineData} from '../interface/IRoutine';
 
@@ -7,13 +7,13 @@ type Props = {
   getRoutineArr: (routine: IRoutineData) => void;
 };
 
-export default function NewDataMainHeader({getRoutineArr}: Props) {
+export default function AddNewDataMainHeader({getRoutineArr}: Props) {
   const route = useRoute<RouteProp<any>>();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{route.params?.title}</Text>
-      <NewDataAdd getRoutineArr={getRoutineArr} />
+      <NewDataAddRoutineBtn getRoutineArr={getRoutineArr} />
     </View>
   );
 }

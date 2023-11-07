@@ -7,16 +7,14 @@ type Props = {
   removeRoutine: (title: string) => void;
 };
 
-export default function NewDataList({routineArr, removeRoutine}: Props) {
+export default function AddNewDataList({routineArr, removeRoutine}: Props) {
   return (
     <View style={styles.container}>
       <ScrollView>
         {routineArr.map((item, i) => {
           return (
-            <View style={styles.list}>
-              <Text style={styles.listTitle} key={i}>
-                {item.title}
-              </Text>
+            <View style={styles.list} key={i}>
+              <Text style={styles.listTitle}>{item.title}</Text>
               <Text
                 style={styles.close}
                 onPress={() => removeRoutine(item.title)}>

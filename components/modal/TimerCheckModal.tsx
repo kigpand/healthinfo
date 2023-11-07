@@ -20,7 +20,10 @@ export default function TimerCheckModal({
       presentationStyle="formSheet">
       <View style={styles.container}>
         <Text style={styles.text}>휴식을 취하시겠습니까?</Text>
-        <TimerCheckModalBtns startTimer={startTimer} closeView={closeView} />
+        <TimerCheckModalBtns
+          startTimer={startTimer}
+          closeTimerCheckModal={closeView}
+        />
       </View>
     </Modal>
   );

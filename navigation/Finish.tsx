@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {mainColor} from '../style/color';
 
-export default function Clear() {
+export default function Finish() {
   return (
     <View style={styles.container}>
       <Text style={{fontSize: 30, color: 'white', fontWeight: '700'}}>

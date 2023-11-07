@@ -1,46 +1,41 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
-import {
-  borderColor,
-  btnBorderColor,
-  buttonColor,
-  falseColor,
-} from '../../style/color';
+import {btnBorderColor, buttonColor, falseColor} from '../../style/color';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type Props = {
-  onView: boolean;
-  closeView: () => void;
+  onLetsGoModal: boolean;
+  closeLetsGoModal: () => void;
 };
 
-export default function HomeModal({onView, closeView}: Props) {
+export default function LetsGoModal({onLetsGoModal, closeLetsGoModal}: Props) {
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-  function onMove() {
+  function onMoveToLoadPrevRoutine() {
     nav.navigate('LoadPrevRoutine');
-    closeView();
+    closeLetsGoModal();
   }
 
-  function onListClick() {
-    nav.navigate('NewData');
-    closeView();
+  function addNewExercise() {
+    nav.navigate('SetNewDataTitle');
+    closeLetsGoModal();
   }
 
   return (
     <Modal
       animationType="fade"
       transparent={false}
-      visible={onView}
+      visible={onLetsGoModal}
       presentationStyle="formSheet">
       <View style={styles.modal}>
         <Text style={styles.title}>어떤 방식으로 진행할까요?</Text>
-        <Text style={styles.list} onPress={onMove}>
+        <Text style={styles.list} onPress={onMoveToLoadPrevRoutine}>
           저장된 루틴 불러오기
         </Text>
-        <Text style={styles.new} onPress={onListClick}>
+        <Text style={styles.new} onPress={addNewExercise}>
           새로 등록하기
         </Text>
-        <Text style={styles.close} onPress={closeView}>
+        <Text style={styles.close} onPress={closeLetsGoModal}>
           이전
         </Text>
       </View>

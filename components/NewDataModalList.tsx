@@ -8,6 +8,14 @@ type Props = {
   onChangeText?: (text: string) => void;
 };
 
+const select = [
+  {label: '등', value: '등'},
+  {label: '어깨', value: '어깨'},
+  {label: '하체', value: '하체'},
+  {label: '팔', value: '팔'},
+  {label: '가슴', value: '가슴'},
+];
+
 export default function NewDataModalList({
   label,
   onChangeCategory,
@@ -18,16 +26,7 @@ export default function NewDataModalList({
       <Text style={styles.title}>{label}</Text>
       {label === '카테고리' && onChangeCategory ? (
         <View style={styles.category}>
-          <RNPickerSelect
-            onValueChange={onChangeCategory}
-            items={[
-              {label: '등', value: '등'},
-              {label: '어깨', value: '어깨'},
-              {label: '하체', value: '하체'},
-              {label: '팔', value: '팔'},
-              {label: '가슴', value: '가슴'},
-            ]}
-          />
+          <RNPickerSelect onValueChange={onChangeCategory} items={select} />
         </View>
       ) : (
         <TextInput

@@ -4,13 +4,13 @@ import {buttonColor} from '../style/color';
 
 type Props = {
   item: IRoutine;
-  openModal: (item: IRoutine) => void;
+  handleListClick: (item: IRoutine) => void;
 };
 
-export default function PrevRoutineList({item, openModal}: Props) {
+export default function PrevRoutineList({item, handleListClick}: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text} onPress={() => openModal(item)}>
+      <Text style={styles.text} onPress={() => handleListClick(item)}>
         {item.title}
       </Text>
     </View>

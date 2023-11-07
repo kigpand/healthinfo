@@ -1,18 +1,21 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {backgroundColor, btnBorderColor, buttonColor} from '../style/color';
 import {useState} from 'react';
-import HomeModal from '../components/modal/HomeModal';
+import LetsGoModal from '../components/modal/LetsGoModal';
 
 export default function Home({navigation}: any) {
-  const [onView, setOnView] = useState<boolean>(false);
+  const [letsGoModal, setLetsGoModal] = useState<boolean>(false);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>오늘은 어떤 운동을 진행해볼까요?</Text>
-      <Text style={styles.today} onPress={() => setOnView(true)}>
+      <Text style={styles.today} onPress={() => setLetsGoModal(true)}>
         Let's Go!
       </Text>
-      <HomeModal onView={onView} closeView={() => setOnView(false)} />
+      <LetsGoModal
+        onLetsGoModal={letsGoModal}
+        closeLetsGoModal={() => setLetsGoModal(false)}
+      />
       <Text style={styles.record} onPress={() => navigation.navigate('Record')}>
         지난 기록
       </Text>

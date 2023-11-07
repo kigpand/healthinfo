@@ -1,20 +1,20 @@
-import {useState} from 'react';
 import {Animated, Image, Pressable, StyleSheet, Text} from 'react-native';
 import NewDataModal from './modal/NewDataModal';
 import {IRoutineData} from '../interface/IRoutine';
 import {useScaleAnimate} from '../hooks/useScaleAnimate';
+import useModal from '../hooks/useModal';
 
 type Props = {
   getRoutineArr: (routine: IRoutineData) => void;
 };
 
-export default function NewDataAdd({getRoutineArr}: Props) {
-  const [viewModal, setViewModal] = useState<boolean>(false);
+export default function NewDataAddRoutineBtn({getRoutineArr}: Props) {
+  const {openModal, handleOpenModal, handleCloseModal} = useModal();
   const animate = useScaleAnimate({scale: 1.05});
 
   return (
     <Animated.View style={{transform: [{scale: animate.animation}]}}>
-      <Pressable style={styles.container} onPress={() => setViewModal(true)}>
+      <Pressable style={styles.container} onPress={handleOpenModal}>
         <Text style={styles.text}>루틴을 추가하실려면 클릭해주세요</Text>
         <Image
           style={styles.plus}
@@ -22,9 +22,9 @@ export default function NewDataAdd({getRoutineArr}: Props) {
           alt="plus"
         />
         <NewDataModal
-          onView={viewModal}
+          onView={openModal}
           getRoutineArr={getRoutineArr}
-          closeView={() => setViewModal(false)}
+          closeView={handleCloseModal}
         />
       </Pressable>
     </Animated.View>
