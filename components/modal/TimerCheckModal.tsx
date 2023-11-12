@@ -4,13 +4,13 @@ import TimerCheckModalBtns from '../TimerCheckModalBtns';
 type Props = {
   onView: boolean;
   closeView: () => void;
-  startTimer: () => void;
+  handlePlayTimer: () => void;
 };
 
 export default function TimerCheckModal({
   onView,
   closeView,
-  startTimer,
+  handlePlayTimer,
 }: Props) {
   return (
     <Modal
@@ -21,7 +21,7 @@ export default function TimerCheckModal({
       <View style={styles.container}>
         <Text style={styles.text}>휴식을 취하시겠습니까?</Text>
         <TimerCheckModalBtns
-          startTimer={startTimer}
+          handlePlayTimer={handlePlayTimer}
           closeTimerCheckModal={closeView}
         />
       </View>

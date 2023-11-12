@@ -2,16 +2,16 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {falseColor, trueColor} from '../style/color';
 
 type Props = {
-  startTimer: () => void;
+  handlePlayTimer: () => void;
   closeTimerCheckModal: () => void;
 };
 
 export default function TimerCheckModalBtns({
-  startTimer,
+  handlePlayTimer,
   closeTimerCheckModal,
 }: Props) {
   function onStartTimer() {
-    startTimer();
+    handlePlayTimer();
     closeTimerCheckModal();
   }
 

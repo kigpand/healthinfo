@@ -1,53 +1,58 @@
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {IRoutineData} from '../interface/IRoutine';
 import {useState} from 'react';
 import {buttonColor} from '../style/color';
 import TimerCheckModal from './modal/TimerCheckModal';
-import SetListDoing from './SetListDoing';
-import SetListTitle from './SetListTitle';
+import PlayExerciseMainInfo from './PlayExerciseMainInfo';
+import PlayExerciseMainTitle from './PlayExerciseMainTitle';
 
 type Props = {
   routine: IRoutineData | null;
-  count: number;
-  onAddCount: () => void;
-  onMinusCount: () => void;
-  startTimer: () => void;
+  doneExerciseCount: number;
+  handleMoveToNextExercise: () => void;
+  handleMoveToPrevExercise: () => void;
+  handlePlayTimer: () => void;
 };
 
-export default function SetListMain({
+export default function PlayExerciseMain({
   routine,
-  count,
-  onAddCount,
-  onMinusCount,
-  startTimer,
+  doneExerciseCount,
+  handleMoveToNextExercise,
+  handleMoveToPrevExercise,
+  handlePlayTimer,
 }: Props) {
-  const [setNum, setSetNum] = useState<number>(0);
+  const [currentExerciseCount, setCurrentExerciseCount] = useState<number>(0);
   const [checkTimer, setCheckTimer] = useState<boolean>(false);
 
   function onNextBtn() {
-    setSetNum(0);
-    onAddCount();
+    setCurrentExerciseCount(0);
+    handleMoveToNextExercise();
   }
 
-  function onAddBtn() {
-    setSetNum(setNum + 1);
+  function handlePlusBtn() {
+    setCurrentExerciseCount(currentExerciseCount + 1);
     setCheckTimer(true);
+  }
+
+  function handleMinusBtn() {
+    setCurrentExerciseCount(currentExerciseCount - 1);
   }
 
   return (
     <View style={styles.container}>
-      {routine && <SetListTitle routine={routine} />}
-      <SetListDoing
-        setCount={routine?.set || 0}
-        setNum={setNum}
-        onAddBtn={onAddBtn}
+      {routine && <PlayExerciseMainTitle routine={routine} />}
+      <PlayExerciseMainInfo
+        totalExerciseCount={routine?.set || 0}
+        currentExerciseCount={currentExerciseCount}
+        handlePlusBtn={handlePlusBtn}
+        handleMinusBtn={handleMinusBtn}
       />
-      {count !== 0 && (
-        <Pressable style={styles.prev} onPress={onMinusCount}>
+      {doneExerciseCount !== 0 && (
+        <Pressable style={styles.prev} onPress={handleMoveToPrevExercise}>
           <Text style={styles.prevText}>이전</Text>
         </Pressable>
       )}
-      {routine?.set === setNum && (
+      {routine?.set === currentExerciseCount && (
         <Pressable style={styles.next} onPress={onNextBtn}>
           <Text style={styles.nextText}>Next</Text>
         </Pressable>
@@ -55,7 +60,7 @@ export default function SetListMain({
       <TimerCheckModal
         onView={checkTimer}
         closeView={() => setCheckTimer(false)}
-        startTimer={startTimer}
+        handlePlayTimer={handlePlayTimer}
       />
     </View>
   );

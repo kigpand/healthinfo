@@ -8,7 +8,7 @@ import Record from './navigation/Record';
 import Stat from './navigation/Stat';
 import LoadPrevRoutine from './navigation/LoadPrevRoutine';
 import SetNewDataTitle from './navigation/SetNewDataTitle';
-import Set from './navigation/Set';
+import Exercise from './navigation/Exercise';
 import AddNewData from './navigation/AddNewData';
 import {prevData} from './data/data';
 import useExercise from './store/useExercise';
@@ -57,12 +57,12 @@ function App(): JSX.Element {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Set"
-          component={Set}
+          name="Exercise"
+          component={Exercise}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Finsh"
+          name="Finish"
           component={Finish}
           options={{headerShown: false}}
         />

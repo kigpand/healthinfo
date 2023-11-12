@@ -19,7 +19,7 @@ export default function StartModal({routine, onView, onCloseView}: Props) {
   const onSuccess = () => {
     setRoutine(routine);
     setTimer(time);
-    nav.navigate('Set');
+    nav.navigate('Exercise');
     onCloseView();
   };
 

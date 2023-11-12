@@ -5,11 +5,11 @@ type Props = {
   routine: IRoutineData;
 };
 
-export default function SetListTitle({routine}: Props) {
+export default function PlayExerciseMainTitle({routine}: Props) {
   return (
     <View style={{alignItems: 'center'}}>
       <Text style={styles.title}>{routine.title}</Text>
-      <Text style={styles.kg}>{routine.kg}</Text>
+      <Text style={styles.kg}>{routine.kg}kg</Text>
       <Text style={styles.set}>{routine.set}set</Text>
     </View>
   );

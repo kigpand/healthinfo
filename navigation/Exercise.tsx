@@ -1,17 +1,17 @@
 import {Animated, Pressable, StyleSheet, Text, View} from 'react-native';
 import {mainColor} from '../style/color';
 import {useState} from 'react';
-import SetList from '../components/SetList';
 import {useScaleAnimate} from '../hooks/useScaleAnimate';
+import PlayExercise from '../components/PlayExercise';
 
-export default function Set() {
+export default function Exercise() {
   const [exercise, setExercise] = useState<boolean>(false);
   const animate = useScaleAnimate({scale: 1.05});
 
   return (
     <View style={styles.guide}>
       {exercise ? (
-        <SetList />
+        <PlayExercise />
       ) : (
         <View style={styles.container}>
           <Text style={styles.title}>
