@@ -1,4 +1,4 @@
-import {View, Dimensions, StyleSheet} from 'react-native';
+import {View, Dimensions, StyleSheet, Text} from 'react-native';
 import {BarChart} from 'react-native-chart-kit';
 import {category} from '../data/data';
 
@@ -16,19 +16,20 @@ const data = {
   labels: category,
   datasets: [
     {
-      data: [3, 7, 2, 5, 3],
+      data: [2, 4, 2, 2, 2],
     },
   ],
 };
 
 export default function StatisticsRecentExercise() {
   return (
-    <View>
+    <View style={styles.container}>
+      <Text style={styles.text}>최근 10일간 각 운동별 횟수</Text>
       <BarChart
         style={styles.chart}
         data={data}
-        width={Dimensions.get('window').width - 50}
-        height={250}
+        width={Dimensions.get('window').width - 30}
+        height={200}
         chartConfig={chartConfig}
         yAxisLabel=""
         yAxisSuffix=""
@@ -42,6 +43,16 @@ export default function StatisticsRecentExercise() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    marginTop: 50,
+    marginBottom: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   chart: {
     alignItems: 'center',
     justifyContent: 'center',
