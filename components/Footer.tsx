@@ -4,7 +4,7 @@ import FooterItem from './FooterItem';
 const data = [
   {title: '홈', link: 'Home'},
   {title: '기록', link: 'Record'},
-  {title: '통계', link: 'Stat'},
+  {title: '통계', link: 'Statistics'},
   {title: '더보기', link: 'Other'},
 ];
 
