@@ -5,7 +5,7 @@ import Home from './navigation/Home';
 import Footer from './components/Footer';
 import Other from './navigation/Other';
 import Record from './navigation/Record';
-import Stat from './navigation/Stat';
+import Statistics from './navigation/Statistics';
 import LoadPrevRoutine from './navigation/LoadPrevRoutine';
 import SetNewDataTitle from './navigation/SetNewDataTitle';
 import Exercise from './navigation/Exercise';
@@ -37,8 +37,8 @@ function App(): JSX.Element {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Stat"
-          component={Stat}
+          name="Statistics"
+          component={Statistics}
           options={{headerShown: false}}
         />
         <Stack.Screen
