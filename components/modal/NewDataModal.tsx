@@ -3,7 +3,7 @@ import {Modal, StyleSheet, Text, View} from 'react-native';
 import NewDataModalList from '../NewDataModalList';
 import {falseColor} from '../../style/color';
 import {trueColor} from '../../style/color';
-import {Category, IRoutineData} from '../../interface/IRoutine';
+import {IRoutineData} from '../../interface/IRoutine';
 
 type Props = {
   onView: boolean;
@@ -16,13 +16,12 @@ export default function NewDataModal({
   getRoutineArr,
   closeView,
 }: Props) {
-  const [category, onChangeCategory] = useState<Category>('가슴');
   const [kg, onChangeKg] = useState<string>('');
   const [set, onChangeSet] = useState<string>('');
   const [title, onChangeTitle] = useState<string>('');
 
   function onAdd() {
-    getRoutineArr({category, kg, set: Number(set), title});
+    getRoutineArr({kg, set: Number(set), title});
     closeView();
   }
 
@@ -30,10 +29,6 @@ export default function NewDataModal({
     <Modal animationType="slide" transparent={false} visible={onView}>
       <View style={styles.container}>
         <Text style={styles.title}>어떤 루틴을 등록하시겠습니까?</Text>
-        <NewDataModalList
-          label={'카테고리'}
-          onChangeCategory={onChangeCategory}
-        />
         <NewDataModalList label={'kg'} onChangeText={onChangeKg} />
         <NewDataModalList label={'세트'} onChangeText={onChangeSet} />
         <NewDataModalList label={'명칭'} onChangeText={onChangeTitle} />

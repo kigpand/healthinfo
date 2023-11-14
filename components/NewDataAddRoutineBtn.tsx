@@ -1,6 +1,6 @@
 import {Animated, Image, Pressable, StyleSheet, Text} from 'react-native';
 import NewDataModal from './modal/NewDataModal';
-import {IRoutineData} from '../interface/IRoutine';
+import {Category, IRoutineData} from '../interface/IRoutine';
 import {useScaleAnimate} from '../hooks/useScaleAnimate';
 import useModal from '../hooks/useModal';
 
