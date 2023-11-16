@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import NewDataAddRoutineBtn from './NewDataAddRoutineBtn';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {IRoutineData} from '../interface/IRoutine';
+import {Category, IRoutineData} from '../interface/IRoutine';
 
 type Props = {
   getRoutineArr: (routine: IRoutineData) => void;

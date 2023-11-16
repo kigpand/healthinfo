@@ -1,5 +1,4 @@
 export interface IRoutineData {
-  category: Category;
   kg: string;
   set: number;
   title: string;
@@ -7,6 +6,7 @@ export interface IRoutineData {
 
 export interface IRoutine {
   title: string;
+  category: Category;
   routine: IRoutineData[];
 }
 

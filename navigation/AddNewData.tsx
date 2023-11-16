@@ -43,7 +43,11 @@ export default function AddNewData() {
   function onNoSubmit() {
     setOnBtn(false);
     if (!route.params) return;
-    addList({title: route.params.title, routine: routineArr});
+    addList({
+      title: route.params.title,
+      category: route.params.category,
+      routine: routineArr,
+    });
     nav.navigate('Home');
   }
 
@@ -57,7 +61,11 @@ export default function AddNewData() {
         </Pressable>
       )}
       <StartModal
-        routine={{title: route.params!.title, routine: routineArr}}
+        routine={{
+          title: route.params!.title,
+          category: route.params!.category,
+          routine: routineArr,
+        }}
         onView={openModal}
         onCloseView={handleCloseModal}
       />
