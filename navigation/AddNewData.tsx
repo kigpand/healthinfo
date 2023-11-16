@@ -7,7 +7,7 @@ import {
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {borderColor, buttonColor, mainColor} from '../style/color';
 import {useState} from 'react';
-import {Category, IRoutineData} from '../interface/IRoutine';
+import {IRoutineData} from '../interface/IRoutine';
 import AddNewDataList from '../components/AddNewDataList';
 import useExercise from '../store/useExercise';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
@@ -22,7 +22,6 @@ export default function AddNewData() {
   const {addList} = useExercise();
   const {openModal, handleOpenModal, handleCloseModal} = useModal();
   const [onBtn, setOnBtn] = useState<boolean>(false);
-  const [category, onChangeCategory] = useState<Category>('가슴');
   const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
 
   function getRoutineArr(routine: IRoutineData) {
@@ -44,16 +43,17 @@ export default function AddNewData() {
   function onNoSubmit() {
     setOnBtn(false);
     if (!route.params) return;
-    addList({title: route.params.title, category, routine: routineArr});
+    addList({
+      title: route.params.title,
+      category: route.params.category,
+      routine: routineArr,
+    });
     nav.navigate('Home');
   }
 
   return (
     <View style={styles.container}>
-      <AddNewDataMainHeader
-        getRoutineArr={getRoutineArr}
-        onChangeCategory={onChangeCategory}
-      />
+      <AddNewDataMainHeader getRoutineArr={getRoutineArr} />
       <AddNewDataList routineArr={routineArr} removeRoutine={removeRoutine} />
       {routineArr.length > 0 && (
         <Pressable style={styles.button} onPress={() => setOnBtn(true)}>
@@ -61,7 +61,11 @@ export default function AddNewData() {
         </Pressable>
       )}
       <StartModal
-        routine={{title: route.params!.title, category, routine: routineArr}}
+        routine={{
+          title: route.params!.title,
+          category: route.params!.category,
+          routine: routineArr,
+        }}
         onView={openModal}
         onCloseView={handleCloseModal}
       />

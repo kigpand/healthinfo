@@ -5,14 +5,24 @@ import {buttonColor} from '../style/color';
 import {borderColor} from '../style/color';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import RNPickerSelect from 'react-native-picker-select';
+
+const select = [
+  {label: '등', value: '등'},
+  {label: '어깨', value: '어깨'},
+  {label: '하체', value: '하체'},
+  {label: '팔', value: '팔'},
+  {label: '가슴', value: '가슴'},
+];
 
 export default function SetNewDataTitle() {
-  const [text, onChangeText] = useState<string>('');
+  const [title, onChangeTitle] = useState<string>('');
+  const [category, onChangeCategory] = useState<string>('');
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function onSubmit() {
-    if (text === '') return;
-    nav.navigate('AddNewData', {title: text});
+    if (title === '' || category === '') return;
+    nav.navigate('AddNewData', {title, category});
   }
 
   return (
@@ -21,10 +31,18 @@ export default function SetNewDataTitle() {
       <TextInput
         style={style.input}
         placeholder="루틴"
-        value={text}
-        onChangeText={onChangeText}
+        value={title}
+        onChangeText={onChangeTitle}
       />
-      {text !== '' && (
+      <Text style={style.title}>카테고리를 설정해주세요</Text>
+      <View style={style.category}>
+        <RNPickerSelect
+          placeholder="카테고리"
+          onValueChange={onChangeCategory}
+          items={select}
+        />
+      </View>
+      {category !== '' && title !== '' && (
         <Pressable style={style.button} onPress={onSubmit}>
           <Text style={{color: 'white'}}>등록</Text>
         </Pressable>
@@ -41,6 +59,14 @@ const style = StyleSheet.create({
     gap: 10,
     backgroundColor: mainColor,
   },
+  category: {
+    borderWidth: 1,
+    backgroundColor: 'white',
+    width: 150,
+    height: 30,
+    borderRadius: 4,
+    justifyContent: 'center',
+  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -50,6 +76,7 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     width: 200,
     height: 30,
+    marginBottom: 20,
   },
   button: {
     backgroundColor: buttonColor,
