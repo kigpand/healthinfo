@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {IRoutineData} from '../interface/IRoutine';
+import {Category, IRoutineData} from '../interface/IRoutine';
 import {useState} from 'react';
 import {buttonColor} from '../style/color';
 import TimerCheckModal from './modal/TimerCheckModal';
@@ -8,6 +8,7 @@ import PlayExerciseMainTitle from './PlayExerciseMainTitle';
 
 type Props = {
   routine: IRoutineData | null;
+  category: Category;
   doneExerciseCount: number;
   handleMoveToNextExercise: () => void;
   handleMoveToPrevExercise: () => void;
@@ -16,6 +17,7 @@ type Props = {
 
 export default function PlayExerciseMain({
   routine,
+  category,
   doneExerciseCount,
   handleMoveToNextExercise,
   handleMoveToPrevExercise,
@@ -40,6 +42,7 @@ export default function PlayExerciseMain({
 
   return (
     <View style={styles.container}>
+      <Text style={styles.category}>오늘은 {category}</Text>
       {routine && <PlayExerciseMainTitle routine={routine} />}
       <PlayExerciseMainInfo
         totalExerciseCount={routine?.set || 0}
@@ -72,6 +75,12 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  category: {
+    position: 'absolute',
+    top: 40,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   prev: {
     backgroundColor: buttonColor,

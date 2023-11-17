@@ -3,27 +3,11 @@ import {useState} from 'react';
 import {mainColor} from '../style/color';
 import {buttonColor} from '../style/color';
 import {borderColor} from '../style/color';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import RNPickerSelect from 'react-native-picker-select';
-
-const select = [
-  {label: '등', value: '등'},
-  {label: '어깨', value: '어깨'},
-  {label: '하체', value: '하체'},
-  {label: '팔', value: '팔'},
-  {label: '가슴', value: '가슴'},
-];
+import SetNewDataCategoryModal from '../components/modal/SetNewDataCategoryModal';
 
 export default function SetNewDataTitle() {
   const [title, onChangeTitle] = useState<string>('');
-  const [category, onChangeCategory] = useState<string>('');
-  const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-
-  function onSubmit() {
-    if (title === '' || category === '') return;
-    nav.navigate('AddNewData', {title, category});
-  }
+  const [isCategoryModal, setIsCategoryModal] = useState<boolean>(false);
 
   return (
     <View style={style.container}>
@@ -34,19 +18,18 @@ export default function SetNewDataTitle() {
         value={title}
         onChangeText={onChangeTitle}
       />
-      <Text style={style.title}>카테고리를 설정해주세요</Text>
-      <View style={style.category}>
-        <RNPickerSelect
-          placeholder="카테고리"
-          onValueChange={onChangeCategory}
-          items={select}
-        />
-      </View>
-      {category !== '' && title !== '' && (
-        <Pressable style={style.button} onPress={onSubmit}>
-          <Text style={{color: 'white'}}>등록</Text>
+      {title !== '' && (
+        <Pressable
+          style={style.button}
+          onPress={() => setIsCategoryModal(true)}>
+          <Text style={{color: 'white'}}>카테고리 선택하기</Text>
         </Pressable>
       )}
+      <SetNewDataCategoryModal
+        onView={isCategoryModal}
+        closeView={() => setIsCategoryModal(false)}
+        title={title}
+      />
     </View>
   );
 }
@@ -58,14 +41,6 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     gap: 10,
     backgroundColor: mainColor,
-  },
-  category: {
-    borderWidth: 1,
-    backgroundColor: 'white',
-    width: 150,
-    height: 30,
-    borderRadius: 4,
-    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
