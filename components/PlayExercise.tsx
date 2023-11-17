@@ -32,6 +32,7 @@ export default function PlayExercise() {
   return (
     <View style={styles.setItem}>
       <PlayExerciseMain
+        category={routine?.category!}
         routine={routine?.routine[doneExerciseCount] || null}
         doneExerciseCount={doneExerciseCount}
         handleMoveToNextExercise={handleMoveToNextExercise}
