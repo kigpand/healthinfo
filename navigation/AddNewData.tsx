@@ -15,6 +15,7 @@ import StartModal from '../components/modal/StartModal';
 import AddNewDataSubmitBtns from '../components/AddNewDataSubmitBtns';
 import AddNewDataMainHeader from '../components/AddNewDataMainHeader';
 import useModal from '../hooks/useModal';
+import AddNewDataCheckModal from '../components/modal/AddNewDataCheckModal';
 
 export default function AddNewData() {
   const route = useRoute<RouteProp<any>>();
@@ -23,6 +24,7 @@ export default function AddNewData() {
   const {openModal, handleOpenModal, handleCloseModal} = useModal();
   const [onBtn, setOnBtn] = useState<boolean>(false);
   const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
+  const [isCheck, setIsCheck] = useState<boolean>(false);
 
   function getRoutineArr(routine: IRoutineData) {
     setRoutineArr([...routineArr, routine]);
@@ -56,7 +58,7 @@ export default function AddNewData() {
       <AddNewDataMainHeader getRoutineArr={getRoutineArr} />
       <AddNewDataList routineArr={routineArr} removeRoutine={removeRoutine} />
       {routineArr.length > 0 && (
-        <Pressable style={styles.button} onPress={() => setOnBtn(true)}>
+        <Pressable style={styles.button} onPress={() => setIsCheck(true)}>
           <Text style={{color: 'white'}}>등록</Text>
         </Pressable>
       )}
@@ -69,6 +71,12 @@ export default function AddNewData() {
         onView={openModal}
         onCloseView={handleCloseModal}
       />
+      {isCheck && (
+        <AddNewDataCheckModal
+          handleSubmitBtn={() => setOnBtn(true)}
+          closeView={() => setIsCheck(false)}
+        />
+      )}
       {onBtn && (
         <AddNewDataSubmitBtns
           onPlaySubmit={onPlaySubmit}
