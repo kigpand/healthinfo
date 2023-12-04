@@ -13,6 +13,7 @@ import AddNewData from './navigation/AddNewData';
 import {prevData} from './data/data';
 import useExercise from './store/useExercise';
 import Finish from './navigation/Finish';
+import Admin from './navigation/Admin';
 
 const Stack = createNativeStackNavigator();
 
@@ -69,6 +70,11 @@ function App(): JSX.Element {
         <Stack.Screen
           name="AddNewData"
           component={AddNewData}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Admin"
+          component={Admin}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

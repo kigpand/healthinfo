@@ -59,7 +59,7 @@ export default function AddNewData() {
       <AddNewDataList routineArr={routineArr} removeRoutine={removeRoutine} />
       {routineArr.length > 0 && (
         <Pressable style={styles.button} onPress={() => setIsCheck(true)}>
-          <Text style={{color: 'white'}}>등록</Text>
+          <Text style={{color: 'white'}}>완료</Text>
         </Pressable>
       )}
       <StartModal
