@@ -14,6 +14,7 @@ import {prevData} from './data/data';
 import useExercise from './store/useExercise';
 import Finish from './navigation/Finish';
 import Admin from './navigation/Admin';
+import CategoryManage from './navigation/CategoryManage';
 
 const Stack = createNativeStackNavigator();
 
@@ -75,6 +76,11 @@ function App(): JSX.Element {
         <Stack.Screen
           name="Admin"
           component={Admin}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="CategoryManage"
+          component={CategoryManage}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
