@@ -5,6 +5,8 @@ import {Modal, View, Text, StyleSheet, TextInput} from 'react-native';
 import {borderColor, buttonColor} from '../../style/color';
 import useExercise from '../../store/useExercise';
 import {IRoutine} from '../../interface/IRoutine';
+import RedButton from '../buttons/RedButton';
+import BlueButton from '../buttons/BlueButton';
 
 type Props = {
   routine: IRoutine;
@@ -24,11 +26,7 @@ export default function StartModal({routine, onView, onCloseView}: Props) {
   };
 
   return (
-    <Modal
-      animationType="fade"
-      transparent={false}
-      visible={onView}
-      presentationStyle="formSheet">
+    <Modal animationType="fade" transparent={false} visible={onView} presentationStyle="formSheet">
       <View style={styles.header}>
         <Text style={styles.timerTitle}>쉬는 시간 입력</Text>
       </View>
@@ -42,12 +40,8 @@ export default function StartModal({routine, onView, onCloseView}: Props) {
           />
         </View>
         <View style={styles.btns}>
-          <Text style={styles.cancle} onPress={onCloseView}>
-            취소
-          </Text>
-          <Text style={styles.start} onPress={onSuccess}>
-            설정완료
-          </Text>
+          <RedButton text="취소" onPress={onCloseView} />
+          <BlueButton text="설정완료" onPress={onSuccess} />
         </View>
       </View>
     </Modal>
@@ -89,25 +83,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 20,
     columnGap: 10,
-  },
-  cancle: {
-    backgroundColor: 'red',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: 'red',
-    overflow: 'hidden',
-    color: 'white',
-  },
-  start: {
-    color: 'white',
-    backgroundColor: buttonColor,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: borderColor,
-    overflow: 'hidden',
   },
 });

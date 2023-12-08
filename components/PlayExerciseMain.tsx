@@ -1,10 +1,11 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Category, IRoutineData} from '../interface/IRoutine';
 import {useState} from 'react';
-import {buttonColor} from '../style/color';
 import TimerCheckModal from './modal/TimerCheckModal';
 import PlayExerciseMainInfo from './PlayExerciseMainInfo';
 import PlayExerciseMainTitle from './PlayExerciseMainTitle';
+import BlueButton from './buttons/BlueButton';
+import RedButton from './buttons/RedButton';
 
 type Props = {
   routine: IRoutineData | null;
@@ -51,20 +52,16 @@ export default function PlayExerciseMain({
         handleMinusBtn={handleMinusBtn}
       />
       {doneExerciseCount !== 0 && (
-        <Pressable style={styles.prev} onPress={handleMoveToPrevExercise}>
-          <Text style={styles.prevText}>이전</Text>
-        </Pressable>
+        <View style={styles.prev}>
+          <RedButton text="이전" onPress={handleMoveToPrevExercise} />
+        </View>
       )}
       {routine?.set === currentExerciseCount && (
-        <Pressable style={styles.next} onPress={onNextBtn}>
-          <Text style={styles.nextText}>Next</Text>
-        </Pressable>
+        <View style={styles.next}>
+          <BlueButton text="Next" onPress={onNextBtn} />
+        </View>
       )}
-      <TimerCheckModal
-        onView={checkTimer}
-        closeView={() => setCheckTimer(false)}
-        handlePlayTimer={handlePlayTimer}
-      />
+      <TimerCheckModal onView={checkTimer} closeView={() => setCheckTimer(false)} handlePlayTimer={handlePlayTimer} />
     </View>
   );
 }
@@ -83,27 +80,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   prev: {
-    backgroundColor: buttonColor,
     position: 'absolute',
     left: 30,
     top: 50,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 12,
-  },
-  prevText: {
-    color: 'white',
   },
   next: {
-    backgroundColor: buttonColor,
     position: 'absolute',
     right: 30,
     top: 50,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 12,
-  },
-  nextText: {
-    color: 'white',
   },
 });

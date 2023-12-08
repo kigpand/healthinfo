@@ -4,6 +4,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {borderColor, buttonColor, mainColor} from '../../style/color';
+import BlueButton from '../buttons/BlueButton';
 
 const select = [
   {label: '등', value: '등'},
@@ -19,15 +20,11 @@ type Props = {
   title: string;
 };
 
-export default function SetNewDataCategoryModal({
-  onView,
-  title,
-  closeView,
-}: Props) {
+export default function SetNewDataCategoryModal({onView, title, closeView}: Props) {
   const [category, onChangeCategory] = useState<string>('');
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-  function onSubmit() {
+  function handleAddButton() {
     if (title === '' || category === '') return;
     closeView();
     nav.navigate('AddNewData', {title, category});
@@ -48,9 +45,9 @@ export default function SetNewDataCategoryModal({
           />
         </View>
         {category !== '' && (
-          <Pressable style={styles.button} onPress={onSubmit}>
-            <Text style={{color: 'white'}}>등록</Text>
-          </Pressable>
+          <View style={styles.button}>
+            <BlueButton text="등록" onPress={handleAddButton} />
+          </View>
         )}
       </View>
     </Modal>
@@ -78,13 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    backgroundColor: buttonColor,
-    borderWidth: 1,
-    borderColor: borderColor,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
     position: 'absolute',
     bottom: 20,
-    borderRadius: 8,
   },
 });

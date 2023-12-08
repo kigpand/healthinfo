@@ -1,8 +1,8 @@
 import {Pressable, StyleSheet, Text} from 'react-native';
 import {ButtonType} from '../../types/ButtonType';
-import {falseColor} from '../../style/color';
+import {btnBorderColor, buttonColor} from '../../style/color';
 
-export default function RedButton({text, onPress}: ButtonType) {
+export default function BlueButton({text, onPress}: ButtonType) {
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <Text style={styles.text}>{text}</Text>
@@ -16,11 +16,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: falseColor,
+    backgroundColor: buttonColor,
     borderWidth: 1,
-    borderColor: '#ff3d8e',
+    borderColor: btnBorderColor,
   },
   text: {
     color: 'white',
+    fontWeight: 'bold',
   },
 });
