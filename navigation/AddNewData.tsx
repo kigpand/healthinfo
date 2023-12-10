@@ -1,11 +1,6 @@
-import {
-  ParamListBase,
-  RouteProp,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {borderColor, buttonColor, mainColor} from '../style/color';
+import {ParamListBase, RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {StyleSheet, View} from 'react-native';
+import {mainColor} from '../style/color';
 import {useState} from 'react';
 import {IRoutineData} from '../interface/IRoutine';
 import AddNewDataList from '../components/AddNewDataList';
@@ -16,6 +11,7 @@ import AddNewDataSubmitBtns from '../components/AddNewDataSubmitBtns';
 import AddNewDataMainHeader from '../components/AddNewDataMainHeader';
 import useModal from '../hooks/useModal';
 import AddNewDataCheckModal from '../components/modal/AddNewDataCheckModal';
+import BlueButton from '../components/buttons/BlueButton';
 
 export default function AddNewData() {
   const route = useRoute<RouteProp<any>>();
@@ -31,9 +27,7 @@ export default function AddNewData() {
   }
 
   function removeRoutine(title: string) {
-    const result = routineArr.filter(
-      (item: IRoutineData) => item.title !== title,
-    );
+    const result = routineArr.filter((item: IRoutineData) => item.title !== title);
     setRoutineArr(result);
   }
 
@@ -58,9 +52,9 @@ export default function AddNewData() {
       <AddNewDataMainHeader getRoutineArr={getRoutineArr} />
       <AddNewDataList routineArr={routineArr} removeRoutine={removeRoutine} />
       {routineArr.length > 0 && (
-        <Pressable style={styles.button} onPress={() => setIsCheck(true)}>
-          <Text style={{color: 'white'}}>등록</Text>
-        </Pressable>
+        <View style={styles.button}>
+          <BlueButton text="등록" onPress={() => setIsCheck(true)} />
+        </View>
       )}
       <StartModal
         routine={{
@@ -71,18 +65,8 @@ export default function AddNewData() {
         onView={openModal}
         onCloseView={handleCloseModal}
       />
-      {isCheck && (
-        <AddNewDataCheckModal
-          handleSubmitBtn={() => setOnBtn(true)}
-          closeView={() => setIsCheck(false)}
-        />
-      )}
-      {onBtn && (
-        <AddNewDataSubmitBtns
-          onPlaySubmit={onPlaySubmit}
-          onNoSubmit={onNoSubmit}
-        />
-      )}
+      {isCheck && <AddNewDataCheckModal handleSubmitBtn={() => setOnBtn(true)} closeView={() => setIsCheck(false)} />}
+      {onBtn && <AddNewDataSubmitBtns onPlaySubmit={onPlaySubmit} onNoSubmit={onNoSubmit} />}
     </View>
   );
 }
@@ -95,13 +79,7 @@ const styles = StyleSheet.create({
     backgroundColor: mainColor,
   },
   button: {
-    backgroundColor: buttonColor,
-    borderWidth: 1,
-    borderColor: borderColor,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
     position: 'absolute',
     bottom: 20,
-    borderRadius: 8,
   },
 });

@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {Modal, StyleSheet, Text, View} from 'react-native';
 import NewDataModalList from '../NewDataModalList';
-import {falseColor} from '../../style/color';
-import {trueColor} from '../../style/color';
 import {IRoutineData} from '../../interface/IRoutine';
+import RedButton from '../buttons/RedButton';
+import BlueButton from '../buttons/BlueButton';
 
 type Props = {
   onView: boolean;
@@ -11,11 +11,7 @@ type Props = {
   closeView: () => void;
 };
 
-export default function NewDataModal({
-  onView,
-  getRoutineArr,
-  closeView,
-}: Props) {
+export default function NewDataModal({onView, getRoutineArr, closeView}: Props) {
   const [kg, onChangeKg] = useState<string>('');
   const [set, onChangeSet] = useState<string>('');
   const [title, onChangeTitle] = useState<string>('');
@@ -33,12 +29,8 @@ export default function NewDataModal({
         <NewDataModalList label={'세트'} onChangeText={onChangeSet} />
         <NewDataModalList label={'명칭'} onChangeText={onChangeTitle} />
         <View style={styles.buttons}>
-          <Text style={styles.cancle} onPress={closeView}>
-            닫기
-          </Text>
-          <Text style={styles.add} onPress={onAdd}>
-            등록
-          </Text>
+          <RedButton text="닫기" onPress={closeView} />
+          <BlueButton text="등록" onPress={onAdd} />
         </View>
       </View>
     </Modal>
@@ -60,17 +52,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
     gap: 10,
-  },
-  cancle: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    backgroundColor: falseColor,
-    color: 'white',
-  },
-  add: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    backgroundColor: trueColor,
-    color: 'white',
   },
 });
