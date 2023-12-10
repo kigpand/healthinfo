@@ -34,14 +34,8 @@ export default function LoadPrevRoutine() {
           justifyContent: 'center',
           gap: 10,
         }}
-        renderItem={item => (
-          <PrevRoutineList item={item.item} handleListClick={handleListClick} />
-        )}></FlatList>
-      <StartModal
-        routine={routine!}
-        onView={openModal}
-        onCloseView={closeModal}
-      />
+        renderItem={item => <PrevRoutineList item={item.item} handleListClick={handleListClick} />}></FlatList>
+      <StartModal routine={routine!} onView={openModal} onCloseView={closeModal} />
     </View>
   );
 }
