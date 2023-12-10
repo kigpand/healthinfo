@@ -1,4 +1,4 @@
-import {Modal, StyleSheet, Text, View} from 'react-native';
+import {Modal, StyleSheet, Text, TextInput, View} from 'react-native';
 import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
 import {useState} from 'react';
@@ -11,12 +11,16 @@ type Props = {
 export default function UpdateCategoryModal({onUpdateCategoryModal, handleCloseModal}: Props) {
   const [updateText, onChangeUpdateText] = useState<string>('');
 
-  function handleUpdateCategoryButton() {}
+  function handleUpdateCategoryButton() {
+    console.log(updateText);
+    handleCloseModal();
+  }
 
   return (
     <Modal animationType="fade" transparent={false} visible={onUpdateCategoryModal} presentationStyle="formSheet">
       <View style={styles.container}>
-        <Text style={styles.title}>등록할 카테고리명을 입력해주세요</Text>
+        <Text style={styles.title}>수정할 카테고리명을 입력해주세요</Text>
+        <TextInput style={styles.input} onChangeText={onChangeUpdateText} />
         <View style={styles.btns}>
           <RedButton text="취소" onPress={handleCloseModal} />
           <BlueButton text="수정" onPress={handleUpdateCategoryButton} />
@@ -35,6 +39,15 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 20,
+  },
+  input: {
+    marginTop: 50,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: 'black',
+    width: 200,
+    height: 30,
+    borderRadius: 4,
   },
   btns: {
     flexDirection: 'row',
