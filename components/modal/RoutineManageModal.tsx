@@ -1,8 +1,10 @@
-import {FlatList, Modal, Pressable, StyleSheet, Text, View} from 'react-native';
+import {FlatList, ListRenderItemInfo, Modal, Pressable, StyleSheet, Text, View} from 'react-native';
 import {prevData} from '../../data/data';
 import {borderColor, buttonColor} from '../../style/color';
 import RoutineManageSelectModal from './RoutineManageSelectModal';
 import {useState} from 'react';
+import useExercise from '../../store/useExercise';
+import {IRoutine} from '../../interface/IRoutine';
 
 type Props = {
   routineManageModal: boolean;
@@ -10,11 +12,20 @@ type Props = {
 };
 
 export default function RoutineManageModal({routineManageModal, handleRoutineModalButton}: Props) {
-  const [selectModal, setSelectModal] = useState<boolean>(true);
+  const [selectModal, setSelectModal] = useState<boolean>(false);
+  const [routine, setRoutine] = useState<IRoutine | null>(null);
+  const {setUpdateRoutine} = useExercise();
+
+  function handleRoutineClick(clickedRoutine: ListRenderItemInfo<IRoutine>) {
+    setRoutine(clickedRoutine.item);
+    setSelectModal(true);
+  }
 
   function handleRoutineSelectModal(type: '수정' | '삭제') {
+    if (!routine) return;
     setSelectModal(false);
     handleRoutineModalButton(type);
+    setUpdateRoutine(routine);
   }
 
   return (
@@ -24,7 +35,7 @@ export default function RoutineManageModal({routineManageModal, handleRoutineMod
         <FlatList
           data={prevData}
           renderItem={item => (
-            <Pressable style={styles.button} onPress={() => setSelectModal(true)}>
+            <Pressable style={styles.button} onPress={() => handleRoutineClick(item)}>
               <Text style={{color: 'white', fontWeight: 'bold'}}>{item.item.title}</Text>
             </Pressable>
           )}
@@ -32,6 +43,7 @@ export default function RoutineManageModal({routineManageModal, handleRoutineMod
       </View>
       {selectModal && (
         <RoutineManageSelectModal
+          routine={routine}
           handleRoutineSelectModal={handleRoutineSelectModal}
           closeModal={() => setSelectModal(false)}
         />

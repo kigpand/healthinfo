@@ -2,13 +2,15 @@ import {StyleSheet, Text, View} from 'react-native';
 import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
 import GreenButton from '../buttons/GreenButton';
+import {IRoutine} from '../../interface/IRoutine';
 
 type Props = {
+  routine: IRoutine | null;
   handleRoutineSelectModal: (type: '수정' | '삭제') => void;
   closeModal: () => void;
 };
 
-export default function RoutineManageSelectModal({handleRoutineSelectModal, closeModal}: Props) {
+export default function RoutineManageSelectModal({routine, handleRoutineSelectModal, closeModal}: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>어떤 작업을 진행하시겠습니까?</Text>

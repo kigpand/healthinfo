@@ -6,7 +6,7 @@ import {useState} from 'react';
 import RoutineManageModal from '../components/modal/RoutineManageModal';
 
 export default function Admin() {
-  const [routineManageModal, setRoutineManageModal] = useState<boolean>(true);
+  const [routineManageModal, setRoutineManageModal] = useState<boolean>(false);
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function handleRoutineModalButton(type: '수정' | '삭제') {
@@ -24,7 +24,7 @@ export default function Admin() {
       <Pressable style={styles.button} onPress={() => nav.navigate('CategoryManage')}>
         <Text style={{fontWeight: 'bold', color: 'white'}}>카테고리 관리</Text>
       </Pressable>
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={() => setRoutineManageModal(true)}>
         <Text style={{fontWeight: 'bold', color: 'white'}}>루틴 관리</Text>
       </Pressable>
       <Pressable style={styles.button}>
