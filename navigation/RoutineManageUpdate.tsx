@@ -5,10 +5,26 @@ import {mainColor} from '../style/color';
 import RedButton from '../components/buttons/RedButton';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import RoutineManageUpdateModal from '../components/modal/RoutineManageUpdateModal';
+import {useState} from 'react';
+import {Category, IRoutine} from '../interface/IRoutine';
 
 export default function RoutineManageUpdate() {
   const {updateRoutine} = useExercise();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  if (!updateRoutine) return nav.navigate('Admin');
+
+  const [routine, setRoutine] = useState<IRoutine>(updateRoutine);
+  const [updateModal, setUpdateModal] = useState<boolean>(true);
+
+  function handleUpdateRoutine(type: '제목' | '카테고리', data: string | Category) {
+    if (type === '제목') {
+      setRoutine({...routine, title: data});
+    }
+    if (type === '카테고리') {
+      setRoutine({...routine, category: data as Category});
+    }
+  }
 
   function handleTitleUpdateButton() {
     console.log(updateRoutine?.title);
@@ -38,6 +54,12 @@ export default function RoutineManageUpdate() {
         <RedButton text="취소" onPress={() => nav.navigate('Admin')} />
         <BlueButton text="수정" onPress={() => console.log('수정')} />
       </View>
+      <RoutineManageUpdateModal
+        handleUpdateRoutine={handleUpdateRoutine}
+        updateModal={updateModal}
+        handleCloseModal={() => setUpdateModal(false)}
+        type="제목"
+      />
     </View>
   );
 }
