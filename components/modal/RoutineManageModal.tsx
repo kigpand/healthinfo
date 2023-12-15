@@ -1,5 +1,4 @@
 import {FlatList, ListRenderItemInfo, Modal, Pressable, StyleSheet, Text, View} from 'react-native';
-import {prevData} from '../../data/data';
 import {borderColor, buttonColor} from '../../style/color';
 import RoutineManageSelectModal from './RoutineManageSelectModal';
 import {useState} from 'react';
@@ -14,7 +13,7 @@ type Props = {
 export default function RoutineManageModal({routineManageModal, handleRoutineModalButton}: Props) {
   const [selectModal, setSelectModal] = useState<boolean>(false);
   const [routine, setRoutine] = useState<IRoutine | null>(null);
-  const {setUpdateRoutine} = useExercise();
+  const {list, setUpdateRoutine} = useExercise();
 
   function handleRoutineClick(clickedRoutine: ListRenderItemInfo<IRoutine>) {
     setRoutine(clickedRoutine.item);
@@ -33,7 +32,7 @@ export default function RoutineManageModal({routineManageModal, handleRoutineMod
       <View style={styles.container}>
         <Text style={styles.title}>작업할 루틴을 선택해주세요</Text>
         <FlatList
-          data={prevData}
+          data={list}
           renderItem={item => (
             <Pressable style={styles.button} onPress={() => handleRoutineClick(item)}>
               <Text style={{color: 'white', fontWeight: 'bold'}}>{item.item.title}</Text>
