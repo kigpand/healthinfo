@@ -16,8 +16,8 @@ export default function CategoryListModal({categorySelectModal, handleCloseModal
         <View style={styles.body}>
           {category.map((cate, i) => {
             return (
-              <Pressable style={styles.button}>
-                <Text style={styles.text} key={i} onPress={() => handleCloseModal(cate as Category)}>
+              <Pressable style={styles.button} key={i}>
+                <Text style={styles.text} onPress={() => handleCloseModal(cate as Category)}>
                   {cate}
                 </Text>
               </Pressable>

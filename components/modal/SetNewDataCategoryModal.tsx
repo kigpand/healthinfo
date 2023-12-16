@@ -5,6 +5,7 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {borderColor, buttonColor, mainColor} from '../../style/color';
 import BlueButton from '../buttons/BlueButton';
+import useExercise from '../../store/useExercise';
 
 const select = [
   {label: '등', value: '등'},
@@ -21,13 +22,14 @@ type Props = {
 };
 
 export default function SetNewDataCategoryModal({onView, title, closeView}: Props) {
+  const {list} = useExercise();
   const [category, onChangeCategory] = useState<string>('');
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function handleAddButton() {
     if (title === '' || category === '') return;
     closeView();
-    nav.navigate('AddNewData', {title, category});
+    nav.navigate('AddNewData', {title, category, id: list[list.length - 1].id + 1});
   }
 
   return (

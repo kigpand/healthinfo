@@ -4,7 +4,8 @@ export const category = ['등', '하체', '어깨', '팔', '가슴'];
 
 export const prevData: IRoutine[] = [
   {
-    title: '등운동',
+    id: 1,
+    title: '등루틴이에요',
     category: '등',
     routine: [
       {
@@ -30,7 +31,8 @@ export const prevData: IRoutine[] = [
     ],
   },
   {
-    title: '어깨 루틴',
+    id: 2,
+    title: '어깨 루틴이에요',
     category: '어깨',
     routine: [
       {

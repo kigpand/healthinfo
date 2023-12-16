@@ -5,6 +5,7 @@ export interface IRoutineData {
 }
 
 export interface IRoutine {
+  id: number;
   title: string;
   category: Category;
   routine: IRoutineData[];

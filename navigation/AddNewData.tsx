@@ -40,6 +40,7 @@ export default function AddNewData() {
     setOnBtn(false);
     if (!route.params) return;
     addList({
+      id: route.params.id,
       title: route.params.title,
       category: route.params.category,
       routine: routineArr,
@@ -58,6 +59,7 @@ export default function AddNewData() {
       )}
       <StartModal
         routine={{
+          id: route.params!.id,
           title: route.params!.title,
           category: route.params!.category,
           routine: routineArr,

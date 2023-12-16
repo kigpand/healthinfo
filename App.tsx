@@ -15,6 +15,7 @@ import useExercise from './store/useExercise';
 import Finish from './navigation/Finish';
 import Admin from './navigation/Admin';
 import CategoryManage from './navigation/CategoryManage';
+import RoutineManageUpdate from './navigation/RoutineManageUpdate';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,61 +29,18 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Record"
-          component={Record}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Statistics"
-          component={Statistics}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Other"
-          component={Other}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="LoadPrevRoutine"
-          component={LoadPrevRoutine}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SetNewDataTitle"
-          component={SetNewDataTitle}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Exercise"
-          component={Exercise}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Finish"
-          component={Finish}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="AddNewData"
-          component={AddNewData}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Admin"
-          component={Admin}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="CategoryManage"
-          component={CategoryManage}
-          options={{headerShown: false}}
-        />
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+        <Stack.Screen name="Record" component={Record} options={{headerShown: false}} />
+        <Stack.Screen name="Statistics" component={Statistics} options={{headerShown: false}} />
+        <Stack.Screen name="Other" component={Other} options={{headerShown: false}} />
+        <Stack.Screen name="LoadPrevRoutine" component={LoadPrevRoutine} options={{headerShown: false}} />
+        <Stack.Screen name="SetNewDataTitle" component={SetNewDataTitle} options={{headerShown: false}} />
+        <Stack.Screen name="Exercise" component={Exercise} options={{headerShown: false}} />
+        <Stack.Screen name="Finish" component={Finish} options={{headerShown: false}} />
+        <Stack.Screen name="AddNewData" component={AddNewData} options={{headerShown: false}} />
+        <Stack.Screen name="Admin" component={Admin} options={{headerShown: false}} />
+        <Stack.Screen name="CategoryManage" component={CategoryManage} options={{headerShown: false}} />
+        <Stack.Screen name="RoutineManageUpdate" component={RoutineManageUpdate} options={{headerShown: false}} />
       </Stack.Navigator>
       <Footer />
     </NavigationContainer>
