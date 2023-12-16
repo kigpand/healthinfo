@@ -53,8 +53,11 @@ export default function RoutineManageUpdateModal({updateModal, handleUpdateRouti
     <Modal animationType="fade" transparent={false} visible={updateModal} presentationStyle="formSheet">
       <View style={styles.container}>
         <Text style={styles.header}>수정할 {type}을 입력해주세요</Text>
-        <CategoryContainer onChangeCategory={onChangeCategory} />
-        <UpdateTitleContainer onChangeTitle={onChangeTitle} />
+        {type === '카테고리' ? (
+          <CategoryContainer onChangeCategory={onChangeCategory} />
+        ) : (
+          <UpdateTitleContainer onChangeTitle={onChangeTitle} />
+        )}
         <View style={styles.buttons}>
           <RedButton text="취소" onPress={handleCloseModal} />
           <BlueButton text="완료" onPress={handleUpdateModal} />
@@ -72,19 +75,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
+    marginBottom: 100,
     fontSize: 18,
     fontWeight: 'bold',
   },
   buttons: {
+    position: 'absolute',
+    bottom: 40,
     flexDirection: 'row',
     gap: 10,
   },
   category: {
     backgroundColor: 'white',
     width: 200,
-    height: 40,
+    height: 30,
     borderRadius: 4,
+    borderWidth: 1,
     justifyContent: 'center',
   },
-  title: {},
+  title: {
+    width: 200,
+    height: 30,
+    borderRadius: 4,
+    borderWidth: 1,
+  },
 });

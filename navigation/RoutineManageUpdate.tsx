@@ -9,13 +9,21 @@ import RoutineManageUpdateModal from '../components/modal/RoutineManageUpdateMod
 import {useState} from 'react';
 import {Category, IRoutine} from '../interface/IRoutine';
 
+interface IUpdateModal {
+  modal: boolean;
+  type: '제목' | '카테고리';
+}
+
 export default function RoutineManageUpdate() {
   const {updateRoutine} = useExercise();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   if (!updateRoutine) return nav.navigate('Admin');
 
   const [routine, setRoutine] = useState<IRoutine>(updateRoutine);
-  const [updateModal, setUpdateModal] = useState<boolean>(true);
+  const [updateModal, setUpdateModal] = useState<IUpdateModal>({
+    modal: false,
+    type: '제목',
+  });
 
   function handleUpdateRoutine(type: '제목' | '카테고리', data: string | Category) {
     if (type === '제목') {
@@ -27,11 +35,11 @@ export default function RoutineManageUpdate() {
   }
 
   function handleTitleUpdateButton() {
-    console.log(updateRoutine?.title);
+    setUpdateModal({modal: true, type: '제목'});
   }
 
   function handleCategoryUpdateButton() {
-    console.log(updateRoutine?.category);
+    setUpdateModal({modal: true, type: '카테고리'});
   }
 
   function handleRoutineUpdateButton() {
@@ -40,6 +48,7 @@ export default function RoutineManageUpdate() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.main}>선택한 루틴은 {routine.title}입니다</Text>
       <Text style={styles.title}>어떤 작업을 진행하시겠습니까?</Text>
       <Pressable style={styles.button} onPress={handleTitleUpdateButton}>
         <Text style={styles.buttonText}>제목 수정</Text>
@@ -56,9 +65,9 @@ export default function RoutineManageUpdate() {
       </View>
       <RoutineManageUpdateModal
         handleUpdateRoutine={handleUpdateRoutine}
-        updateModal={updateModal}
-        handleCloseModal={() => setUpdateModal(false)}
-        type="제목"
+        updateModal={updateModal.modal}
+        handleCloseModal={() => setUpdateModal({...updateModal, modal: false})}
+        type={updateModal.type}
       />
     </View>
   );
@@ -70,8 +79,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  main: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 50,
+  },
   title: {
-    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 50,
   },
