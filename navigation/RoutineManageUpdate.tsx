@@ -21,9 +21,14 @@ interface IRoutineItemModal {
 }
 
 export default function RoutineManageUpdate() {
-  const {updateRoutine} = useExercise();
+  const {updateRoutine, list, setList} = useExercise();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  if (!updateRoutine) return nav.navigate('Admin');
+  if (!updateRoutine)
+    return (
+      <View>
+        <Text>없는 지원입니다.</Text>
+      </View>
+    );
 
   const [routine, setRoutine] = useState<IRoutine>(updateRoutine);
   const [itemModal, setItemModal] = useState<IRoutineItemModal>({
@@ -61,6 +66,15 @@ export default function RoutineManageUpdate() {
     setItemModal({...itemModal, modal: false});
   }
 
+  function handleUpdateButton() {
+    const updateRoutine = list.map((routineList: IRoutine) => {
+      if (routineList.id === routine.id) return routine;
+      return routineList;
+    });
+    setList(updateRoutine);
+    nav.navigate('Admin');
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.main}>선택한 루틴은 {routine.title}입니다</Text>
@@ -76,7 +90,7 @@ export default function RoutineManageUpdate() {
       </Pressable>
       <View style={styles.footer}>
         <RedButton text="취소" onPress={() => nav.navigate('Admin')} />
-        <BlueButton text="수정" onPress={() => console.log('수정')} />
+        <BlueButton text="수정" onPress={handleUpdateButton} />
       </View>
       <RoutineManageUpdateModal
         handleUpdateRoutine={handleUpdateRoutine}

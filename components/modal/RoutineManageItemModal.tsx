@@ -4,6 +4,7 @@ import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
 import {mainColor} from '../../style/color';
 import {useState} from 'react';
+import AddRoutineDataModal from './AddRoutineDataModal';
 
 type Props = {
   routine: IRoutineData[];
@@ -18,27 +19,29 @@ export default function RoutineManageItemModal({
   handleItemUpdate,
   handleCloseModal,
 }: Props) {
+  const [addRoutineDataModal, setAddRoutineDataModal] = useState<boolean>(false);
   const [routineData, setRoutineData] = useState<IRoutineData[]>(routine);
-
-  function handleUpdateRoutine(data: IRoutineData) {}
 
   function handleRemoveRoutine(data: IRoutineData) {
     const result = routineData.filter((item: IRoutineData) => item.title !== data.title);
-    console.log(result);
     setRoutineData(result);
+  }
+
+  function handleAddRoutineBtn(data: IRoutineData) {
+    setRoutineData([...routineData, data]);
   }
 
   return (
     <Modal animationType="fade" visible={routineManageItemModal} presentationStyle="formSheet" transparent={false}>
       <View style={styles.container}>
         <Text style={styles.title}>작업할 루틴을 선택해주세요</Text>
+        <BlueButton text="추가" onPress={() => setAddRoutineDataModal(true)}></BlueButton>
         <FlatList
           data={routineData}
           renderItem={item => (
             <View style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
               <Text style={styles.list}>{item.item.title}</Text>
               <Text onPress={() => handleRemoveRoutine(item.item)}>x</Text>
-              <Text>o</Text>
             </View>
           )}
         />
@@ -47,6 +50,12 @@ export default function RoutineManageItemModal({
           <BlueButton text="완료" onPress={() => handleItemUpdate(routine)} />
         </View>
       </View>
+      {addRoutineDataModal && (
+        <AddRoutineDataModal
+          handleAddRoutineBtn={handleAddRoutineBtn}
+          handleCloseModal={() => setAddRoutineDataModal(false)}
+        />
+      )}
     </Modal>
   );
 }

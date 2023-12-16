@@ -39,9 +39,7 @@ export default function PlayExercise() {
         handleMoveToPrevExercise={handleMoveToPrevExercise}
         handlePlayTimer={handlePlayTimer}
       />
-      {onTimer && (
-        <Timer closeView={() => setOnTimer(false)} timer={Number(timer)} />
-      )}
+      {onTimer && <Timer closeView={() => setOnTimer(false)} timer={Number(timer)} />}
     </View>
   );
 }
