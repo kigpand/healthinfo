@@ -7,11 +7,17 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import RoutineManageUpdateModal from '../components/modal/RoutineManageUpdateModal';
 import {useState} from 'react';
-import {Category, IRoutine} from '../interface/IRoutine';
+import {Category, IRoutine, IRoutineData} from '../interface/IRoutine';
+import RoutineManageItemModal from '../components/modal/RoutineManageItemModal';
 
 interface IUpdateModal {
   modal: boolean;
   type: '제목' | '카테고리';
+}
+
+interface IRoutineItemModal {
+  modal: boolean;
+  routine: IRoutineData[];
 }
 
 export default function RoutineManageUpdate() {
@@ -20,6 +26,10 @@ export default function RoutineManageUpdate() {
   if (!updateRoutine) return nav.navigate('Admin');
 
   const [routine, setRoutine] = useState<IRoutine>(updateRoutine);
+  const [itemModal, setItemModal] = useState<IRoutineItemModal>({
+    modal: false,
+    routine: updateRoutine.routine,
+  });
   const [updateModal, setUpdateModal] = useState<IUpdateModal>({
     modal: false,
     type: '제목',
@@ -43,7 +53,12 @@ export default function RoutineManageUpdate() {
   }
 
   function handleRoutineUpdateButton() {
-    console.log(updateRoutine?.routine);
+    setItemModal({modal: true, routine: updateRoutine!.routine});
+  }
+
+  function handleItemUpdate(routineData: IRoutineData[]) {
+    setRoutine({...routine, routine: routineData});
+    setItemModal({...itemModal, modal: false});
   }
 
   return (
@@ -68,6 +83,12 @@ export default function RoutineManageUpdate() {
         updateModal={updateModal.modal}
         handleCloseModal={() => setUpdateModal({...updateModal, modal: false})}
         type={updateModal.type}
+      />
+      <RoutineManageItemModal
+        routine={itemModal.routine}
+        routineManageItemModal={itemModal.modal}
+        handleItemUpdate={handleItemUpdate}
+        handleCloseModal={() => setItemModal({...itemModal, modal: false})}
       />
     </View>
   );
