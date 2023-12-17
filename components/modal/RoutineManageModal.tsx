@@ -4,16 +4,18 @@ import RoutineManageSelectModal from './RoutineManageSelectModal';
 import {useState} from 'react';
 import useExercise from '../../store/useExercise';
 import {IRoutine} from '../../interface/IRoutine';
+import RedButton from '../buttons/RedButton';
 
 type Props = {
   routineManageModal: boolean;
+  handleCloseModal: () => void;
   handleRoutineModalButton: (type: '수정' | '삭제') => void;
 };
 
-export default function RoutineManageModal({routineManageModal, handleRoutineModalButton}: Props) {
+export default function RoutineManageModal({routineManageModal, handleCloseModal, handleRoutineModalButton}: Props) {
   const [selectModal, setSelectModal] = useState<boolean>(false);
   const [routine, setRoutine] = useState<IRoutine | null>(null);
-  const {list, setUpdateRoutine} = useExercise();
+  const {list, setUpdateRoutine, setList} = useExercise();
 
   function handleRoutineClick(clickedRoutine: ListRenderItemInfo<IRoutine>) {
     setRoutine(clickedRoutine.item);
@@ -22,9 +24,14 @@ export default function RoutineManageModal({routineManageModal, handleRoutineMod
 
   function handleRoutineSelectModal(type: '수정' | '삭제') {
     if (!routine) return;
+    if (type === '수정') {
+      setUpdateRoutine(routine);
+    } else {
+      const result = list.filter(routineList => routineList.id !== routine.id);
+      setList(result);
+    }
     setSelectModal(false);
     handleRoutineModalButton(type);
-    setUpdateRoutine(routine);
   }
 
   return (
@@ -39,6 +46,7 @@ export default function RoutineManageModal({routineManageModal, handleRoutineMod
             </Pressable>
           )}
         />
+        <RedButton text="이전" onPress={handleCloseModal} />
       </View>
       {selectModal && (
         <RoutineManageSelectModal
@@ -56,6 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingBottom: 30,
   },
   title: {
     marginTop: 100,
