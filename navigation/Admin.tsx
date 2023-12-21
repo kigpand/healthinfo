@@ -25,9 +25,6 @@ export default function Admin() {
       <Pressable style={styles.button} onPress={() => setRoutineManageModal(true)}>
         <Text style={{fontWeight: 'bold', color: 'white'}}>루틴 관리</Text>
       </Pressable>
-      <Pressable style={styles.button}>
-        <Text style={{fontWeight: 'bold', color: 'white'}}>계정 추가</Text>
-      </Pressable>
       <RoutineManageModal
         routineManageModal={routineManageModal}
         handleCloseModal={() => setRoutineManageModal(false)}

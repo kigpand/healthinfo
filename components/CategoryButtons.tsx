@@ -47,7 +47,10 @@ export default function CategoryButtons() {
       />
       <CategoryListModal
         categorySelectModal={categorySelectModal.isView}
-        handleCloseModal={categorySelectModal.categorySelectType === 'update' ? handleUpdateModal : handleRemoveModal}
+        handleCloseModal={() => setCategorySelectModal({...categorySelectModal, isView: false})}
+        handleClickCategoryButton={
+          categorySelectModal.categorySelectType === 'update' ? handleUpdateModal : handleRemoveModal
+        }
       />
       {onAddCategory && (
         <AddCategoryModal onAddCategoryModal={onAddCategory} handleCloseModal={() => setOnAddCategory(false)} />

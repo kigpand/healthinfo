@@ -2,13 +2,15 @@ import {Modal, Pressable, StyleSheet, Text, View} from 'react-native';
 import {category} from '../../data/data';
 import {borderColor, buttonColor} from '../../style/color';
 import {Category} from '../../interface/IRoutine';
+import GreenButton from '../buttons/GreenButton';
 
 type Props = {
   categorySelectModal: boolean;
-  handleCloseModal: (cate: Category) => void;
+  handleCloseModal: () => void;
+  handleClickCategoryButton: (cate: Category) => void;
 };
 
-export default function CategoryListModal({categorySelectModal, handleCloseModal}: Props) {
+export default function CategoryListModal({categorySelectModal, handleCloseModal, handleClickCategoryButton}: Props) {
   return (
     <Modal animationType="fade" transparent={false} visible={categorySelectModal} presentationStyle="formSheet">
       <View style={styles.container}>
@@ -16,13 +18,14 @@ export default function CategoryListModal({categorySelectModal, handleCloseModal
         <View style={styles.body}>
           {category.map((cate, i) => {
             return (
-              <Pressable style={styles.button} key={i}>
-                <Text style={styles.text} onPress={() => handleCloseModal(cate as Category)}>
-                  {cate}
-                </Text>
+              <Pressable style={styles.button} onPress={() => handleClickCategoryButton(cate as Category)} key={i}>
+                <Text style={styles.text}>{cate}</Text>
               </Pressable>
             );
           })}
+        </View>
+        <View style={{position: 'absolute', bottom: 20}}>
+          <GreenButton text="이전" onPress={handleCloseModal} />
         </View>
       </View>
     </Modal>
