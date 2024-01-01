@@ -10,20 +10,25 @@ import LoadPrevRoutine from './navigation/LoadPrevRoutine';
 import SetNewDataTitle from './navigation/SetNewDataTitle';
 import Exercise from './navigation/Exercise';
 import AddNewData from './navigation/AddNewData';
-import {prevData} from './data/data';
 import useExercise from './store/useExercise';
 import Finish from './navigation/Finish';
 import Admin from './navigation/Admin';
 import CategoryManage from './navigation/CategoryManage';
 import RoutineManageUpdate from './navigation/RoutineManageUpdate';
+import {getRoutine} from './service/routineService';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   const {setList} = useExercise();
 
+  async function makeRoutine() {
+    const routine = await getRoutine();
+    setList(routine);
+  }
+
   useEffect(() => {
-    setList(prevData);
+    makeRoutine();
   }, []);
 
   return (

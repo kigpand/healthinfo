@@ -21,21 +21,13 @@ export default function RecordList() {
       <Text style={styles.title}>최근 루틴</Text>
       {record.map((item, i: number) => {
         return (
-          <Pressable
-            style={styles.button}
-            onPress={() => onItemClick(item.title)}
-            key={i}>
+          <Pressable style={styles.button} onPress={() => onItemClick(item.title)} key={i}>
             <Text style={styles.text}>{item.date}</Text>
             <Text style={styles.text}>{item.title}</Text>
           </Pressable>
         );
       })}
-      {modalItem && (
-        <RecordViewModal
-          modalItem={modalItem}
-          closeModal={() => setModalItem(false)}
-        />
-      )}
+      {modalItem && <RecordViewModal modalItem={modalItem} closeModal={() => setModalItem(false)} />}
     </View>
   );
 }

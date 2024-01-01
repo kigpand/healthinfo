@@ -7,7 +7,6 @@ interface IUserStore {
   timer: number;
   updateRoutine: IRoutine | null;
   setList: (routine: IRoutine[]) => void;
-  addList: (routine: IRoutine) => void;
   setRoutine: (list: IRoutine) => void;
   setTimer: (time: number) => void;
   setUpdateRoutine: (routine: IRoutine) => void;
@@ -19,7 +18,6 @@ const useExercise = create<IUserStore>(set => ({
   timer: 0,
   updateRoutine: null,
   setList: (routine: IRoutine[]) => set({list: routine}),
-  addList: (routine: IRoutine) => set(state => ({list: [...state.list, routine]})),
   setRoutine: (list: IRoutine) => set({routine: list}),
   setTimer: (time: number) => set({timer: time}),
   setUpdateRoutine: (routine: IRoutine) => set({updateRoutine: routine}),
