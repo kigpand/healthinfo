@@ -33,3 +33,32 @@ export async function addRoutine(routine: IRoutine) {
     return false;
   }
 }
+
+export async function getRoutineOnce(id: number) {
+  try {
+    const result = await fetch(`http://localhost:3010/${id}`, {
+      method: 'get',
+    });
+    const data = await result.json();
+    return data;
+  } catch (e) {
+    console.error(e);
+    return 'fail';
+  }
+}
+
+export async function deleteRoutine(id: number) {
+  try {
+    await fetch(`http://localhost:3010/delete`, {
+      method: 'delete',
+      body: JSON.stringify({id: id}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return 'success';
+  } catch (e) {
+    console.error(e);
+    return 'fail';
+  }
+}
