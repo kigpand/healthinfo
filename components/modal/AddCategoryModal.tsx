@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {Modal, StyleSheet, Text, TextInput, View} from 'react-native';
 import BlueButton from '../buttons/BlueButton';
 import RedButton from '../buttons/RedButton';
+import {addCategory, getCategoryOnce} from '../../service/categoryService';
 
 type Props = {
   onAddCategoryModal: boolean;
@@ -11,8 +12,13 @@ type Props = {
 export default function AddCategoryModal({onAddCategoryModal, handleCloseModal}: Props) {
   const [category, onChangeCategory] = useState<string>('');
 
-  function handleAddCategoryButton() {
-    console.log(category);
+  async function handleAddCategoryButton() {
+    const result = await getCategoryOnce(category);
+    if (result.category === 'empty') {
+      await addCategory(category);
+    } else {
+      console.log('이미 존재하는 카테고리');
+    }
     handleCloseModal();
   }
 

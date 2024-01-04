@@ -8,7 +8,7 @@ import {IRoutine} from '../interface/IRoutine';
 
 export async function getRoutine() {
   try {
-    const result = await fetch('http://localhost:3010/', {
+    const result = await fetch('http://localhost:3010/routine', {
       method: 'get',
     });
     const data = await result.json();
@@ -20,7 +20,7 @@ export async function getRoutine() {
 
 export async function addRoutine(routine: IRoutine) {
   try {
-    const result = await fetch('http://localhost:3010/addRoutine', {
+    const result = await fetch('http://localhost:3010/routine/addRoutine', {
       method: 'post',
       body: JSON.stringify(routine),
       headers: {
@@ -36,7 +36,7 @@ export async function addRoutine(routine: IRoutine) {
 
 export async function getRoutineOnce(id: number) {
   try {
-    const result = await fetch(`http://localhost:3010/${id}`, {
+    const result = await fetch(`http://localhost:3010/routine/${id}`, {
       method: 'get',
     });
     const data = await result.json();
@@ -49,7 +49,7 @@ export async function getRoutineOnce(id: number) {
 
 export async function deleteRoutine(id: number) {
   try {
-    await fetch(`http://localhost:3010/delete`, {
+    await fetch(`http://localhost:3010/routine/delete`, {
       method: 'delete',
       body: JSON.stringify({id: id}),
       headers: {

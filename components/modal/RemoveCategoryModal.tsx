@@ -2,6 +2,7 @@ import {Modal, StyleSheet, Text, View} from 'react-native';
 import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
 import {Category} from '../../interface/IRoutine';
+import {deleteCategory} from '../../service/categoryService';
 
 type Props = {
   category: Category;
@@ -10,7 +11,8 @@ type Props = {
 };
 
 export default function RemoveCategoryModal({category, onRemoveCategoryModal, handleCloseModal}: Props) {
-  function handleRemoveCategoryButton() {
+  async function handleRemoveCategoryButton() {
+    await deleteCategory(category);
     handleCloseModal();
   }
 
