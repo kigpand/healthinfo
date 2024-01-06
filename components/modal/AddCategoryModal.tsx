@@ -2,7 +2,8 @@ import {useState} from 'react';
 import {Modal, StyleSheet, Text, TextInput, View} from 'react-native';
 import BlueButton from '../buttons/BlueButton';
 import RedButton from '../buttons/RedButton';
-import {addCategory, getCategoryOnce} from '../../service/categoryService';
+import {addCategory} from '../../service/categoryService';
+import {useCategoryQuery} from '../../query/categoryQuery';
 
 type Props = {
   onAddCategoryModal: boolean;
@@ -10,12 +11,16 @@ type Props = {
 };
 
 export default function AddCategoryModal({onAddCategoryModal, handleCloseModal}: Props) {
-  const [category, onChangeCategory] = useState<string>('');
+  const [updateCategory, onChangeUpdateCategory] = useState<string>('');
+  const {category, isLoading} = useCategoryQuery();
+
+  if (isLoading) return <div>loading</div>;
 
   async function handleAddCategoryButton() {
-    const result = await getCategoryOnce(category);
-    if (result.category === 'empty') {
-      await addCategory(category);
+    if (!category) return;
+    const result = category.find(item => item.category === updateCategory);
+    if (!result) {
+      await addCategory(updateCategory);
     } else {
       console.log('이미 존재하는 카테고리');
     }
@@ -26,7 +31,7 @@ export default function AddCategoryModal({onAddCategoryModal, handleCloseModal}:
     <Modal animationType="fade" transparent={false} visible={onAddCategoryModal} presentationStyle="formSheet">
       <View style={styles.container}>
         <Text style={styles.title}>등록할 카테고리명을 입력해주세요</Text>
-        <TextInput style={styles.input} onChangeText={onChangeCategory} />
+        <TextInput style={styles.input} onChangeText={onChangeUpdateCategory} />
         <View style={styles.btns}>
           <RedButton text="취소" onPress={handleCloseModal} />
           <BlueButton text="등록" onPress={handleAddCategoryButton} />

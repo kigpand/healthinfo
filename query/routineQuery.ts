@@ -2,7 +2,7 @@ import {useQuery} from 'react-query';
 import {getRoutine} from '../service/routineService';
 
 export function useRoutineQuery() {
-  const {data: routine, isLoading} = useQuery(['routine'], getRoutine);
+  const {data: routine, isLoading, isError} = useQuery(['routine'], getRoutine);
 
-  return {routine, isLoading};
+  return {routine, isLoading, isError};
 }

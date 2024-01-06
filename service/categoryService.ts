@@ -49,7 +49,6 @@ export async function getCategoryOnce(category: string) {
       method: 'get',
     });
     const data = await result.json();
-    console.log(data);
     return data;
   } catch (e) {
     return 'fail';
