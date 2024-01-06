@@ -5,6 +5,7 @@ import {useState} from 'react';
 import useExercise from '../../store/useExercise';
 import {IRoutine} from '../../interface/IRoutine';
 import RedButton from '../buttons/RedButton';
+import {useRoutineQuery} from '../../query/routineQuery';
 
 type Props = {
   routineManageModal: boolean;
@@ -14,21 +15,22 @@ type Props = {
 
 export default function RoutineManageModal({routineManageModal, handleCloseModal, handleRoutineModalButton}: Props) {
   const [selectModal, setSelectModal] = useState<boolean>(false);
-  const [routine, setRoutine] = useState<IRoutine | null>(null);
-  const {list, setUpdateRoutine, setList} = useExercise();
+  const [currentRoutine, setCurrentRoutine] = useState<IRoutine | null>(null);
+  const {setUpdateRoutine} = useExercise();
+  const {routine} = useRoutineQuery();
 
   function handleRoutineClick(clickedRoutine: ListRenderItemInfo<IRoutine>) {
-    setRoutine(clickedRoutine.item);
+    setCurrentRoutine(clickedRoutine.item);
     setSelectModal(true);
   }
 
   function handleRoutineSelectModal(type: '수정' | '삭제') {
-    if (!routine) return;
+    if (!currentRoutine) return;
     if (type === '수정') {
-      setUpdateRoutine(routine);
+      setUpdateRoutine(currentRoutine);
     } else {
-      const result = list.filter(routineList => routineList.id !== routine.id);
-      setList(result);
+      // const result = list.filter(routineList => routineList.id !== routine.id);
+      // setList(result);
     }
     setSelectModal(false);
     handleRoutineModalButton(type);
@@ -39,7 +41,7 @@ export default function RoutineManageModal({routineManageModal, handleCloseModal
       <View style={styles.container}>
         <Text style={styles.title}>작업할 루틴을 선택해주세요</Text>
         <FlatList
-          data={list}
+          data={routine}
           renderItem={item => (
             <Pressable style={styles.button} onPress={() => handleRoutineClick(item)}>
               <Text style={{color: 'white', fontWeight: 'bold'}}>{item.item.title}</Text>
@@ -50,7 +52,7 @@ export default function RoutineManageModal({routineManageModal, handleCloseModal
       </View>
       {selectModal && (
         <RoutineManageSelectModal
-          routine={routine}
+          routine={currentRoutine}
           handleRoutineSelectModal={handleRoutineSelectModal}
           closeModal={() => setSelectModal(false)}
         />

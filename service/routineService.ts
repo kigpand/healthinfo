@@ -11,6 +11,7 @@ export async function getRoutine() {
     const result = await fetch('http://localhost:3010/routine', {
       method: 'get',
     });
+    console.log('dsadsadsa');
     const data = await result.json();
     return data;
   } catch (e) {

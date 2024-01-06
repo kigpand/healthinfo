@@ -9,6 +9,7 @@ import RoutineManageUpdateModal from '../components/modal/RoutineManageUpdateMod
 import {useState} from 'react';
 import {Category, IRoutine, IRoutineData} from '../interface/IRoutine';
 import RoutineManageItemModal from '../components/modal/RoutineManageItemModal';
+import {useRoutineQuery} from '../query/routineQuery';
 
 interface IUpdateModal {
   modal: boolean;
@@ -21,7 +22,8 @@ interface IRoutineItemModal {
 }
 
 export default function RoutineManageUpdate() {
-  const {updateRoutine, list, setList} = useExercise();
+  const {updateRoutine} = useExercise();
+  const {routine} = useRoutineQuery();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   if (!updateRoutine)
     return (
@@ -30,7 +32,7 @@ export default function RoutineManageUpdate() {
       </View>
     );
 
-  const [routine, setRoutine] = useState<IRoutine>(updateRoutine);
+  const [currentRoutine, setCurrentRoutine] = useState<IRoutine>(updateRoutine);
   const [itemModal, setItemModal] = useState<IRoutineItemModal>({
     modal: false,
     routine: updateRoutine.routine,
@@ -42,10 +44,10 @@ export default function RoutineManageUpdate() {
 
   function handleUpdateRoutine(type: '제목' | '카테고리', data: string | Category) {
     if (type === '제목') {
-      setRoutine({...routine, title: data});
+      setCurrentRoutine({...currentRoutine, title: data});
     }
     if (type === '카테고리') {
-      setRoutine({...routine, category: data as Category});
+      setCurrentRoutine({...currentRoutine, category: data as Category});
     }
   }
 
@@ -62,16 +64,16 @@ export default function RoutineManageUpdate() {
   }
 
   function handleItemUpdate(routineData: IRoutineData[]) {
-    setRoutine({...routine, routine: routineData});
+    setCurrentRoutine({...currentRoutine, routine: routineData});
     setItemModal({...itemModal, modal: false});
   }
 
   function handleUpdateButton() {
-    const updateRoutine = list.map((routineList: IRoutine) => {
-      if (routineList.id === routine.id) return routine;
+    const updateRoutine = routine.map((routineList: IRoutine) => {
+      if (routineList.id === currentRoutine.id) return currentRoutine;
       return routineList;
     });
-    setList(updateRoutine);
+    // setList(updateRoutine);
     nav.navigate('Admin');
   }
 

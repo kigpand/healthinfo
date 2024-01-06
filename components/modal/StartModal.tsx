@@ -17,9 +17,9 @@ type Props = {
 export default function StartModal({routine, onView, onCloseView}: Props) {
   const [time, setTime] = useState<number>(0);
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const {setRoutine, setTimer} = useExercise();
+  const {setCurrentRoutine, setTimer} = useExercise();
   const onSuccess = () => {
-    setRoutine(routine);
+    setCurrentRoutine(routine);
     setTimer(time);
     nav.navigate('Exercise');
     onCloseView();
