@@ -1,19 +1,12 @@
 import {useState} from 'react';
-import {Modal, Pressable, StyleSheet, Text, View} from 'react-native';
+import {Modal, StyleSheet, Text, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {borderColor, buttonColor, mainColor} from '../../style/color';
+import {mainColor} from '../../style/color';
 import BlueButton from '../buttons/BlueButton';
-import useExercise from '../../store/useExercise';
-
-const select = [
-  {label: '등', value: '등'},
-  {label: '어깨', value: '어깨'},
-  {label: '하체', value: '하체'},
-  {label: '팔', value: '팔'},
-  {label: '가슴', value: '가슴'},
-];
+import {useRoutineQuery} from '../../query/routineQuery';
+import {useCategoryQuery} from '../../query/categoryQuery';
 
 type Props = {
   onView: boolean;
@@ -22,14 +15,22 @@ type Props = {
 };
 
 export default function SetNewDataCategoryModal({onView, title, closeView}: Props) {
-  const {list} = useExercise();
-  const [category, onChangeCategory] = useState<string>('');
+  const [selectCategory, onChangeSelectCategory] = useState<string>('');
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const {routine} = useRoutineQuery();
+  const {category} = useCategoryQuery();
+
+  if (!category)
+    return (
+      <View>
+        <Text>카테고리가 존재하지 않습니다</Text>
+      </View>
+    );
 
   function handleAddButton() {
-    if (title === '' || category === '') return;
+    if (title === '' || selectCategory === '') return;
     closeView();
-    nav.navigate('AddNewData', {title, category, id: list[list.length - 1].id + 1});
+    nav.navigate('AddNewData', {title, selectCategory, id: routine[routine.length - 1].id + 1});
   }
 
   return (
@@ -42,11 +43,13 @@ export default function SetNewDataCategoryModal({onView, title, closeView}: Prop
               label: '카테고리를 선택해주세요',
               value: '',
             }}
-            onValueChange={onChangeCategory}
-            items={select}
+            onValueChange={onChangeSelectCategory}
+            items={category!.map(item => {
+              return {label: item.category, value: item.category};
+            })}
           />
         </View>
-        {category !== '' && (
+        {selectCategory !== '' && (
           <View style={styles.button}>
             <BlueButton text="등록" onPress={handleAddButton} />
           </View>
