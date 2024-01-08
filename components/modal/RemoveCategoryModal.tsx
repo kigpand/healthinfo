@@ -3,17 +3,33 @@ import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
 import {Category} from '../../interface/IRoutine';
 import {deleteCategory} from '../../service/categoryService';
+import {useMutation, useQueryClient} from 'react-query';
 
 type Props = {
-  category: Category;
+  category: string;
   onRemoveCategoryModal: boolean;
   handleCloseModal: () => void;
 };
 
 export default function RemoveCategoryModal({category, onRemoveCategoryModal, handleCloseModal}: Props) {
+  const queryClient = useQueryClient();
+  const {mutate, isError, isLoading} = useMutation(deleteCategory, {
+    onSuccess: () => {
+      console.log('success');
+      queryClient.invalidateQueries();
+      handleCloseModal();
+    },
+  });
+
+  if (isLoading)
+    return (
+      <View>
+        <Text>loading</Text>
+      </View>
+    );
+
   async function handleRemoveCategoryButton() {
-    await deleteCategory(category);
-    handleCloseModal();
+    mutate(category);
   }
 
   return (

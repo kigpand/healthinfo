@@ -10,7 +10,14 @@ type Props = {
 };
 
 export default function CategoryListModal({categorySelectModal, handleCloseModal, handleClickCategoryButton}: Props) {
-  const {category, isError} = useCategoryQuery();
+  const {category, isError, isLoading} = useCategoryQuery();
+
+  if (isLoading)
+    return (
+      <View>
+        <Text>loading</Text>
+      </View>
+    );
 
   return (
     <Modal animationType="fade" transparent={false} visible={categorySelectModal} presentationStyle="formSheet">
