@@ -3,21 +3,21 @@ import StartModal from '../components/modal/StartModal';
 import {useState} from 'react';
 import {IRoutine} from '../interface/IRoutine';
 import PrevRoutineList from '../components/PrevRoutineList';
-import useExercise from '../store/useExercise';
 import useModal from '../hooks/useModal';
+import {useRoutineQuery} from '../query/routineQuery';
 
 export default function LoadPrevRoutine() {
-  const [routine, setRoutine] = useState<IRoutine | null>(null);
-  const {list} = useExercise();
+  const [currentRoutine, setCurrentRoutine] = useState<IRoutine | null>(null);
   const {openModal, handleOpenModal, handleCloseModal} = useModal();
+  const {routine} = useRoutineQuery();
 
   function handleListClick(routine: IRoutine) {
-    setRoutine(routine);
+    setCurrentRoutine(routine);
     handleOpenModal();
   }
 
   function closeModal() {
-    setRoutine(null);
+    setCurrentRoutine(null);
     handleCloseModal();
   }
 
@@ -28,14 +28,14 @@ export default function LoadPrevRoutine() {
       <FlatList
         horizontal={true}
         style={style.flatList}
-        data={list}
+        data={routine}
         contentContainerStyle={{
           flex: 1,
           justifyContent: 'center',
           gap: 10,
         }}
         renderItem={item => <PrevRoutineList item={item.item} handleListClick={handleListClick} />}></FlatList>
-      <StartModal routine={routine!} onView={openModal} onCloseView={closeModal} />
+      <StartModal routine={currentRoutine!} onView={openModal} onCloseView={closeModal} />
     </View>
   );
 }

@@ -16,7 +16,7 @@ export default function AddRoutineDataModal({handleAddRoutineBtn, handleCloseMod
   const [set, onChangeSet] = useState<string>('');
 
   function handleAddButton() {
-    handleAddRoutineBtn({title, kg, set: Number(set)});
+    handleAddRoutineBtn({title, kg: Number(kg), set: Number(set)});
     handleCloseModal();
   }
 

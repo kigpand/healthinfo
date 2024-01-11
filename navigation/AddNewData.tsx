@@ -4,7 +4,6 @@ import {mainColor} from '../style/color';
 import {useState} from 'react';
 import {IRoutineData} from '../interface/IRoutine';
 import AddNewDataList from '../components/AddNewDataList';
-import useExercise from '../store/useExercise';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 import StartModal from '../components/modal/StartModal';
 import AddNewDataSubmitBtns from '../components/AddNewDataSubmitBtns';
@@ -12,15 +11,23 @@ import AddNewDataMainHeader from '../components/AddNewDataMainHeader';
 import useModal from '../hooks/useModal';
 import AddNewDataCheckModal from '../components/modal/AddNewDataCheckModal';
 import BlueButton from '../components/buttons/BlueButton';
+import {addRoutine} from '../service/routineService';
+import {useMutation, useQueryClient} from 'react-query';
 
 export default function AddNewData() {
   const route = useRoute<RouteProp<any>>();
+  const queryClient = useQueryClient();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const {addList} = useExercise();
   const {openModal, handleOpenModal, handleCloseModal} = useModal();
   const [onBtn, setOnBtn] = useState<boolean>(false);
   const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
   const [isCheck, setIsCheck] = useState<boolean>(false);
+  const {mutate} = useMutation(addRoutine, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['routine']);
+      nav.navigate('Home');
+    },
+  });
 
   function getRoutineArr(routine: IRoutineData) {
     setRoutineArr([...routineArr, routine]);
@@ -36,16 +43,15 @@ export default function AddNewData() {
     handleOpenModal();
   }
 
-  function onNoSubmit() {
+  async function onNoSubmit() {
     setOnBtn(false);
     if (!route.params) return;
-    addList({
+    mutate({
       id: route.params.id,
       title: route.params.title,
       category: route.params.category,
       routine: routineArr,
     });
-    nav.navigate('Home');
   }
 
   return (

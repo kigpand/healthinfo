@@ -9,11 +9,11 @@ import PlayExerciseMain from './PlayExerciseMain';
 export default function PlayExercise() {
   const [onTimer, setOnTimer] = useState<boolean>(false);
   const [doneExerciseCount, setDoneExerciseCount] = useState<number>(0);
-  const {routine, timer} = useExercise();
+  const {timer, currentRoutine} = useExercise();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   function handleMoveToNextExercise() {
-    if (doneExerciseCount + 1 === routine?.routine.length) {
+    if (doneExerciseCount + 1 === currentRoutine?.routine.length) {
       nav.navigate('Finish');
     } else {
       setOnTimer(true);
@@ -32,8 +32,8 @@ export default function PlayExercise() {
   return (
     <View style={styles.setItem}>
       <PlayExerciseMain
-        category={routine?.category!}
-        routine={routine?.routine[doneExerciseCount] || null}
+        category={currentRoutine?.category!}
+        routine={currentRoutine?.routine[doneExerciseCount] || null}
         doneExerciseCount={doneExerciseCount}
         handleMoveToNextExercise={handleMoveToNextExercise}
         handleMoveToPrevExercise={handleMoveToPrevExercise}

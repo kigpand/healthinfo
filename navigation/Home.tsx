@@ -12,10 +12,7 @@ export default function Home({navigation}: any) {
       <Text style={styles.today} onPress={() => setLetsGoModal(true)}>
         Let's Go!
       </Text>
-      <LetsGoModal
-        onLetsGoModal={letsGoModal}
-        closeLetsGoModal={() => setLetsGoModal(false)}
-      />
+      <LetsGoModal onLetsGoModal={letsGoModal} closeLetsGoModal={() => setLetsGoModal(false)} />
       <Text style={styles.record} onPress={() => navigation.navigate('Record')}>
         지난 기록
       </Text>

@@ -10,22 +10,22 @@ export const prevData: IRoutine[] = [
     routine: [
       {
         title: '등운동1',
-        kg: '10kg',
+        kg: 10,
         set: 5,
       },
       {
         title: '등운동2',
-        kg: '8kg',
+        kg: 8,
         set: 10,
       },
       {
         title: '등운동3',
-        kg: '5kg',
+        kg: 5,
         set: 7,
       },
       {
         title: '등운동4',
-        kg: '15kg',
+        kg: 15,
         set: 8,
       },
     ],
@@ -37,17 +37,17 @@ export const prevData: IRoutine[] = [
     routine: [
       {
         title: '어깨운동1',
-        kg: '12kg',
+        kg: 12,
         set: 3,
       },
       {
         title: '어깨운동2',
-        kg: '15kg',
+        kg: 15,
         set: 4,
       },
       {
         title: '어깨운동3',
-        kg: '20kg',
+        kg: 20,
         set: 5,
       },
     ],

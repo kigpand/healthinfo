@@ -1,5 +1,5 @@
 export interface IRoutineData {
-  kg: string;
+  kg: number;
   set: number;
   title: string;
 }

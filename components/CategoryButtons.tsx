@@ -2,7 +2,6 @@ import {StyleSheet, View} from 'react-native';
 import CategoryManageButton from './buttons/CategoryManageButton';
 import {useState} from 'react';
 import AddCategoryModal from './modal/AddCategoryModal';
-import {Category} from '../interface/IRoutine';
 import UpdateCategoryModal from './modal/UpdateCategoryModal';
 import CategoryListModal from './modal/CategoryListModal';
 import RemoveCategoryModal from './modal/RemoveCategoryModal';
@@ -20,15 +19,15 @@ export default function CategoryButtons() {
   });
   const [onUpdateCategory, setOnUpdateCategory] = useState<boolean>(false);
   const [onRemoveCategory, setOnRemoveCategory] = useState<boolean>(false);
-  const [category, setCategory] = useState<Category | null>(null);
+  const [category, setCategory] = useState<string | null>(null);
 
-  function handleUpdateModal(cate: Category) {
+  function handleUpdateModal(cate: string) {
     setCategory(cate);
     setCategorySelectModal({isView: false, categorySelectType: 'update'});
     setOnUpdateCategory(true);
   }
 
-  function handleRemoveModal(cate: Category) {
+  function handleRemoveModal(cate: string) {
     setCategory(cate);
     setCategorySelectModal({isView: false, categorySelectType: 'remove'});
     setOnRemoveCategory(true);

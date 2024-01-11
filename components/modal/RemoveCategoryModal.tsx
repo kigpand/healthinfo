@@ -2,16 +2,34 @@ import {Modal, StyleSheet, Text, View} from 'react-native';
 import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
 import {Category} from '../../interface/IRoutine';
+import {deleteCategory} from '../../service/categoryService';
+import {useMutation, useQueryClient} from 'react-query';
 
 type Props = {
-  category: Category;
+  category: string;
   onRemoveCategoryModal: boolean;
   handleCloseModal: () => void;
 };
 
 export default function RemoveCategoryModal({category, onRemoveCategoryModal, handleCloseModal}: Props) {
-  function handleRemoveCategoryButton() {
-    handleCloseModal();
+  const queryClient = useQueryClient();
+  const {mutate, isError, isLoading} = useMutation(deleteCategory, {
+    onSuccess: () => {
+      console.log('success');
+      queryClient.invalidateQueries();
+      handleCloseModal();
+    },
+  });
+
+  if (isLoading)
+    return (
+      <View>
+        <Text>loading</Text>
+      </View>
+    );
+
+  async function handleRemoveCategoryButton() {
+    mutate(category);
   }
 
   return (

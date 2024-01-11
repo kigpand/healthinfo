@@ -1,25 +1,33 @@
 import {Modal, Pressable, StyleSheet, Text, View} from 'react-native';
-import {category} from '../../data/data';
 import {borderColor, buttonColor} from '../../style/color';
-import {Category} from '../../interface/IRoutine';
 import GreenButton from '../buttons/GreenButton';
+import {useCategoryQuery} from '../../query/categoryQuery';
 
 type Props = {
   categorySelectModal: boolean;
   handleCloseModal: () => void;
-  handleClickCategoryButton: (cate: Category) => void;
+  handleClickCategoryButton: (cate: string) => void;
 };
 
 export default function CategoryListModal({categorySelectModal, handleCloseModal, handleClickCategoryButton}: Props) {
+  const {category, isError, isLoading} = useCategoryQuery();
+
+  if (isLoading)
+    return (
+      <View>
+        <Text>loading</Text>
+      </View>
+    );
+
   return (
     <Modal animationType="fade" transparent={false} visible={categorySelectModal} presentationStyle="formSheet">
       <View style={styles.container}>
         <Text style={styles.title}>어떤 카테고리를 선택하시겠습니까?</Text>
         <View style={styles.body}>
-          {category.map((cate, i) => {
+          {category!.map((cate, i) => {
             return (
-              <Pressable style={styles.button} onPress={() => handleClickCategoryButton(cate as Category)} key={i}>
-                <Text style={styles.text}>{cate}</Text>
+              <Pressable style={styles.button} onPress={() => handleClickCategoryButton(cate.category)} key={i}>
+                <Text style={styles.text}>{cate.category}</Text>
               </Pressable>
             );
           })}

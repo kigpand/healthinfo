@@ -17,7 +17,7 @@ export default function NewDataModal({onView, getRoutineArr, closeView}: Props) 
   const [title, onChangeTitle] = useState<string>('');
 
   function onAdd() {
-    getRoutineArr({kg, set: Number(set), title});
+    getRoutineArr({kg: Number(kg), set: Number(set), title});
     closeView();
   }
 

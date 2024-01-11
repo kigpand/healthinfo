@@ -38,6 +38,7 @@ export default function PlayExerciseMain({
   }
 
   function handleMinusBtn() {
+    if (currentExerciseCount === 0) return;
     setCurrentExerciseCount(currentExerciseCount - 1);
   }
 
