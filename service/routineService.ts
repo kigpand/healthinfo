@@ -1,11 +1,5 @@
 import {IRoutine} from '../interface/IRoutine';
 
-// export function addRoutine() {
-//   fetch('http://localhost:3010', {
-//     method: 'get',
-//   });
-// }
-
 export async function getRoutine() {
   try {
     const result = await fetch('http://localhost:3010/routine', {

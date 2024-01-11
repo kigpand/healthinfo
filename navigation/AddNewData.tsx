@@ -12,14 +12,22 @@ import useModal from '../hooks/useModal';
 import AddNewDataCheckModal from '../components/modal/AddNewDataCheckModal';
 import BlueButton from '../components/buttons/BlueButton';
 import {addRoutine} from '../service/routineService';
+import {useMutation, useQueryClient} from 'react-query';
 
 export default function AddNewData() {
   const route = useRoute<RouteProp<any>>();
+  const queryClient = useQueryClient();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {openModal, handleOpenModal, handleCloseModal} = useModal();
   const [onBtn, setOnBtn] = useState<boolean>(false);
   const [routineArr, setRoutineArr] = useState<IRoutineData[]>([]);
   const [isCheck, setIsCheck] = useState<boolean>(false);
+  const {mutate} = useMutation(addRoutine, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['routine']);
+      nav.navigate('Home');
+    },
+  });
 
   function getRoutineArr(routine: IRoutineData) {
     setRoutineArr([...routineArr, routine]);
@@ -38,13 +46,12 @@ export default function AddNewData() {
   async function onNoSubmit() {
     setOnBtn(false);
     if (!route.params) return;
-    await addRoutine({
+    mutate({
       id: route.params.id,
       title: route.params.title,
       category: route.params.category,
       routine: routineArr,
     });
-    nav.navigate('Home');
   }
 
   return (
