@@ -1,7 +1,7 @@
 import {Modal, Pressable, StyleSheet, Text, View} from 'react-native';
 import {borderColor, buttonColor} from '../../style/color';
 import GreenButton from '../buttons/GreenButton';
-import {useCategoryQuery} from '../../query/categoryQuery';
+import {useCategoryQuery} from '../../query/useCategoryQuery';
 
 type Props = {
   categorySelectModal: boolean;

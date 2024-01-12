@@ -5,12 +5,12 @@ import {useState} from 'react';
 import useExercise from '../../store/useExercise';
 import {IRoutine} from '../../interface/IRoutine';
 import RedButton from '../buttons/RedButton';
-import {useRoutineQuery} from '../../query/routineQuery';
+import {useRoutineQuery} from '../../query/useRoutineQuery';
 
 type Props = {
   routineManageModal: boolean;
   handleCloseModal: () => void;
-  handleRoutineModalButton: (type: '수정' | '삭제') => void;
+  handleRoutineModalButton: (type: '수정' | '삭제', id: number) => void;
 };
 
 export default function RoutineManageModal({routineManageModal, handleCloseModal, handleRoutineModalButton}: Props) {

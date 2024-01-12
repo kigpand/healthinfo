@@ -9,7 +9,7 @@ import RoutineManageUpdateModal from '../components/modal/RoutineManageUpdateMod
 import {useState} from 'react';
 import {Category, IRoutine, IRoutineData} from '../interface/IRoutine';
 import RoutineManageItemModal from '../components/modal/RoutineManageItemModal';
-import {useRoutineQuery} from '../query/routineQuery';
+import {useRoutineQuery} from '../query/useRoutineQuery';
 
 interface IUpdateModal {
   modal: boolean;

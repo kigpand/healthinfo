@@ -4,15 +4,26 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useState} from 'react';
 import RoutineManageModal from '../components/modal/RoutineManageModal';
+import {useMutation, useQueryClient} from 'react-query';
+import {deleteRoutine} from '../service/routineService';
 
 export default function Admin() {
+  const queryClient = useQueryClient();
   const [routineManageModal, setRoutineManageModal] = useState<boolean>(false);
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const {mutate} = useMutation(deleteRoutine, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      nav.navigate('Home');
+    },
+  });
 
-  function handleRoutineModalButton(type: '수정' | '삭제') {
+  function handleRoutineModalButton(type: '수정' | '삭제', id: number) {
     setRoutineManageModal(false);
     if (type === '수정') {
       nav.navigate('RoutineManageUpdate');
+    } else {
+      mutate(id);
     }
   }
 
