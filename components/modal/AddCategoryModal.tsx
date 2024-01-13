@@ -3,7 +3,7 @@ import {Modal, StyleSheet, Text, TextInput, View} from 'react-native';
 import BlueButton from '../buttons/BlueButton';
 import RedButton from '../buttons/RedButton';
 import {addCategory} from '../../service/categoryService';
-import {useCategoryQuery} from '../../query/categoryQuery';
+import {useCategoryQuery} from '../../query/useCategoryQuery';
 import {useMutation, useQueryClient} from 'react-query';
 
 type Props = {

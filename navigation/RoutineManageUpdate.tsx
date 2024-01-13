@@ -9,37 +9,30 @@ import RoutineManageUpdateModal from '../components/modal/RoutineManageUpdateMod
 import {useState} from 'react';
 import {Category, IRoutine, IRoutineData} from '../interface/IRoutine';
 import RoutineManageItemModal from '../components/modal/RoutineManageItemModal';
-import {useRoutineQuery} from '../query/routineQuery';
+import {useMutation, useQueryClient} from 'react-query';
+import {updateRoutineService} from '../service/routineService';
 
 interface IUpdateModal {
   modal: boolean;
   type: '제목' | '카테고리';
 }
 
-interface IRoutineItemModal {
-  modal: boolean;
-  routine: IRoutineData[];
-}
-
 export default function RoutineManageUpdate() {
+  const queryClient = useQueryClient();
   const {updateRoutine} = useExercise();
-  const {routine} = useRoutineQuery();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  if (!updateRoutine)
-    return (
-      <View>
-        <Text>없는 지원입니다.</Text>
-      </View>
-    );
-
-  const [currentRoutine, setCurrentRoutine] = useState<IRoutine>(updateRoutine);
-  const [itemModal, setItemModal] = useState<IRoutineItemModal>({
-    modal: false,
-    routine: updateRoutine.routine,
-  });
+  const [currentRoutine, setCurrentRoutine] = useState<IRoutine>(updateRoutine!);
+  const [itemModal, setItemModal] = useState<boolean>(false);
   const [updateModal, setUpdateModal] = useState<IUpdateModal>({
     modal: false,
     type: '제목',
+  });
+  const {mutate} = useMutation(updateRoutineService, {
+    onSuccess: () => {
+      console.log('success');
+      queryClient.invalidateQueries();
+      nav.navigate('Admin');
+    },
   });
 
   function handleUpdateRoutine(type: '제목' | '카테고리', data: string | Category) {
@@ -59,27 +52,19 @@ export default function RoutineManageUpdate() {
     setUpdateModal({modal: true, type: '카테고리'});
   }
 
-  function handleRoutineUpdateButton() {
-    setItemModal({modal: true, routine: updateRoutine!.routine});
-  }
-
   function handleItemUpdate(routineData: IRoutineData[]) {
     setCurrentRoutine({...currentRoutine, routine: routineData});
-    setItemModal({...itemModal, modal: false});
+    setItemModal(false);
   }
 
   function handleUpdateButton() {
-    const updateRoutine = routine.map((routineList: IRoutine) => {
-      if (routineList.id === currentRoutine.id) return currentRoutine;
-      return routineList;
-    });
-    // setList(updateRoutine);
-    nav.navigate('Admin');
+    console.log(currentRoutine);
+    mutate(currentRoutine);
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.main}>선택한 루틴은 {routine.title}입니다</Text>
+      <Text style={styles.main}>선택한 루틴은 {currentRoutine.title}입니다</Text>
       <Text style={styles.title}>어떤 작업을 진행하시겠습니까?</Text>
       <Pressable style={styles.button} onPress={handleTitleUpdateButton}>
         <Text style={styles.buttonText}>제목 수정</Text>
@@ -87,7 +72,7 @@ export default function RoutineManageUpdate() {
       <Pressable style={styles.button} onPress={handleCategoryUpdateButton}>
         <Text style={styles.buttonText}>카테고리 수정</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={handleRoutineUpdateButton}>
+      <Pressable style={styles.button} onPress={() => setItemModal(true)}>
         <Text style={styles.buttonText}>루틴 수정</Text>
       </Pressable>
       <View style={styles.footer}>
@@ -101,10 +86,10 @@ export default function RoutineManageUpdate() {
         type={updateModal.type}
       />
       <RoutineManageItemModal
-        routine={itemModal.routine}
-        routineManageItemModal={itemModal.modal}
+        routine={currentRoutine.routine}
+        routineManageItemModal={itemModal}
         handleItemUpdate={handleItemUpdate}
-        handleCloseModal={() => setItemModal({...itemModal, modal: false})}
+        handleCloseModal={() => setItemModal(false)}
       />
     </View>
   );

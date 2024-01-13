@@ -1,7 +1,6 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
 import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
-import {Category} from '../../interface/IRoutine';
 import {deleteCategory} from '../../service/categoryService';
 import {useMutation, useQueryClient} from 'react-query';
 

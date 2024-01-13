@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {IRoutine} from '../interface/IRoutine';
 import PrevRoutineList from '../components/PrevRoutineList';
 import useModal from '../hooks/useModal';
-import {useRoutineQuery} from '../query/routineQuery';
+import {useRoutineQuery} from '../query/useRoutineQuery';
 
 export default function LoadPrevRoutine() {
   const [currentRoutine, setCurrentRoutine] = useState<IRoutine | null>(null);

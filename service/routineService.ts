@@ -29,16 +29,19 @@ export async function addRoutine(routine: IRoutine) {
   }
 }
 
-export async function getRoutineOnce(id: number) {
+export async function updateRoutineService(routine: IRoutine) {
   try {
-    const result = await fetch(`http://localhost:3010/routine/${id}`, {
-      method: 'get',
+    await fetch('http://localhost:3010/routine/updateRoutine', {
+      method: 'put',
+      body: JSON.stringify(routine),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
-    const data = await result.json();
-    return data;
+    return true;
   } catch (e) {
     console.error(e);
-    return 'fail';
+    return false;
   }
 }
 

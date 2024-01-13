@@ -37,10 +37,6 @@ export default function CategoryButtons() {
     <View style={styles.container}>
       <CategoryManageButton text="카테고리 추가" onPress={() => setOnAddCategory(true)} />
       <CategoryManageButton
-        text="카테고리 수정"
-        onPress={() => setCategorySelectModal({isView: true, categorySelectType: 'update'})}
-      />
-      <CategoryManageButton
         text="카테고리 삭제"
         onPress={() => setCategorySelectModal({isView: true, categorySelectType: 'remove'})}
       />

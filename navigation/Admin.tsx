@@ -9,13 +9,6 @@ export default function Admin() {
   const [routineManageModal, setRoutineManageModal] = useState<boolean>(false);
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-  function handleRoutineModalButton(type: '수정' | '삭제') {
-    setRoutineManageModal(false);
-    if (type === '수정') {
-      nav.navigate('RoutineManageUpdate');
-    }
-  }
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>관리자 페이지</Text>
@@ -28,7 +21,6 @@ export default function Admin() {
       <RoutineManageModal
         routineManageModal={routineManageModal}
         handleCloseModal={() => setRoutineManageModal(false)}
-        handleRoutineModalButton={handleRoutineModalButton}
       />
     </View>
   );

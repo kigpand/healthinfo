@@ -5,8 +5,8 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {mainColor} from '../../style/color';
 import BlueButton from '../buttons/BlueButton';
-import {useRoutineQuery} from '../../query/routineQuery';
-import {useCategoryQuery} from '../../query/categoryQuery';
+import {useRoutineQuery} from '../../query/useRoutineQuery';
+import {useCategoryQuery} from '../../query/useCategoryQuery';
 
 type Props = {
   onView: boolean;
