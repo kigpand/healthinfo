@@ -6,19 +6,30 @@ import useExercise from '../../store/useExercise';
 import {IRoutine} from '../../interface/IRoutine';
 import RedButton from '../buttons/RedButton';
 import {useRoutineQuery} from '../../query/useRoutineQuery';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useMutation, useQueryClient} from 'react-query';
+import {deleteRoutine} from '../../service/routineService';
 
 type Props = {
   routineManageModal: boolean;
   handleCloseModal: () => void;
-  handleRoutineModalButton: (type: '수정' | '삭제', id: number) => void;
 };
 
-export default function RoutineManageModal({routineManageModal, handleCloseModal, handleRoutineModalButton}: Props) {
+export default function RoutineManageModal({routineManageModal, handleCloseModal}: Props) {
+  const queryClient = useQueryClient();
   const [selectModal, setSelectModal] = useState<boolean>(false);
   const [currentRoutine, setCurrentRoutine] = useState<IRoutine | null>(null);
   const {setUpdateRoutine} = useExercise();
   const {routine} = useRoutineQuery();
-
+  const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const {mutate} = useMutation(deleteRoutine, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      handleCloseModal();
+      nav.navigate('Home');
+    },
+  });
   function handleRoutineClick(clickedRoutine: ListRenderItemInfo<IRoutine>) {
     setCurrentRoutine(clickedRoutine.item);
     setSelectModal(true);
@@ -26,14 +37,14 @@ export default function RoutineManageModal({routineManageModal, handleCloseModal
 
   function handleRoutineSelectModal(type: '수정' | '삭제') {
     if (!currentRoutine) return;
+    handleCloseModal();
+    setSelectModal(false);
     if (type === '수정') {
       setUpdateRoutine(currentRoutine);
+      nav.navigate('RoutineManageUpdate');
     } else {
-      // const result = list.filter(routineList => routineList.id !== routine.id);
-      // setList(result);
+      mutate(currentRoutine.id);
     }
-    setSelectModal(false);
-    handleRoutineModalButton(type);
   }
 
   return (
