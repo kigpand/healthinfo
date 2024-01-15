@@ -8,8 +8,6 @@ import RedButton from '../buttons/RedButton';
 import {useRoutineQuery} from '../../query/useRoutineQuery';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useMutation, useQueryClient} from 'react-query';
-import {deleteRoutine} from '../../service/routineService';
 
 type Props = {
   routineManageModal: boolean;
@@ -17,19 +15,12 @@ type Props = {
 };
 
 export default function RoutineManageModal({routineManageModal, handleCloseModal}: Props) {
-  const queryClient = useQueryClient();
   const [selectModal, setSelectModal] = useState<boolean>(false);
   const [currentRoutine, setCurrentRoutine] = useState<IRoutine | null>(null);
   const {setUpdateRoutine} = useExercise();
-  const {routine} = useRoutineQuery();
+  const {routine, deleteRoutineMutate} = useRoutineQuery();
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const {mutate} = useMutation(deleteRoutine, {
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-      handleCloseModal();
-      nav.navigate('Home');
-    },
-  });
+
   function handleRoutineClick(clickedRoutine: ListRenderItemInfo<IRoutine>) {
     setCurrentRoutine(clickedRoutine.item);
     setSelectModal(true);
@@ -43,7 +34,9 @@ export default function RoutineManageModal({routineManageModal, handleCloseModal
       setUpdateRoutine(currentRoutine);
       nav.navigate('RoutineManageUpdate');
     } else {
-      mutate(currentRoutine.id);
+      deleteRoutineMutate(currentRoutine.id);
+      handleCloseModal();
+      nav.navigate('Home');
     }
   }
 

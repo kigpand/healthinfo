@@ -19,11 +19,11 @@ export default function PrevRoutineList({item, handleListClick}: Props) {
 
 const styles = StyleSheet.create({
   container: {
+    width: 150,
+    marginTop: 10,
     backgroundColor: buttonColor,
     borderRadius: 4,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    width: 100,
+    paddingVertical: 15,
   },
   text: {
     textAlign: 'center',

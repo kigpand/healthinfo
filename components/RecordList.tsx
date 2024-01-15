@@ -3,14 +3,15 @@ import {record} from '../data/data';
 import {mainColor} from '../style/color';
 import {useState} from 'react';
 import RecordViewModal from './modal/RecordViewModal';
-import useExercise from '../store/useExercise';
+import {useRoutineQuery} from '../query/useRoutineQuery';
+import {IRoutine} from '../interface/IRoutine';
 
 export default function RecordList() {
   const [modalItem, setModalItem] = useState<any>(null);
-  const {list} = useExercise();
+  const {routine} = useRoutineQuery();
 
   function onItemClick(title: string) {
-    const result = list.find(item => item.title === title);
+    const result = routine.find((item: IRoutine) => item.title === title);
     if (result) {
       setModalItem(result);
     }

@@ -58,7 +58,6 @@ export default function RoutineManageUpdate() {
   }
 
   function handleUpdateButton() {
-    console.log(currentRoutine);
     mutate(currentRoutine);
   }
 

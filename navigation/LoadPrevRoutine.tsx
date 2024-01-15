@@ -26,13 +26,10 @@ export default function LoadPrevRoutine() {
     <View style={style.container}>
       <Text style={style.title}>어떤 루틴을 불러올까요?</Text>
       <FlatList
-        horizontal={true}
         style={style.flatList}
         data={routine}
         contentContainerStyle={{
-          flex: 1,
-          justifyContent: 'center',
-          gap: 10,
+          alignItems: 'center',
         }}
         renderItem={item => <PrevRoutineList item={item.item} handleListClick={handleListClick} />}></FlatList>
       <StartModal routine={currentRoutine!} onView={openModal} onCloseView={closeModal} />
@@ -45,6 +42,7 @@ const style = StyleSheet.create({
     flex: 1,
     height: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontWeight: '700',
@@ -53,9 +51,8 @@ const style = StyleSheet.create({
   },
   flatList: {
     flex: 1,
-    flexWrap: 'wrap',
-    marginTop: 50,
     width: '100%',
+    marginTop: 50,
   },
   kg: {
     display: 'flex',

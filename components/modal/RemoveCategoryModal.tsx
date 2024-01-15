@@ -1,8 +1,7 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
 import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
-import {deleteCategory} from '../../service/categoryService';
-import {useMutation, useQueryClient} from 'react-query';
+import {useCategoryQuery} from '../../query/useCategoryQuery';
 
 type Props = {
   category: string;
@@ -11,24 +10,11 @@ type Props = {
 };
 
 export default function RemoveCategoryModal({category, onRemoveCategoryModal, handleCloseModal}: Props) {
-  const queryClient = useQueryClient();
-  const {mutate, isError, isLoading} = useMutation(deleteCategory, {
-    onSuccess: () => {
-      console.log('success');
-      queryClient.invalidateQueries();
-      handleCloseModal();
-    },
-  });
-
-  if (isLoading)
-    return (
-      <View>
-        <Text>loading</Text>
-      </View>
-    );
+  const {deleteCategoryMutate} = useCategoryQuery();
 
   async function handleRemoveCategoryButton() {
-    mutate(category);
+    deleteCategoryMutate(category);
+    handleCloseModal();
   }
 
   return (

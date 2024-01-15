@@ -2,9 +2,7 @@ import {useState} from 'react';
 import {Modal, StyleSheet, Text, TextInput, View} from 'react-native';
 import BlueButton from '../buttons/BlueButton';
 import RedButton from '../buttons/RedButton';
-import {addCategory} from '../../service/categoryService';
 import {useCategoryQuery} from '../../query/useCategoryQuery';
-import {useMutation, useQueryClient} from 'react-query';
 
 type Props = {
   onAddCategoryModal: boolean;
@@ -12,21 +10,10 @@ type Props = {
 };
 
 export default function AddCategoryModal({onAddCategoryModal, handleCloseModal}: Props) {
-  const queryClient = useQueryClient();
   const [updateCategory, onChangeUpdateCategory] = useState<string>('');
-  const {category, isLoading} = useCategoryQuery();
-  const {
-    mutate,
-    isError,
-    isLoading: categoryLoading,
-  } = useMutation(addCategory, {
-    onSuccess: () => {
-      console.log('요청 성공');
-      queryClient.invalidateQueries(['category']);
-    },
-  });
+  const {category, isLoading, addCategoryMutate} = useCategoryQuery();
 
-  if (isLoading || categoryLoading)
+  if (isLoading)
     return (
       <View>
         <Text>loading</Text>
@@ -37,7 +24,7 @@ export default function AddCategoryModal({onAddCategoryModal, handleCloseModal}:
     if (!category) return;
     const result = category.find(item => item.category === updateCategory);
     if (!result) {
-      mutate(updateCategory);
+      addCategoryMutate(updateCategory);
     } else {
       console.log('이미 존재하는 카테고리');
     }
