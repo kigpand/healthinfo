@@ -1,14 +1,22 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {record} from '../data/data';
 import {mainColor} from '../style/color';
 import {useState} from 'react';
 import RecordViewModal from './modal/RecordViewModal';
 import {useRoutineQuery} from '../query/useRoutineQuery';
 import {IRoutine} from '../interface/IRoutine';
+import {useRecordQuery} from '../query/useRecordQuery';
 
 export default function RecordList() {
   const [modalItem, setModalItem] = useState<any>(null);
   const {routine} = useRoutineQuery();
+  const {record, isError, isLoading} = useRecordQuery();
+
+  if (isLoading || isError)
+    return (
+      <View>
+        <Text>서버 로딩 실패</Text>
+      </View>
+    );
 
   function onItemClick(title: string) {
     const result = routine.find((item: IRoutine) => item.title === title);
@@ -20,10 +28,10 @@ export default function RecordList() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>최근 루틴</Text>
-      {record.map((item, i: number) => {
+      {record!.map((item, i: number) => {
         return (
           <Pressable style={styles.button} onPress={() => onItemClick(item.title)} key={i}>
-            <Text style={styles.text}>{item.date}</Text>
+            <Text style={styles.text}>{String(item.date)}</Text>
             <Text style={styles.text}>{item.title}</Text>
           </Pressable>
         );

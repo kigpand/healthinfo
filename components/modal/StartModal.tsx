@@ -2,11 +2,12 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useState} from 'react';
 import {Modal, View, Text, StyleSheet, TextInput} from 'react-native';
-import {borderColor, buttonColor} from '../../style/color';
+import {buttonColor} from '../../style/color';
 import useExercise from '../../store/useExercise';
 import {IRoutine} from '../../interface/IRoutine';
 import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
+import {useRecordQuery} from '../../query/useRecordQuery';
 
 type Props = {
   routine: IRoutine;
@@ -18,7 +19,9 @@ export default function StartModal({routine, onView, onCloseView}: Props) {
   const [time, setTime] = useState<number>(0);
   const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const {setCurrentRoutine, setTimer} = useExercise();
+  const {addRecordMutation} = useRecordQuery();
   const onSuccess = () => {
+    addRecordMutation(routine);
     setCurrentRoutine(routine);
     setTimer(time);
     nav.navigate('Exercise');
