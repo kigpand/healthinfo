@@ -4,7 +4,7 @@ import {addRecord, getRecord} from '../service/recordService';
 type RecordType = {
   title: string;
   category: string;
-  date: Date;
+  date: string;
 };
 
 export function useRecordQuery() {

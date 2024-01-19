@@ -29,9 +29,12 @@ export default function RecordList() {
     <View style={styles.container}>
       <Text style={styles.title}>최근 루틴</Text>
       {record!.map((item, i: number) => {
+        const date = new Date(item.date);
         return (
           <Pressable style={styles.button} onPress={() => onItemClick(item.title)} key={i}>
-            <Text style={styles.text}>{String(item.date)}</Text>
+            <Text style={styles.text}>
+              {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}
+            </Text>
             <Text style={styles.text}>{item.title}</Text>
           </Pressable>
         );
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   button: {
-    width: 250,
+    width: 200,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
