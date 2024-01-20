@@ -1,5 +1,5 @@
 import {useMutation, useQuery, useQueryClient} from 'react-query';
-import {addRoutine, deleteRoutine, getRoutine} from '../service/routineService';
+import {addRoutine, deleteRoutine, deleteRoutineByCategory, getRoutine} from '../service/routineService';
 
 export function useRoutineQuery() {
   const queryClient = useQueryClient();
@@ -11,9 +11,14 @@ export function useRoutineQuery() {
   });
   const {mutate: deleteRoutineMutate} = useMutation(deleteRoutine, {
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(['routine']);
+    },
+  });
+  const {mutate: deleteRoutineByCategoryMutate} = useMutation(deleteRoutineByCategory, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['routine']);
     },
   });
 
-  return {routine, isLoading, isError, addRoutineMutate, deleteRoutineMutate};
+  return {routine, isLoading, isError, addRoutineMutate, deleteRoutineMutate, deleteRoutineByCategoryMutate};
 }

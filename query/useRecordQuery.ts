@@ -1,7 +1,7 @@
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 import {addRecord, getRecord} from '../service/recordService';
 
-type RecordType = {
+export type RecordType = {
   title: string;
   category: string;
   date: string;

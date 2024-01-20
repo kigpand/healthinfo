@@ -3,7 +3,7 @@ import {addCategory, deleteCategory, getCategory} from '../service/categoryServi
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-type CategoryQueryType = {
+export type CategoryQueryType = {
   category: string;
 };
 
@@ -22,7 +22,7 @@ export function useCategoryQuery() {
   const {mutate: deleteCategoryMutate} = useMutation(deleteCategory, {
     onSuccess: () => {
       console.log('success');
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(['category']);
     },
   });
 

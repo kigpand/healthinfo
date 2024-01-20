@@ -60,3 +60,19 @@ export async function deleteRoutine(id: number) {
     return 'fail';
   }
 }
+
+export async function deleteRoutineByCategory(category: string) {
+  try {
+    await fetch('http://localhost:3010/routine/deleteRoutineByCategory', {
+      method: 'delete',
+      body: JSON.stringify({category}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return 'success';
+  } catch (e) {
+    console.error(e);
+    return 'fail';
+  }
+}
