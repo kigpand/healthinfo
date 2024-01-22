@@ -30,7 +30,7 @@ export default function RoutineManageUpdate() {
   const {mutate} = useMutation(updateRoutineService, {
     onSuccess: () => {
       console.log('success');
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(['routine']);
       nav.navigate('Admin');
     },
   });

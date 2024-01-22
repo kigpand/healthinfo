@@ -2,6 +2,7 @@ import {Modal, StyleSheet, Text, View} from 'react-native';
 import RedButton from '../buttons/RedButton';
 import BlueButton from '../buttons/BlueButton';
 import {useCategoryQuery} from '../../query/useCategoryQuery';
+import {useRoutineQuery} from '../../query/useRoutineQuery';
 
 type Props = {
   category: string;
@@ -11,9 +12,11 @@ type Props = {
 
 export default function RemoveCategoryModal({category, onRemoveCategoryModal, handleCloseModal}: Props) {
   const {deleteCategoryMutate} = useCategoryQuery();
+  const {deleteRoutineByCategoryMutate} = useRoutineQuery();
 
   async function handleRemoveCategoryButton() {
     deleteCategoryMutate(category);
+    deleteRoutineByCategoryMutate(category);
     handleCloseModal();
   }
 
