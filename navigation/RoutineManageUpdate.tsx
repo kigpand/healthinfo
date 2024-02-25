@@ -9,8 +9,8 @@ import RoutineManageUpdateModal from '../components/modal/RoutineManageUpdateMod
 import {useState} from 'react';
 import {Category, IRoutine, IRoutineData} from '../interface/IRoutine';
 import RoutineManageItemModal from '../components/modal/RoutineManageItemModal';
-import {useMutation, useQueryClient} from 'react-query';
 import {updateRoutineService} from '../service/routineService';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 
 interface IUpdateModal {
   modal: boolean;
@@ -27,10 +27,11 @@ export default function RoutineManageUpdate() {
     modal: false,
     type: '제목',
   });
-  const {mutate} = useMutation(updateRoutineService, {
+  const {mutate} = useMutation({
+    mutationFn: updateRoutineService,
     onSuccess: () => {
       console.log('success');
-      queryClient.invalidateQueries(['routine']);
+      queryClient.invalidateQueries({queryKey: ['routine']});
       nav.navigate('Admin');
     },
   });

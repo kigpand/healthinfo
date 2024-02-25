@@ -1,4 +1,4 @@
-import {useMutation, useQuery, useQueryClient} from 'react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {addRecord, getRecord} from '../service/recordService';
 
 export type RecordType = {
@@ -9,10 +9,11 @@ export type RecordType = {
 
 export function useRecordQuery() {
   const queryClient = useQueryClient();
-  const {data: record, isLoading, isError} = useQuery<RecordType[]>(['record'], getRecord);
-  const {mutate: addRecordMutation} = useMutation(addRecord, {
+  const {data: record, isLoading, isError} = useQuery<RecordType[]>({queryKey: ['record'], queryFn: getRecord});
+  const {mutate: addRecordMutation} = useMutation({
+    mutationFn: addRecord,
     onSuccess: () => {
-      queryClient.invalidateQueries(['record']);
+      queryClient.invalidateQueries({queryKey: ['record']});
     },
   });
 

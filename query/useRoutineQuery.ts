@@ -1,22 +1,25 @@
-import {useMutation, useQuery, useQueryClient} from 'react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {addRoutine, deleteRoutine, deleteRoutineByCategory, getRoutine} from '../service/routineService';
 
 export function useRoutineQuery() {
   const queryClient = useQueryClient();
-  const {data: routine, isLoading, isError} = useQuery(['routine'], getRoutine);
-  const {mutate: addRoutineMutate} = useMutation(addRoutine, {
+  const {data: routine, isLoading, isError} = useQuery({queryKey: ['routine'], queryFn: getRoutine});
+  const {mutate: addRoutineMutate} = useMutation({
+    mutationFn: addRoutine,
     onSuccess: () => {
-      queryClient.invalidateQueries(['routine']);
+      queryClient.invalidateQueries({queryKey: ['routine']});
     },
   });
-  const {mutate: deleteRoutineMutate} = useMutation(deleteRoutine, {
+  const {mutate: deleteRoutineMutate} = useMutation({
+    mutationFn: deleteRoutine,
     onSuccess: () => {
-      queryClient.invalidateQueries(['routine']);
+      queryClient.invalidateQueries({queryKey: ['routine']});
     },
   });
-  const {mutate: deleteRoutineByCategoryMutate} = useMutation(deleteRoutineByCategory, {
+  const {mutate: deleteRoutineByCategoryMutate} = useMutation({
+    mutationFn: deleteRoutineByCategory,
     onSuccess: () => {
-      queryClient.invalidateQueries(['routine']);
+      queryClient.invalidateQueries({queryKey: ['routine']});
     },
   });
 
