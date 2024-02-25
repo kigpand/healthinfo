@@ -10,12 +10,11 @@ import LoadPrevRoutine from './navigation/LoadPrevRoutine';
 import SetNewDataTitle from './navigation/SetNewDataTitle';
 import Exercise from './navigation/Exercise';
 import AddNewData from './navigation/AddNewData';
-import useExercise from './store/useExercise';
 import Finish from './navigation/Finish';
 import Admin from './navigation/Admin';
 import CategoryManage from './navigation/CategoryManage';
 import RoutineManageUpdate from './navigation/RoutineManageUpdate';
-import {QueryClient, QueryClientProvider} from 'react-query';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
